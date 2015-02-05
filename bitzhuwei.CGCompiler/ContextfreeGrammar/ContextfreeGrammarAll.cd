@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="bitzhuwei.CGCompiler.ContextfreeGrammar">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="bitzhuwei.CGCompiler.ContextfreeGrammar.CharProductionNodeListList">
+        <TypeIdentifier>
+          <NewMemberFileName>ContextfreeGrammar\ContextfreeGrammarLexicalAnalyzerSG.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="bitzhuwei.CGCompiler.ContextfreeGrammar.CharProductionNodeList">
+        <TypeIdentifier>
+          <NewMemberFileName>ContextfreeGrammar\ContextfreeGrammarLexicalAnalyzerSG.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>I16kFqBpHKYAlgnuuJpBQhIFESdUMqQCMmANmDADr/Y=</HashCode>
+      <FileName>ContextfreeGrammar\ContextfreeGrammar.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="bitzhuwei.CGCompiler.ContextfreeProductionList">
+    <Position X="2.75" Y="0.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAEgQAAAAAAAAAAAIAAAAAAABAAAjA=</HashCode>
+      <FileName>ContextfreeGrammar\ContextfreeProductionList.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="bitzhuwei.CGCompiler.ContextfreeProduction">
+    <Position X="5.25" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAEgAAAgAAAAAgAAIAgCBAAABAQAjI=</HashCode>
+      <FileName>ContextfreeGrammar\ContextfreeProduction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="bitzhuwei.CGCompiler.RightSection">
+    <Position X="7.5" Y="0.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AwAAAAAAAAAAAAAEgAAAAAAAAAAAAIAAAAAAABAAABA=</HashCode>
+      <FileName>ContextfreeGrammar\RightSection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="bitzhuwei.CGCompiler.ProductionNodeList">
+    <Position X="0.5" Y="3" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAIEgAAAABAAAAAAAIAAAAAAABAAAjA=</HashCode>
+      <FileName>ContextfreeGrammar\ProductionNodeList.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="bitzhuwei.CGCompiler.ProductionNode">
+    <Position X="2.5" Y="3" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AwAAAAIAAGAAAAAugAAAAAAgQAAAAIAAABAAQBIgAjE=</HashCode>
+      <FileName>ContextfreeGrammar\ProductionNode.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Enum Name="bitzhuwei.CGCompiler.EnumProductionNodePosition">
+    <Position X="4.25" Y="3" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>ContextfreeGrammar\ProductionNode.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>

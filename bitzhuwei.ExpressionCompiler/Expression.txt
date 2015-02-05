@@ -1,0 +1,6 @@
+Name:Expression
+<Expression> ::= <Multiply> <PlusOpt>;
+<PlusOpt> ::= "+" <Multiply> | "-" <Multiply> | null;
+<Multiply> ::= <Unit> <MultiplyOpt>;
+<MultiplyOpt> ::= "*" <Unit> | "/" <Unit> | null;
+<Unit> ::= number | "(" <Expression> ")";

@@ -1,0 +1,44 @@
+﻿本项目是一个编译器，此编译器对应的文法如下。
+<Start>  ::= <Vn> "::=" <VList> ";" <PList>;
+<PList>  ::= <Vn> "::=" <VList> ";" <PList> | null; 
+<VList>  ::= <V> <VOpt>; 
+<V>      ::= <Vn> | <Vt>; 
+<VOpt>   ::= <V> <VOpt> | "|" <V> <VOpt> | null; 
+<Vn>     ::= "<" identifier ">";
+<Vt>     ::= "null" | "identifier" | "number" | "constString" | constString;
+实际上，这是对符合上下文无关文法（Contextfree Grammar）的程序语言的描述。也就是说，这个编译器的输出结果是所描述的语言的编译器。
+例如，对于能够进行加减运算的一个语言：
+123 Add 321 - 22
+其对应的文法如下：
+<Start> ::= <Value> <RightOpt>;
+<Value> ::= number | identifier;
+<RightOpt> ::= <Opt> <Value> <RightOpt> | null;
+<Opt> ::= "Add" | "-";
+大家可以体会文法的书写规则。
+文法至少有一项，即<Start> ::= ...（当然你写<Begin> ::=...或者<FuckingLanguage> ::=...都可以）
+文法也是一种程序语言，在这里我们把这个语言叫做CG语言（Contextfree Grammar，即上下文无关文法）
+CG语言的关键字有："::=", ";", "|", "<", ">", "null", "identifier", "number", "constString"。
+文法涉及到的概念包括：产生式，候选式，非终结点，终结点。
+分析给定的文法，进而得到该文法的编译器的过程中涉及到的概念：FIRST集，FOLLOW集，单词流，语法树。
+下面的1、2、3……15标识出了CG文法的15个候选式。其实一个产生式中用“|”分隔开的各个分支就是候选式。
+<Start>  ::= <Vn> "::=" <VList> ";" <PList>; // 1
+<PList>  ::= <Vn> "::=" <VList> ";" <PList> | null; // 2 3
+<VList>  ::= <V> <VOpt>; // 4
+<V>      ::= <Vn> | <Vt>; // 5 6
+<VOpt>   ::= <V> <VOpt> | "|" <V> <VOpt> | null; // 7 8 9
+<Vn>     ::= "<" identifier ">"; // 10
+<Vt>     ::= "null" | "identifier" | "number" | "constString" | constString; // 11 12 13 14 15
+
+分析一些文法后，我们会发现一些重要的规律。
+规律1：双引号引起来的就是关键字。关键字可以是某个标识符，例如char；也可以是各种非字母形式的，例如++。我们相信，写a++与写inc a对编译器的设计没有大的影响。
+规律2：一个给定的文法，其单词的类型是固定的有限个，因此可以用enum类型记录。任意一个文法的单词类型都是由下面这些元素组成：unknown，startEnd，{epsilon，identifier，number, constString}，{my_关键字}，{my_非字母关键字}
+（注：为了避免给定的文法的关键字和CG语言本身的关键字相同产生混淆，我们规定对于给定的文法，其关键字都加前缀“my_”。当然你可以随自己喜欢加“shit”什么的都随意）
+规律3：一个给定的文法，其语法树结点的类型是固定的有限个，因此可以用enum类型记录。任意一个文法的语法树结点类型都是由下面这些元素组成：Unknown，startEndLeave，{epsilon，identifier，number, constString}，{my_关键字}，{my_非字母关键字}，{非终结点}
+（注：为了避免给定的文法的关键字和CG语言本身的关键字相同产生混淆，我们规定对于给定的文法，其关键字都加前缀“my_”。当然你可以随自己喜欢加“shit”什么的都随意）
+
+CG的关键字："null", "identifier", "number", "constString"
+CG的EnumTokenType：unknown, startEnd, epsilon, identifier, my_null, my_identifier, my_number, my_constString, my_::=, my_;, my_|, my_<, my_>
+CG的EnumVType：Unknown, startEnd, epsilon, identifier, my_null, my_identifier, my_number, my_constString, my_::=, my_;, my_|, my_<, my_>, Start, PList, VList, V, VOpt, Vn, Vt
+C#里当然是不能用“my_::=”来直接做enum类型的成员名称的，这个只要改写一下就可以了，比如“：”的英文是colon，那“my_::=”可以写成“my_colon_colon_equal”。
+
+

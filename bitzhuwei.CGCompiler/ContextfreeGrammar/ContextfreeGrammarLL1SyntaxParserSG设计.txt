@@ -1,0 +1,15 @@
+﻿SyntaxParserSG (SG means SomeGrammar)
+字段：
+Loop: "FuncParse" Derivation
+Loop: "m_" Terminal
+Loop: "m_" NonTerminal
+方法：
+Loop: "GetFuncParse" Derivation "()"
+Loop: "Parse" Derivation "()"
+Loop: Derivation "()"
+"FillMapCells()"
+"InitFunc"
+"InitMap"
+"SyntaxParserSG(...)"
+"Reset()"
+"SetMapLinesAndColumns()"

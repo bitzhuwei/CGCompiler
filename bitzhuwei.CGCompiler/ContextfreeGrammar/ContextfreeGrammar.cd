@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="bitzhuwei.CGCompiler.ContextfreeGrammar">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="bitzhuwei.CGCompiler.ContextfreeGrammar.CharProductionNodeListList">
+        <TypeIdentifier>
+          <NewMemberFileName>ContextfreeGrammar\ContextfreeGrammarLexicalAnalyzerSG.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="bitzhuwei.CGCompiler.ContextfreeGrammar.CharProductionNodeList">
+        <TypeIdentifier>
+          <NewMemberFileName>ContextfreeGrammar\ContextfreeGrammarLexicalAnalyzerSG.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>I16kFqBpHKYAlgnuuJpBQhIFESdUMqQCMmANmDADr/Y=</HashCode>
+      <FileName>ContextfreeGrammar\ContextfreeGrammar.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>

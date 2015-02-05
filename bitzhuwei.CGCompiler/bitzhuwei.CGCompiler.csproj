@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{245551F0-3012-4E11-8C63-8E91AED163F8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>bitzhuwei.CGCompiler</RootNamespace>
+    <AssemblyName>bitzhuwei.CGCompiler</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="ContextfreeGrammar\ContextfreeGrammar.cs" />
+    <Compile Include="ContextfreeGrammar\ContextfreeGrammarCommonSG.cs" />
+    <Compile Include="ContextfreeGrammar\ContextfreeGrammarEnumCharTypeSG.cs" />
+    <Compile Include="ContextfreeGrammar\ContextfreeGrammarEnumTokenTypeSG.cs" />
+    <Compile Include="ContextfreeGrammar\ContextfreeGrammarEnumVTypeSG.cs" />
+    <Compile Include="ContextfreeGrammar\ContextfreeGrammarEssential.cs" />
+    <Compile Include="ContextfreeGrammar\ContextfreeGrammarFIRSTCollection.cs" />
+    <Compile Include="ContextfreeGrammar\ContextfreeGrammarFOLLOWCollection.cs" />
+    <Compile Include="ContextfreeGrammar\ContextfreeGrammarLexicalAnalyzerSG.cs" />
+    <Compile Include="ContextfreeGrammar\ContextfreeGrammarLL1ParserMap.cs" />
+    <Compile Include="ContextfreeGrammar\ContextfreeGrammarLL1SyntaxParserSG.cs" />
+    <Compile Include="ContextfreeGrammar\ContextfreeGrammarTreeNodeValueSG.cs" />
+    <Compile Include="ContextfreeGrammar\ContextfreeProduction.cs" />
+    <Compile Include="ContextfreeGrammar\ContextfreeProductionList.cs" />
+    <Compile Include="ContextfreeGrammar\Derivation.cs" />
+    <Compile Include="ContextfreeGrammar\DerivationList.cs" />
+    <Compile Include="ContextfreeGrammar\EnumCharTypeCG.cs" />
+    <Compile Include="ContextfreeGrammar\FIRSTCollection.cs" />
+    <Compile Include="ContextfreeGrammar\FIRSTCollectionItem.cs" />
+    <Compile Include="ContextfreeGrammar\FOLLOWCollection.cs" />
+    <Compile Include="ContextfreeGrammar\FOLLOWCollectionItem.cs" />
+    <Compile Include="ContextfreeGrammar\LL1GeneraterInput.cs" />
+    <Compile Include="ContextfreeGrammar\LL1ParserMap.cs" />
+    <Compile Include="ContextfreeGrammar\ProductionNode.cs" />
+    <Compile Include="ContextfreeGrammar\ProductionNodeList.cs" />
+    <Compile Include="ContextfreeGrammar\RightSection.cs" />
+    <Compile Include="SyntaxTreeCGGetFormatted.cs" />
+    <Compile Include="EnumCharTypeCG.cs" />
+    <Compile Include="EnumTokenTypeCG.cs" />
+    <Compile Include="EnumVTypeCG.cs" />
+    <Compile Include="LexicalAnalyzerCG.cs" />
+    <Compile Include="LL1SyntaxParserCG.cs" />
+    <Compile Include="OfContextfreeGrammar.Visual\FormFormattedSourceCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OfContextfreeGrammar.Visual\FormFormattedSourceCode.Designer.cs">
+      <DependentUpon>FormFormattedSourceCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OfContextfreeGrammar.Visual\SourceCodeCGTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="OfContextfreeGrammar.Visual\SourceCodeTextBoxForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OfContextfreeGrammar.Visual\SourceCodeTextBoxForm.Designer.cs">
+      <DependentUpon>SourceCodeTextBoxForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OfContextfreeGrammar.Visual\SyntaxTreeCGTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="OfContextfreeGrammar.Visual\SyntaxTreeCGTextBoxForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OfContextfreeGrammar.Visual\SyntaxTreeCGTextBoxForm.Designer.cs">
+      <DependentUpon>SyntaxTreeCGTextBoxForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OfContextfreeGrammar.Visual\SyntaxTreeCGTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="OfContextfreeGrammar.Visual\SyntaxTreeCGTreeViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OfContextfreeGrammar.Visual\SyntaxTreeCGTreeViewForm.Designer.cs">
+      <DependentUpon>SyntaxTreeCGTreeViewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OfContextfreeGrammar.Visual\TokenListCGTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="OfContextfreeGrammar.Visual\TokenListCGTextBoxForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OfContextfreeGrammar.Visual\TokenListCGTextBoxForm.Designer.cs">
+      <DependentUpon>TokenListCGTextBoxForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SyntaxTreeCGGetGrammar.cs" />
+    <Compile Include="SyntaxTreeNodeValueCG.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\bitzhuwei.CompilerBase\bitzhuwei.CompilerBase.csproj">
+      <Project>{B7205829-1611-487C-9E16-6BF43F98C547}</Project>
+      <Name>bitzhuwei.CompilerBase</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CG.txt" />
+    <Content Include="CG.xml" />
+    <Content Include="ContextfreeGrammar\ContextfreeGrammarLL1SyntaxParserSG设计.txt" />
+    <Content Include="ContextfreeGrammar\GrammarOfContextfreeGrammar.txt" />
+    <Content Include="GrammarOfContextfreeGrammar.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="项目说明.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="OfContextfreeGrammar.Visual\FormFormattedSourceCode.resx">
+      <DependentUpon>FormFormattedSourceCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OfContextfreeGrammar.Visual\SourceCodeTextBoxForm.resx">
+      <DependentUpon>SourceCodeTextBoxForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OfContextfreeGrammar.Visual\SyntaxTreeCGTextBoxForm.resx">
+      <DependentUpon>SyntaxTreeCGTextBoxForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OfContextfreeGrammar.Visual\SyntaxTreeCGTreeViewForm.resx">
+      <DependentUpon>SyntaxTreeCGTreeViewForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OfContextfreeGrammar.Visual\TokenListCGTextBoxForm.resx">
+      <DependentUpon>TokenListCGTextBoxForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ContextfreeGrammar\ContextfreeGrammar.cd" />
+    <None Include="ContextfreeGrammar\ContextfreeProduction.cd" />
+    <None Include="ContextfreeGrammar\ContextfreeProductionList.cd" />
+    <None Include="ContextfreeGrammar\ProductionNode.cd" />
+    <None Include="ContextfreeGrammar\ProductionNodeList.cd" />
+    <None Include="ContextfreeGrammar\RightSection.cd" />
+    <None Include="ContextfreeGrammar\Derivation.cd" />
+    <None Include="ContextfreeGrammar\DerivationList.cd" />
+    <None Include="ContextfreeGrammar\EnumProductionNodePosition.cd" />
+    <None Include="ContextfreeGrammar\ContextfreeGrammarAll.cd" />
+    <None Include="EnumTokenTypeCG.cd" />
+    <None Include="EnumVTypeCG.cd" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContextfreeGrammar GrammarName="Expression" Namespace="bitzhuwei.ExpressionCompiler">
+  <ContextfreeProductionList Count="5">
+    <ContextfreeProduction>
+      <ProductionNode NodeName="Expression" NodeNote="Expression" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="Multiply" NodeNote="Multiply" Position="NonLeave" />
+          <ProductionNode NodeName="PlusOpt" NodeNote="PlusOpt" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="PlusOpt" NodeNote="PlusOpt" Position="NonLeave" />
+      <RightSection CandidateCount="3">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="&quot;+&quot;" NodeNote="&quot;+&quot;" Position="Leave" />
+          <ProductionNode NodeName="Multiply" NodeNote="Multiply" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="&quot;-&quot;" NodeNote="&quot;-&quot;" Position="Leave" />
+          <ProductionNode NodeName="Multiply" NodeNote="Multiply" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="Multiply" NodeNote="Multiply" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="Unit" NodeNote="Unit" Position="NonLeave" />
+          <ProductionNode NodeName="MultiplyOpt" NodeNote="MultiplyOpt" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="MultiplyOpt" NodeNote="MultiplyOpt" Position="NonLeave" />
+      <RightSection CandidateCount="3">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="&quot;*&quot;" NodeNote="&quot;*&quot;" Position="Leave" />
+          <ProductionNode NodeName="Unit" NodeNote="Unit" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="&quot;/&quot;" NodeNote="&quot;/&quot;" Position="Leave" />
+          <ProductionNode NodeName="Unit" NodeNote="Unit" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="Unit" NodeNote="Unit" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="number" NodeNote="number" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="Expression" NodeNote="Expression" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+  </ContextfreeProductionList>
+</ContextfreeGrammar>

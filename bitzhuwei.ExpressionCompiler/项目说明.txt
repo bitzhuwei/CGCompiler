@@ -1,0 +1,9 @@
+﻿本项目是用来为bizhuwei.CGCompiler生成的编译器代码进行测试用的。
+通过启动bitzhuwei.CGCompiler.Winform，为如下的文法
+<Expression>  ::= <Multiply> <PlusOpt>;
+<PlusOpt>     ::= "+" <Multiply> | "-" <Multiply> | null;
+<Multiply>    ::= <Unit> <MultiplyOpt>;
+<MultiplyOpt> ::= "*" <Unit> | "/" <Unit> | null;
+<Unit>        ::= number | "(" <Expression> ")";
+生成编译器代码。编译器名称为Expression，命名空间为bitzhuwei.ExpressionCompiler。
+然后通过bitzhuwei.ExpressionCompiler.Test项目进行测试此生成的代码是否有问题。

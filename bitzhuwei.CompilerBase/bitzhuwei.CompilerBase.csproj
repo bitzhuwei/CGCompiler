@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B7205829-1611-487C-9E16-6BF43F98C547}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>bitzhuwei.CompilerBase</RootNamespace>
+    <AssemblyName>bitzhuwei.CompilerBase</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\CandidateFunction.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Core\ILexicalAnalyzerGeneric.cs" />
+    <Compile Include="Core\ISyntaxParserGeneric.cs" />
+    <Compile Include="LexicalAnalyzerBase\LexcialAnalyzerDllDetectiveGeneric.cs" />
+    <Compile Include="LexicalAnalyzerBase\LexicalAnalyzerBase.cs" />
+    <Compile Include="LexicalAnalyzerBase\LexicalAnalyzerBaseStringShot.cs" />
+    <Compile Include="LL1SyntaxParserBase\LL1SyntaxParserGeneric.cs" />
+    <Compile Include="LL1SyntaxParserBase\LL1SyntaxParserGenericStringShot.cs" />
+    <Compile Include="LL1SyntaxParserBase\LL1SyntaxParserMap.cs" />
+    <Compile Include="LL1SyntaxParserBase\SyntaxParserDllDetectiveGeneric.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Core\SyntaxTreeGeneric.cs" />
+    <Compile Include="Core\SyntaxTreeListGeneric.cs" />
+    <Compile Include="Core\TokenGeneric.cs" />
+    <Compile Include="Core\TokenListGeneric.cs" />
+    <Compile Include="Core\Utility.cs" />
+    <Compile Include="Visual\ChangeWatchdog.cs" />
+    <Compile Include="Visual\FormLexicalAnalyzerPicker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Visual\FormLexicalAnalyzerPicker.Designer.cs">
+      <DependentUpon>FormLexicalAnalyzerPicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Visual\ISourceCodeVisable.cs" />
+    <Compile Include="Visual\ISyntaxTreeVisable.cs" />
+    <Compile Include="Visual\ITokenListVisable.cs" />
+    <Compile Include="Visual\RunningSign.cs" />
+    <Compile Include="Visual\SourceCodeTextBoxGeneric.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Visual\SourceCodeTextBoxGeneric.designer.cs">
+      <DependentUpon>SourceCodeTextBoxGeneric.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Visual\SyntaxTreeViewGeneric.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Visual\SyntaxTreeViewGeneric.designer.cs">
+      <DependentUpon>SyntaxTreeViewGeneric.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Visual\SyntexTreeTextBoxGeneric.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Visual\SyntexTreeTextBoxGeneric.Designer.cs">
+      <DependentUpon>SyntexTreeTextBoxGeneric.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Visual\TokenListTextBoxGeneric.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Visual\TokenListTextBoxGeneric.Designer.cs">
+      <DependentUpon>TokenListTextBoxGeneric.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\设计说明Core.txt" />
+    <Content Include="LexicalAnalyzerBase\设计说明LexicalAnalyzerBase.txt" />
+    <Content Include="LL1SyntaxParserBase\GrammarOfContextfreeGrammar.txt" />
+    <Content Include="LL1SyntaxParserBase\设计说明LL1SyntaxParserBase.txt" />
+    <Content Include="Visual\设计说明Visual.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Visual\FormLexicalAnalyzerPicker.resx">
+      <DependentUpon>FormLexicalAnalyzerPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Visual\SourceCodeTextBoxGeneric.resx">
+      <DependentUpon>SourceCodeTextBoxGeneric.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Visual\SyntaxTreeViewGeneric.resx">
+      <DependentUpon>SyntaxTreeViewGeneric.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Visual\SyntexTreeTextBoxGeneric.resx">
+      <DependentUpon>SyntexTreeTextBoxGeneric.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Visual\TokenListTextBoxGeneric.resx">
+      <DependentUpon>TokenListTextBoxGeneric.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

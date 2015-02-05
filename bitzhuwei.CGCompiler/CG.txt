@@ -1,0 +1,8 @@
+Name:CG
+<Start> ::= <Vn> "::=" <VList> ";" <PList>;
+<PList> ::= <Vn> "::=" <VList> ";" <PList> | null;
+<VList> ::= <V> <VOpt>;
+<V> ::= <Vn> | <Vt>;
+<VOpt> ::= <V> <VOpt> | "|" <V> <VOpt> | null;
+<Vn> ::= "<" identifier ">";
+<Vt> ::= "null" | "identifier" | "number" | "constString" | identifier | number | constString;

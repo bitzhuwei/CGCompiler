@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContextfreeGrammar GrammarName="CG" Namespace="bitzhuwei.CGCompiler">
+  <ContextfreeProductionList Count="7">
+    <ContextfreeProduction>
+      <ProductionNode NodeName="Start" NodeNote="Start" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="5">
+          <ProductionNode NodeName="Vn" NodeNote="Vn" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;::=&quot;" NodeNote="&quot;::=&quot;" Position="Leave" />
+          <ProductionNode NodeName="VList" NodeNote="VList" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+          <ProductionNode NodeName="PList" NodeNote="PList" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="PList" NodeNote="PList" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="5">
+          <ProductionNode NodeName="Vn" NodeNote="Vn" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;::=&quot;" NodeNote="&quot;::=&quot;" Position="Leave" />
+          <ProductionNode NodeName="VList" NodeNote="VList" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+          <ProductionNode NodeName="PList" NodeNote="PList" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="VList" NodeNote="VList" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="V" NodeNote="V" Position="NonLeave" />
+          <ProductionNode NodeName="VOpt" NodeNote="VOpt" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="V" NodeNote="V" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="Vn" NodeNote="Vn" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="Vt" NodeNote="Vt" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="VOpt" NodeNote="VOpt" Position="NonLeave" />
+      <RightSection CandidateCount="3">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="V" NodeNote="V" Position="NonLeave" />
+          <ProductionNode NodeName="VOpt" NodeNote="VOpt" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;|&quot;" NodeNote="&quot;|&quot;" Position="Leave" />
+          <ProductionNode NodeName="V" NodeNote="V" Position="NonLeave" />
+          <ProductionNode NodeName="VOpt" NodeNote="VOpt" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="Vn" NodeNote="Vn" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;&lt;&quot;" NodeNote="&quot;&lt;&quot;" Position="Leave" />
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="&quot;&gt;&quot;" NodeNote="&quot;&gt;&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="Vt" NodeNote="Vt" Position="NonLeave" />
+      <RightSection CandidateCount="7">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;null&quot;" NodeNote="&quot;null&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;identifier&quot;" NodeNote="&quot;identifier&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;number&quot;" NodeNote="&quot;number&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;constString&quot;" NodeNote="&quot;constString&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="number" NodeNote="number" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="constString" NodeNote="constString" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+  </ContextfreeProductionList>
+</ContextfreeGrammar>
