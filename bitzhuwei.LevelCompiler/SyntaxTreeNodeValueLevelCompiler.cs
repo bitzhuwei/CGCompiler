@@ -1,5 +1,3 @@
-namespace bitzhuwei.LevelCompiler
-{
     /// <summary>
     /// 文法LevelCompiler的语法树结点的值
     /// </summary>
@@ -40,5 +38,4 @@ namespace bitzhuwei.LevelCompiler
         }
     }
 
-}
 

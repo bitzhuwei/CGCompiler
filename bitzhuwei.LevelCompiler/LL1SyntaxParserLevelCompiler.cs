@@ -1,8 +1,6 @@
 using System;
 using bitzhuwei.CompilerBase;
 
-namespace bitzhuwei.LevelCompiler
-{
     /// <summary>
     /// LevelCompiler的LL1语法分析器
     /// </summary>
@@ -1137,6 +1135,4 @@ namespace bitzhuwei.LevelCompiler
         
         #endregion SetMapLinesAndColumns()
     }
-
-}
 

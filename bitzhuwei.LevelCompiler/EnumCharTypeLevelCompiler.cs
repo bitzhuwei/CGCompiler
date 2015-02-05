@@ -1,5 +1,3 @@
-namespace bitzhuwei.LevelCompiler
-{
     /// <summary>
     /// 文法LevelCompiler的字符枚举类型
     /// </summary>
@@ -147,5 +145,4 @@ namespace bitzhuwei.LevelCompiler
         Space,
     }
 
-}
 

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using bitzhuwei.CompilerBase;
 
 namespace bitzhuwei.LevelCompiler.Test
@@ -29,11 +28,11 @@ level
             };
             foreach (var sourceCode in sourceCodes)
             {
-                var lex = new bitzhuwei.LevelCompiler.LexicalAnalyzerLevelCompiler();
+                var lex = new LexicalAnalyzerLevelCompiler();
                 lex.SetSourceCode(sourceCode);
                 var tokens = lex.Analyze();
                 Console.WriteLine(tokens);
-                var parser = new bitzhuwei.LevelCompiler.LL1SyntaxParserLevelCompiler();
+                var parser = new LL1SyntaxParserLevelCompiler();
                 parser.SetTokenListSource(tokens);
                 var tree = parser.Parse();
                 Console.WriteLine(tree);

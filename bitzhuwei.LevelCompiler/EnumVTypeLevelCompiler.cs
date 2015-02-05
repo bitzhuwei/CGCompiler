@@ -1,5 +1,3 @@
-namespace bitzhuwei.LevelCompiler
-{
     /// <summary>
     /// 文法LevelCompiler的语法树结点枚举类型
     /// </summary>
@@ -71,5 +69,4 @@ namespace bitzhuwei.LevelCompiler
         tail_startEndLeave,
     }
 
-}
 

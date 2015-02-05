@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace bitzhuwei.LevelCompiler
-{
     public class EnemyEgg
     {
         public EnemyEgg(int enemyPrefabIndex, int bornPointIndex)
@@ -17,4 +15,3 @@ namespace bitzhuwei.LevelCompiler
 
         public int enemyPrefabIndex;
     }
-}

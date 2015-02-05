@@ -4,8 +4,6 @@ using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using bitzhuwei.CompilerBase;
 
-namespace bitzhuwei.LevelCompiler
-{
     /// <summary>
     /// LevelCompiler的词法分析器
     /// </summary>
@@ -538,5 +536,4 @@ namespace bitzhuwei.LevelCompiler
         private static readonly Regex regChineseLetter = new Regex("^[^\x00-\xFF]");
     }
 
-}
 

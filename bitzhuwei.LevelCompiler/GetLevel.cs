@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using bitzhuwei.CompilerBase;
 
-namespace bitzhuwei.LevelCompiler
-{
     public static partial class GetLevel
     {
         public static Level GetValue(this SyntaxTree<EnumTokenTypeLevelCompiler,
@@ -104,4 +101,3 @@ namespace bitzhuwei.LevelCompiler
             return 0;
         }
     }
-}

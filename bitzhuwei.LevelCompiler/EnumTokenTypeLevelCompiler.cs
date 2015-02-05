@@ -1,5 +1,3 @@
-namespace bitzhuwei.LevelCompiler
-{
     /// <summary>
     /// 文法LevelCompiler的单词枚举类型
     /// </summary>
@@ -47,5 +45,4 @@ namespace bitzhuwei.LevelCompiler
         identifier,
     }
 
-}
 
