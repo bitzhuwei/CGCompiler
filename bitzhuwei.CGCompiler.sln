@@ -15,31 +15,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bitzhuwei.ExpressionCompile
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bitzhuwei.CGCompiler.Winform", "bitzhuwei.CGCompiler.Winform\bitzhuwei.CGCompiler.Winform.csproj", "{1FC32681-FF44-4E5C-A8DA-E46D6C6884A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bitzhuwei.LevelCompiler", "bitzhuwei.LevelCompiler\bitzhuwei.LevelCompiler.csproj", "{47963D86-3784-44B8-8D5F-9A46C7F58D4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bitzhuwei.LevelCompiler.Test", "bitzhuwei.LevelCompiler.Test\bitzhuwei.LevelCompiler.Test.csproj", "{247BCDA3-57F0-461D-A76D-E257EE39919B}"
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://bitzhuwei.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = bitzhuwei.CGCompiler.Test\\bitzhuwei.CGCompiler.Test.csproj
-		SccProjectName1 = bitzhuwei.CGCompiler.Test
-		SccLocalPath1 = bitzhuwei.CGCompiler.Test
-		SccProjectUniqueName2 = bitzhuwei.CGCompiler.Winform\\bitzhuwei.CGCompiler.Winform.csproj
-		SccProjectName2 = bitzhuwei.CGCompiler.Winform
-		SccLocalPath2 = bitzhuwei.CGCompiler.Winform
-		SccProjectUniqueName3 = bitzhuwei.CGCompiler\\bitzhuwei.CGCompiler.csproj
-		SccProjectName3 = bitzhuwei.CGCompiler
-		SccLocalPath3 = bitzhuwei.CGCompiler
-		SccProjectUniqueName4 = bitzhuwei.CompilerBase\\bitzhuwei.CompilerBase.csproj
-		SccProjectName4 = bitzhuwei.CompilerBase
-		SccLocalPath4 = bitzhuwei.CompilerBase
-		SccProjectUniqueName5 = bitzhuwei.ExpressionCompiler.Test\\bitzhuwei.ExpressionCompiler.Test.csproj
-		SccProjectName5 = bitzhuwei.ExpressionCompiler.Test
-		SccLocalPath5 = bitzhuwei.ExpressionCompiler.Test
-		SccProjectUniqueName6 = bitzhuwei.ExpressionCompiler\\bitzhuwei.ExpressionCompiler.csproj
-		SccProjectName6 = bitzhuwei.ExpressionCompiler
-		SccLocalPath6 = bitzhuwei.ExpressionCompiler
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -109,6 +89,26 @@ Global
 		{1FC32681-FF44-4E5C-A8DA-E46D6C6884A8}.Release|Mixed Platforms.Build.0 = Release|x86
 		{1FC32681-FF44-4E5C-A8DA-E46D6C6884A8}.Release|x86.ActiveCfg = Release|x86
 		{1FC32681-FF44-4E5C-A8DA-E46D6C6884A8}.Release|x86.Build.0 = Release|x86
+		{47963D86-3784-44B8-8D5F-9A46C7F58D4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47963D86-3784-44B8-8D5F-9A46C7F58D4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47963D86-3784-44B8-8D5F-9A46C7F58D4E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{47963D86-3784-44B8-8D5F-9A46C7F58D4E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{47963D86-3784-44B8-8D5F-9A46C7F58D4E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{47963D86-3784-44B8-8D5F-9A46C7F58D4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47963D86-3784-44B8-8D5F-9A46C7F58D4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47963D86-3784-44B8-8D5F-9A46C7F58D4E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{47963D86-3784-44B8-8D5F-9A46C7F58D4E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{47963D86-3784-44B8-8D5F-9A46C7F58D4E}.Release|x86.ActiveCfg = Release|Any CPU
+		{247BCDA3-57F0-461D-A76D-E257EE39919B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{247BCDA3-57F0-461D-A76D-E257EE39919B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{247BCDA3-57F0-461D-A76D-E257EE39919B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{247BCDA3-57F0-461D-A76D-E257EE39919B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{247BCDA3-57F0-461D-A76D-E257EE39919B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{247BCDA3-57F0-461D-A76D-E257EE39919B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{247BCDA3-57F0-461D-A76D-E257EE39919B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{247BCDA3-57F0-461D-A76D-E257EE39919B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{247BCDA3-57F0-461D-A76D-E257EE39919B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{247BCDA3-57F0-461D-A76D-E257EE39919B}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
