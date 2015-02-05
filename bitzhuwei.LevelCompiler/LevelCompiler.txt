@@ -1,8 +1,6 @@
 Name:LevelCompiler
-<Level> ::= "level" "{" <StepList> "}";
-<StepList> ::= <Step> <StepList> | null;
-<Step> ::= "step" "{" <TankList> "}";
+<Level> ::= "level" "{" <TankList> "}";
 <TankList> ::= <Tank> <TankList> | null;
-<Tank> ::= "tank" "{" <TankPrefab> <BornPoint> "}";
+<Tank> ::= "tank" "{" <TankPrefab> <BornPoint> "}" | "|";
 <TankPrefab> ::= number;
 <BornPoint> ::= number;

@@ -46,6 +46,9 @@ using bitzhuwei.CompilerBase;
                 case EnumCharTypeLevelCompiler.RightBrace:
                     gotToken = GetRightBrace(result);
                     break;
+                case EnumCharTypeLevelCompiler.Or:
+                    gotToken = GetOr(result);
+                    break;
                 case EnumCharTypeLevelCompiler.Number:
                     gotToken = GetConstentNumber(result);
                     break;
@@ -117,6 +120,32 @@ using bitzhuwei.CompilerBase;
             
             return false;
         }
+        /// <summary>
+        /// )
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        protected virtual bool GetOr(Token<EnumTokenTypeLevelCompiler> result)
+        {
+            var count = this.GetSourceCode().Length;
+            //item.CharType: Or
+            //Mapped nodes:
+            //    "|"
+            //result.TokenType = EnumTokenTypeLevelCompiler.token_Or_;
+            if (PtNextLetter + 1 <= count)
+            {
+                var str = this.GetSourceCode().Substring(PtNextLetter, 1);
+                if ("|" == str)
+                {
+                    result.TokenType = EnumTokenTypeLevelCompiler.token_Or_;
+                    result.Detail = str;
+                    PtNextLetter += 1;
+                    return true;
+                }
+            }
+            
+            return false;
+        }
         #region GetIdentifier
         /// <summary>
         /// 获取标识符（函数名，变量名，等）
@@ -157,7 +186,6 @@ using bitzhuwei.CompilerBase;
         public static readonly IEnumerable<EnumTokenTypeLevelCompiler> keywords = new List<EnumTokenTypeLevelCompiler>()
         {
             EnumTokenTypeLevelCompiler.token_level,
-            EnumTokenTypeLevelCompiler.token_step,
             EnumTokenTypeLevelCompiler.token_tank,
         };
         

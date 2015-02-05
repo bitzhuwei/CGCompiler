@@ -24,13 +24,13 @@
         /// </summary>
         epsilon,
         /// <summary>
-        /// &quot;step&quot;
-        /// </summary>
-        token_step,
-        /// <summary>
         /// &quot;tank&quot;
         /// </summary>
         token_tank,
+        /// <summary>
+        /// &quot;|&quot;
+        /// </summary>
+        token_Or_,
         /// <summary>
         /// number
         /// </summary>
@@ -44,5 +44,4 @@
         /// </summary>
         identifier,
     }
-
 

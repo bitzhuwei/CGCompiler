@@ -8,23 +8,15 @@
         /// </summary>
         Unknown,
         /// <summary>
-        /// &lt;Level&gt; ::= &quot;level&quot; &quot;{&quot; &lt;StepList&gt; &quot;}&quot;;
+        /// &lt;Level&gt; ::= &quot;level&quot; &quot;{&quot; &lt;TankList&gt; &quot;}&quot;;
         /// </summary>
         case_Level,
-        /// <summary>
-        /// &lt;StepList&gt; ::= &lt;Step&gt; &lt;StepList&gt; | null;
-        /// </summary>
-        case_StepList,
-        /// <summary>
-        /// &lt;Step&gt; ::= &quot;step&quot; &quot;{&quot; &lt;TankList&gt; &quot;}&quot;;
-        /// </summary>
-        case_Step,
         /// <summary>
         /// &lt;TankList&gt; ::= &lt;Tank&gt; &lt;TankList&gt; | null;
         /// </summary>
         case_TankList,
         /// <summary>
-        /// &lt;Tank&gt; ::= &quot;tank&quot; &quot;{&quot; &lt;TankPrefab&gt; &lt;BornPoint&gt; &quot;}&quot;;
+        /// &lt;Tank&gt; ::= &quot;tank&quot; &quot;{&quot; &lt;TankPrefab&gt; &lt;BornPoint&gt; &quot;}&quot; | &quot;|&quot;;
         /// </summary>
         case_Tank,
         /// <summary>
@@ -52,13 +44,13 @@
         /// </summary>
         epsilonLeave,
         /// <summary>
-        /// &quot;step&quot;
-        /// </summary>
-        tail_stepLeave,
-        /// <summary>
         /// &quot;tank&quot;
         /// </summary>
         tail_tankLeave,
+        /// <summary>
+        /// &quot;|&quot;
+        /// </summary>
+        tail_or_Leave,
         /// <summary>
         /// number
         /// </summary>
@@ -68,5 +60,4 @@
         /// </summary>
         tail_startEndLeave,
     }
-
 

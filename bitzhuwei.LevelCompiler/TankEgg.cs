@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-    public class EnemyEgg
+    public class TankEgg
     {
-        public EnemyEgg(int enemyPrefabIndex, int bornPointIndex)
+        public TankEgg(int enemyPrefabIndex, int bornPointIndex)
         {
             this.bornPointIndex = bornPointIndex;
             this.enemyPrefabIndex = enemyPrefabIndex;

@@ -40,13 +40,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="EnemyEgg.cs" />
+    <Compile Include="TankEgg.cs" />
     <Compile Include="EnumCharTypeLevelCompiler.cs" />
     <Compile Include="EnumTokenTypeLevelCompiler.cs" />
     <Compile Include="EnumVTypeLevelCompiler.cs" />
     <Compile Include="GetLevel.cs" />
     <Compile Include="Level.cs" />
-    <Compile Include="LevelStep.cs" />
     <Compile Include="LexicalAnalyzerLevelCompiler.cs" />
     <Compile Include="LL1SyntaxParserLevelCompiler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
