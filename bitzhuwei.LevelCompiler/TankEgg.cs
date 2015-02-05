@@ -5,6 +5,10 @@ using System.Text;
 
     public class TankEgg
     {
+        public bool IsStop()
+        {
+            return !(enemyPrefabIndex >= 0 && bornPointIndex >= 0);
+        }
         public TankEgg(int enemyPrefabIndex, int bornPointIndex)
         {
             this.bornPointIndex = bornPointIndex;

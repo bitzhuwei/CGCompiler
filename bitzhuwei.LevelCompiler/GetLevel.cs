@@ -49,6 +49,11 @@ public static partial class GetLevel
             var result = new TankEgg(tankPrefab, bornPoint);
             return result;
         }
+        else if (syntaxTree.CandidateFunc == LL1SyntaxParserLevelCompiler.GetFuncParsecase_Tank___tail_or_Leave())
+        {
+            var result = new TankEgg(-1, -1);
+            return result;
+        }
 
         return null;
     }
