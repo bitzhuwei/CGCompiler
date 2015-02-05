@@ -27,7 +27,8 @@ public static partial class GetLevel
 
     private static void GetTankList(Level level, SyntaxTree<EnumTokenTypeLevelCompiler, EnumVTypeLevelCompiler, TreeNodeValueLevelCompiler> syntaxTree)
     {
-        if (syntaxTree.CandidateFunc == LL1SyntaxParserLevelCompiler.GetFuncParsecase_TankList___tail_tankLeave())
+        if (syntaxTree.CandidateFunc == LL1SyntaxParserLevelCompiler.GetFuncParsecase_TankList___tail_tankLeave()
+            || syntaxTree.CandidateFunc == LL1SyntaxParserLevelCompiler.GetFuncParsecase_TankList___tail_or_Leave())
         {
             var egg = GetTank(syntaxTree.Children[0]);
             level.Add(egg);
@@ -37,7 +38,6 @@ public static partial class GetLevel
         {
             //nothing to do
         }
-
     }
 
     private static TankEgg GetTank(SyntaxTree<EnumTokenTypeLevelCompiler, EnumVTypeLevelCompiler, TreeNodeValueLevelCompiler> syntaxTree)

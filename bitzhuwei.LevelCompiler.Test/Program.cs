@@ -15,14 +15,8 @@ namespace bitzhuwei.LevelCompiler.Test
 @"
 level
 {
-    step
-    {
-        tank{1 2} //{<TankPrefab> <BornPoint>}
-    }
-    step
-    {
-        tank{3 4} tank{5 6}
-    }
+    
+     tank{1 2} | tank{3 4} 
 }
 "
             };
