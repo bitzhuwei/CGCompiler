@@ -428,6 +428,7 @@ namespace bitzhuwei.CGCompiler
             builer.Replace(":", "Colon_");
             builer.Replace(";", "Semicolon_");
             builer.Replace("=", "Equality_");
+            builer.Replace("@", "At");
             builer.Replace(' ', '_');
             builer.Replace('\t', '_');
             builer.Replace('\r', '_');
