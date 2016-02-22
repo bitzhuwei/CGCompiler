@@ -250,6 +250,10 @@ namespace bitzhuwei.CGCompiler
             builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
             builder.AppendLine(GetSpaces(preSpace) + "Equality,");
             builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
+            builder.AppendLine(GetSpaces(preSpace) + "/// @");
+            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
+            builder.AppendLine(GetSpaces(preSpace) + "At,");
+            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
             builder.AppendLine(GetSpaces(preSpace) + "/// space Tab \\r\\n");
             builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
             builder.AppendLine(GetSpaces(preSpace) + "Space,");
@@ -279,10 +283,10 @@ namespace bitzhuwei.CGCompiler
 
         private string GetEnumCharTypeSGItemDefaultNote()
         {
-            return "未知字符";            
+            return "未知字符";
         }
 
-        
+
         /// <summary>
         /// 获取字符类型
         /// </summary>
@@ -322,6 +326,7 @@ namespace bitzhuwei.CGCompiler
             if (c == ':') return EnumCharType.Colon;
             if (c == ';') return EnumCharType.Semicolon;
             if (c == '=') return EnumCharType.Equality;
+            if (c == '@') return EnumCharType.At;
             if (regChineseLetter.IsMatch(Convert.ToString(c))) return EnumCharType.ChineseLetter;
             if (c == ' ' || c == '\t' || c == '\r' || c == '\n') return EnumCharType.Space;
             return EnumCharType.Unknown;
