@@ -12,7 +12,7 @@ namespace bitzhuwei.CGCompiler
     public partial class ContextfreeGrammar : ICloneable
     {
         #region 生成整个词法分析器的源代码
-        
+
         /// <summary>
         /// 生成整个词法分析器的源代码
         /// </summary>
@@ -61,7 +61,7 @@ namespace bitzhuwei.CGCompiler
             return builder.ToString();
         }
         #endregion 生成整个词法分析器的源代码
-        
+
         #region 生成词法分析器类的源代码
         /// <summary>
         /// 生成LL1生成词法分析器类的源代码（只包含类）
@@ -101,7 +101,7 @@ namespace bitzhuwei.CGCompiler
             //LexicalAnalyzerCG : LexicalAnalyzerBase<EnumTokenTypeCG>
 
             builder.AppendLine(GetSpaces(preSpace) + string.Format("public partial class {0} : {1}<{2}>"
-                ,GetLexicalAnalyzerName()
+                , GetLexicalAnalyzerName()
                 , GetLexicalAnalyzerBaseName()
                 , GetEnumTokenTypeSG()));
 
@@ -113,7 +113,7 @@ namespace bitzhuwei.CGCompiler
             GenerateLexicalAnalyzerTokenFactory(builder, ref preSpace, input);
             GenerateLexicalAnalyzerMethodGetCharType(builder, ref preSpace, input);
             GenerateLexicalAnalyzerFieldregChineseLetter(builder, ref preSpace, input);
-            
+
             DecreasepreSpace(ref preSpace);
             builder.AppendLine(GetSpaces(preSpace) + "}");
 
@@ -132,7 +132,7 @@ namespace bitzhuwei.CGCompiler
             builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
             builder.AppendLine(GetSpaces(preSpace) + "/// 汉字 new Regex(\"^[^\\x00-\\xFF]\")");
             builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) + 
+            builder.AppendLine(GetSpaces(preSpace) +
                 "private static readonly Regex regChineseLetter = new Regex(\"^[^\\x00-\\xFF]\");");
         }
 
@@ -245,6 +245,9 @@ namespace bitzhuwei.CGCompiler
                 string.Format("if (c == '=') return {0}.Equality;"
                 , GetEnumCharTypeSG()));
             builder.AppendLine(GetSpaces(preSpace) +
+                string.Format("if (c == '@') return {0}.At;"
+                , GetEnumCharTypeSG()));
+            builder.AppendLine(GetSpaces(preSpace) +
                 string.Format("if ({1}.IsMatch(Convert.ToString(c))) return {0}.ChineseLetter;"
                 , GetEnumCharTypeSG()
                 , GetFieldregChineseLetter()));
@@ -301,7 +304,7 @@ namespace bitzhuwei.CGCompiler
                 builder.AppendLine(GetSpaces(preSpace) + "{");
                 IncreasepreSpace(ref preSpace);
                 builder.AppendLine(GetSpaces(preSpace) + "var count = this.GetSourceCode().Length;");
-                builder.AppendLine(GetSpaces(preSpace) + 
+                builder.AppendLine(GetSpaces(preSpace) +
                     string.Format("//item.CharType: {0}"
                     , item.CharType));
                 if (item.MappedNodes.Count > 1)
@@ -335,7 +338,12 @@ namespace bitzhuwei.CGCompiler
                         , key));
                     foreach (var sign in token)
                     {
-                        var start = sign.NodeName[0] == '"' ? 1 : 0;
+                        if (key == 2 && sign.NodeName[1] == '/')
+                        {
+                            builder.AppendLine(GetSpaces(preSpace) + 
+                                "if (\"//\" == str) { SkipSingleLineNote(); return false; }");
+                        }
+                        //var start = sign.NodeName[0] == '"' ? 1 : 0;
                         builder.AppendLine(GetSpaces(preSpace) +
                             string.Format("if ({0} == str)"
                             , sign.NodeName
@@ -353,6 +361,7 @@ namespace bitzhuwei.CGCompiler
                         builder.AppendLine(GetSpaces(preSpace) + "return true;");
                         DecreasepreSpace(ref preSpace);
                         builder.AppendLine(GetSpaces(preSpace) + "}");
+
                     }
                     DecreasepreSpace(ref preSpace);
                     builder.AppendLine(GetSpaces(preSpace) + "}");
@@ -372,7 +381,7 @@ namespace bitzhuwei.CGCompiler
                 GenerateLexicalAnalyzerTokenFactoryConstentNumber(builder, ref preSpace, input);
             if (map.Contains(EnumCharType.Quotation))
                 GenerateLexicalAnalyzerTokenFactoryConstentChar(builder, ref preSpace, input);
-            if(map.Contains(EnumCharType.DoubleQuotation))
+            if (map.Contains(EnumCharType.DoubleQuotation))
                 GenerateLexicalAnalyzerTokenFactoryConstentString(builder, ref preSpace, input);
             GenerateLexicalAnalyzerTokenFactoryUnknown(builder, ref preSpace, input);
             GenerateLexicalAnalyzerTokenFactorySpace(builder, ref preSpace, input);
@@ -463,7 +472,7 @@ namespace bitzhuwei.CGCompiler
             builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
             builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"result\"></param>");
             builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) + 
+            builder.AppendLine(GetSpaces(preSpace) +
                 string.Format("protected virtual bool GetSpace(Token<{0}> result)"
                 , GetEnumTokenTypeSG()));
             builder.AppendLine(GetSpaces(preSpace) + "{");
@@ -489,12 +498,12 @@ namespace bitzhuwei.CGCompiler
             builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
             builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"result\"></param>");
             builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) + 
+            builder.AppendLine(GetSpaces(preSpace) +
                 string.Format("protected virtual bool GetUnknown(Token<{0}> result)"
-                ,GetEnumTokenTypeSG()));
+                , GetEnumTokenTypeSG()));
             builder.AppendLine(GetSpaces(preSpace) + "{");
             IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + 
+            builder.AppendLine(GetSpaces(preSpace) +
                 string.Format("result.TokenType = {0}.unknown;"
                 , GetEnumTokenTypeSG()));
             builder.AppendLine(GetSpaces(preSpace) + "result.Detail = this.GetSourceCode()[PtNextLetter].ToString();");
@@ -518,7 +527,7 @@ namespace bitzhuwei.CGCompiler
                 , GetEnumTokenTypeSG()));//GetMethodGetSomeTokenWithCharType
             builder.AppendLine(GetSpaces(preSpace) + "{");
             IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + 
+            builder.AppendLine(GetSpaces(preSpace) +
                 string.Format("result.TokenType = {0}.constString;"
                 , GetEnumTokenTypeSG()));
             builder.AppendLine(GetSpaces(preSpace) + "int count = this.GetSourceCode().Length;");
@@ -566,14 +575,14 @@ namespace bitzhuwei.CGCompiler
             builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
             builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"result\"></param>");
             builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) + 
+            builder.AppendLine(GetSpaces(preSpace) +
                 string.Format("protected virtual bool GetQuotation(Token<{0}> result)"
-                ,GetEnumTokenTypeSG()));
+                , GetEnumTokenTypeSG()));
             builder.AppendLine(GetSpaces(preSpace) + "{");
             IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + 
+            builder.AppendLine(GetSpaces(preSpace) +
                 string.Format("result.TokenType = {0}.ConstentChar;"
-                ,GetEnumTokenTypeSG()));
+                , GetEnumTokenTypeSG()));
             builder.AppendLine(GetSpaces(preSpace) + "int count = this.GetSourceCode().Length;");
             builder.AppendLine(GetSpaces(preSpace) + "int ptCharHead = PtNextLetter;");
             builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
@@ -611,7 +620,7 @@ namespace bitzhuwei.CGCompiler
             builder.AppendLine(GetSpaces(preSpace) + "{");
             IncreasepreSpace(ref preSpace);
             builder.AppendLine(GetSpaces(preSpace) + "var ect = GetCharType(this.GetSourceCode()[ptCharHead + 1]);");
-            builder.AppendLine(GetSpaces(preSpace) + 
+            builder.AppendLine(GetSpaces(preSpace) +
                 string.Format("if (ect == {0}.{1})"
                 , GetEnumCharTypeSG()
                 , GetEnumCharTypeSGItemDefaultName()));
@@ -629,10 +638,10 @@ namespace bitzhuwei.CGCompiler
             builder.AppendLine(GetSpaces(preSpace) + "if (this.GetSourceCode()[ptCharHead] != '\\''");
             IncreasepreSpace(ref preSpace);
             builder.AppendLine(GetSpaces(preSpace) + "|| this.GetSourceCode()[ptCharHead + 1] != '\\\\'");
-            builder.AppendLine(GetSpaces(preSpace) + 
+            builder.AppendLine(GetSpaces(preSpace) +
                 string.Format("|| GetCharType(this.GetSourceCode()[ptCharHead + 2]) == {0}.{1}"
-                ,GetEnumCharTypeSG()
-                ,GetEnumCharTypeSGItemDefaultName()));
+                , GetEnumCharTypeSG()
+                , GetEnumCharTypeSGItemDefaultName()));
             builder.AppendLine(GetSpaces(preSpace) + "|| this.GetSourceCode()[ptCharHead + 3] != '\\'')");
             DecreasepreSpace(ref preSpace);
             builder.AppendLine(GetSpaces(preSpace) + "{");
@@ -665,7 +674,7 @@ namespace bitzhuwei.CGCompiler
             builder.AppendLine(GetSpaces(preSpace) +
                 string.Format("result.TokenType = {0}.{1};"
                 , GetEnumTokenTypeSG()
-                , GetEnumTokenTypeSGItem( ProductionNode.tail_number)));
+                , GetEnumTokenTypeSGItem(ProductionNode.tail_number)));
             builder.AppendLine(GetSpaces(preSpace) + "if (this.GetSourceCode()[PtNextLetter] == '0')//可能是八进制或十六进制数");
             builder.AppendLine(GetSpaces(preSpace) + "{");
             IncreasepreSpace(ref preSpace);
@@ -708,7 +717,7 @@ namespace bitzhuwei.CGCompiler
             builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
             builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"result\"></param>");
             builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) + 
+            builder.AppendLine(GetSpaces(preSpace) +
                 string.Format("protected virtual bool GetConstentDecimalNumber(Token<{0}> result)"
                 , GetEnumTokenTypeSG()));
             builder.AppendLine(GetSpaces(preSpace) + "{");
@@ -787,7 +796,7 @@ namespace bitzhuwei.CGCompiler
             builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
             builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"result\"></param>");
             builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) + 
+            builder.AppendLine(GetSpaces(preSpace) +
                 string.Format("protected virtual bool GetConstentOctonaryNumber(Token<{0}> result)"
                 , GetEnumTokenTypeSG()));
             builder.AppendLine(GetSpaces(preSpace) + "{");
@@ -827,7 +836,7 @@ namespace bitzhuwei.CGCompiler
             builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
             builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"result\"></param>");
             builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) + 
+            builder.AppendLine(GetSpaces(preSpace) +
                 string.Format("protected virtual bool GetConstentHexadecimalNumber(Token<{0}> result)"
                 , GetEnumTokenTypeSG()));
             builder.AppendLine(GetSpaces(preSpace) + "{");
@@ -1001,7 +1010,7 @@ namespace bitzhuwei.CGCompiler
                 , GetEnumTokenTypeSG()));
             builder.AppendLine(GetSpaces(preSpace) + "{");
             IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + 
+            builder.AppendLine(GetSpaces(preSpace) +
                 string.Format("result.TokenType = {0}.identifier;"
                 , GetEnumTokenTypeSG()));
             builder.AppendLine(GetSpaces(preSpace) + "StringBuilder builder = new StringBuilder();");
@@ -1009,16 +1018,16 @@ namespace bitzhuwei.CGCompiler
             builder.AppendLine(GetSpaces(preSpace) + "{");
             IncreasepreSpace(ref preSpace);
             builder.AppendLine(GetSpaces(preSpace) + "var ct = GetCharType(this.GetSourceCode()[PtNextLetter]);");
-            builder.AppendLine(GetSpaces(preSpace) + 
+            builder.AppendLine(GetSpaces(preSpace) +
                 string.Format("if (ct == {0}.Letter"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) + 
+            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) +
                 string.Format("|| ct == {0}.Number"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) + 
+            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) +
                 string.Format("|| ct == {0}.UnderLine"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) + 
+            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) +
                 string.Format("|| ct == {0}.ChineseLetter)"
                 , GetEnumCharTypeSG()));
             builder.AppendLine(GetSpaces(preSpace) + "{");
@@ -1034,14 +1043,14 @@ namespace bitzhuwei.CGCompiler
             builder.AppendLine(GetSpaces(preSpace) + "result.Detail = builder.ToString();");
 
             builder.AppendLine(GetSpaces(preSpace) + "// specify if this string is a keyword");
-            builder.AppendLine(GetSpaces(preSpace) + 
+            builder.AppendLine(GetSpaces(preSpace) +
                 string.Format("foreach (var item in {0}.keywords)", GetLexicalAnalyzerName()));
             builder.AppendLine(GetSpaces(preSpace) + "{");
             IncreasepreSpace(ref preSpace);
             builder.AppendLine(GetSpaces(preSpace) +
                 string.Format("if (item.ToString().Substring({0}) == result.Detail)",
                     GetKeywordPrefix4Token().Length));
-                    //GetKeywordPrefix4SyntaxTreeNodeLeave(EnumProductionNodePosition.Leave).Length));
+            //GetKeywordPrefix4SyntaxTreeNodeLeave(EnumProductionNodePosition.Leave).Length));
             builder.AppendLine(GetSpaces(preSpace) + "{");
             IncreasepreSpace(ref preSpace);
             builder.AppendLine(GetSpaces(preSpace) + "result.TokenType = item;");
@@ -1093,7 +1102,7 @@ namespace bitzhuwei.CGCompiler
                       )
                     )
                 {
-                    return false;   
+                    return false;
                 }
             }
             return true;
@@ -1259,7 +1268,7 @@ namespace bitzhuwei.CGCompiler
                     , ct
                     , value.MappedNodes.Count > 1 ? "Opt" : "");
             }
-            return result; 
+            return result;
         }
 
         //private static string GetMethodGetSomeTokenWithCharType(EnumCharType ct)
@@ -1300,7 +1309,7 @@ namespace bitzhuwei.CGCompiler
             {
                 foreach (var item in this.Map)
                 {
-                    if (item.CharType==charType)
+                    if (item.CharType == charType)
                     {
                         return true;
                     }
@@ -1337,10 +1346,10 @@ namespace bitzhuwei.CGCompiler
         /// </summary>
         class CharProductionNodeList
         {
-            public CharProductionNodeList(EnumCharType charType,params ProductionNode[] mappedNodes)
+            public CharProductionNodeList(EnumCharType charType, params ProductionNode[] mappedNodes)
             {
                 m_charType = charType;
-                if (mappedNodes!=null)
+                if (mappedNodes != null)
                     foreach (var item in mappedNodes)
                     {
                         m_MappedNodes.Add(item);
@@ -1380,7 +1389,7 @@ namespace bitzhuwei.CGCompiler
             builder.AppendLine(GetSpaces(preSpace) +
                 string.Format("/// {0}的词法分析器", this.GrammarName));
             builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) + 
+            builder.AppendLine(GetSpaces(preSpace) +
                 string.Format("public {0}()"
                 , GetLexicalAnalyzerName()));
             builder.AppendLine(GetSpaces(preSpace) + "{ }");
@@ -1397,7 +1406,7 @@ namespace bitzhuwei.CGCompiler
         }
 
         #endregion 生成词法分析器类的源代码
-        
+
 
     }
 }
