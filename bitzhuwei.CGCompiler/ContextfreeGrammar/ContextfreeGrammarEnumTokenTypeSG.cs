@@ -139,7 +139,7 @@ namespace bitzhuwei.CGCompiler
             //terminalList.Remove(ProductionNode.epsilonLeave);
             terminalList.Add(ProductionNode.startEndLeave);
             var needIdentifier = false;
-
+            var identifierExists = false;
             foreach (var terminal in terminalList)
             {
                 builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
@@ -149,6 +149,7 @@ namespace bitzhuwei.CGCompiler
                 builder.AppendLine(GetSpaces(preSpace) +
                     string.Format("{0},"
                     , GetEnumTokenTypeSGItem(terminal)));
+                if (terminal.NodeName == "identifier") { identifierExists = true; }
                 if (!needIdentifier)
                 {
                     var ct = GetCharType(terminal.NodeName[0]);
@@ -158,7 +159,7 @@ namespace bitzhuwei.CGCompiler
                     }
                 }
             }
-            if (needIdentifier)
+            if (needIdentifier &&(!identifierExists))
             {
                 builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
                 builder.AppendLine(GetSpaces(preSpace) +
