@@ -164,6 +164,8 @@ namespace bitzhuwei.CGCompiler
             }
             return false;
         }
+
+
         /// <summary>
         /// 判定给定的候选式能否推导出ε（空）
         /// </summary>
@@ -173,33 +175,64 @@ namespace bitzhuwei.CGCompiler
         {
             foreach (var node in candidate)
             {
-                switch (node.Position)
+                if (node.Position == EnumProductionNodePosition.Leave)
                 {
-                    case EnumProductionNodePosition.Leave:
-                        return false;
-                    //break;
-                    case EnumProductionNodePosition.NonLeave:
-                        var production = this.GetProduction(node);
-                        if (!this.CanInferNull(production))
-                            return false;
-                        break;
-                    //case EnumProductionNodePosition.My:
-                    //    if (node.NodeName != ProductionNode.my_null.NodeName)
-                    //        return false;
-                    //    else
-                    //        break;
-                    case EnumProductionNodePosition.Unknown:
-                        Console.WriteLine("文法中存在不合法的候选式{0}", candidate);
-                        Console.ReadKey(true);
-                        return false;
-                    //break;
-                    default:
-                        return false;
-                    //break;
+                    return false;
+                }
+                else if (node.Position == EnumProductionNodePosition.Unknown)
+                {
+                    throw new Exception(string.Format("文法中存在不合法的候选式{0}", candidate));
                 }
             }
+
+            foreach (var node in candidate)
+            {
+                var production = this.GetProduction(node);
+                //AppendSpaces(builder, prefixSpace);
+                //builder.AppendLine(string.Format("parse next production: {0}", production));
+                if (!this.CanInferNull(production))
+                    return false;
+            }
+
             return false;
         }
+
+        ///// <summary>
+        ///// 判定给定的候选式能否推导出ε（空）
+        ///// </summary>
+        ///// <param name="candidate"></param>
+        ///// <returns></returns>
+        //public bool CanInferNull(ProductionNodeList candidate)
+        //{
+        //    foreach (var node in candidate)
+        //    {
+        //        switch (node.Position)
+        //        {
+        //            case EnumProductionNodePosition.Leave:
+        //                return false;
+        //            //break;
+        //            case EnumProductionNodePosition.NonLeave:
+        //                var production = this.GetProduction(node);
+        //                if (!this.CanInferNull(production))
+        //                    return false;
+        //                break;
+        //            //case EnumProductionNodePosition.My:
+        //            //    if (node.NodeName != ProductionNode.my_null.NodeName)
+        //            //        return false;
+        //            //    else
+        //            //        break;
+        //            case EnumProductionNodePosition.Unknown:
+        //                Console.WriteLine("文法中存在不合法的候选式{0}", candidate);
+        //                Console.ReadKey(true);
+        //                return false;
+        //            //break;
+        //            default:
+        //                return false;
+        //            //break;
+        //        }
+        //    }
+        //    return false;
+        //}
         
         
     }

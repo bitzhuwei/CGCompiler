@@ -155,12 +155,12 @@ namespace bitzhuwei.CGCompiler.Winform
                     codeGenerator.ReportProgress(37, "冲突的FIRST集所在的产生式：" + Environment.NewLine + conflicted.ToString());
                     throw new Exception("您给定的文法的FIRST集有冲突，详情见状态框。");
                 }
-                var followCollection = grammar.GetFollowCollection();
-                codeGenerator.ReportProgress(42, "得到文法的FOLLOW集！");
-                var ll1ParserMap = grammar.GetLL1ParserMap();
-                codeGenerator.ReportProgress(48, "得到文法的LL1分析表！");
-                input = new LL1GeneraterInput(grammar);
+                //var followCollection = grammar.GetFollowCollection();
+                //codeGenerator.ReportProgress(42, "得到文法的FOLLOW集！");
+                //var ll1ParserMap = grammar.GetLL1ParserMap();
+                //codeGenerator.ReportProgress(48, "得到文法的LL1分析表！");
             }
+            input = new LL1GeneraterInput(grammar);
             {
                 var lexicalAnalyzerGenerated = grammar.GenerateLexicalAnalyzer(input);
                 codeGenerator.ReportProgress(54, string.Format("自动生成\"{0}\"的代码！", grammar.GetLexicalAnalyzerName()));

@@ -29,15 +29,30 @@ namespace bitzhuwei.CGCompiler
         /// </summary>
         public List<ProductionNode> GetTerminalList()
         {
-            var result =
-                (from production in this.m_ProductionCollection
-                 from candidate in production.RightCollection
-                 from node in candidate
-                 where (
-                    node.Position == EnumProductionNodePosition.Leave
-                     //|| node.Position == EnumProductionNodePosition.My
-                    )
-                 select node).Distinct().ToList();
+            //var result =
+            //    (from production in this.m_ProductionCollection
+            //     from candidate in production.RightCollection
+            //     from node in candidate
+            //     where (
+            //        node.Position == EnumProductionNodePosition.Leave
+            //         //|| node.Position == EnumProductionNodePosition.My
+            //        )
+            //     select node).Distinct().ToList();
+            List<ProductionNode> result = new List<ProductionNode>();
+            foreach (var production in this.m_ProductionCollection)
+            {
+                foreach (var candidate in production.RightCollection)
+                {
+                    foreach (var node in candidate)
+                    {
+                        if (node.Position == EnumProductionNodePosition.Leave
+                            && (!result.Contains(node)))
+                        {
+                            result.Add(node);
+                        }
+                    }
+                }
+            }
             //if (!result.Contains(ProductionNode.my_constString))
             //    foreach (var item in result)
             //    {
@@ -58,7 +73,7 @@ namespace bitzhuwei.CGCompiler
         /// </summary>
         public ProductionNode GetHeadNode()
         {
-            if (this.m_ProductionCollection==null
+            if (this.m_ProductionCollection == null
                 || this.m_ProductionCollection.Count == 0)
             {
                 return null;

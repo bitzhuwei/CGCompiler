@@ -40,12 +40,16 @@ namespace bitzhuwei.CGCompiler
             {
                 return true;
             }
+
             if ((object)a == null)
             {
                 if ((object)b == null) return true;
                 else return false;
             }
             else if ((object)b == null) return false;
+
+            if (a.RightCollection.Count != b.RightCollection.Count) { return false; }
+
             for (int i = 0; i < a.RightCollection.Count; i++)
             {
                 if (!a.RightCollection[i].Equals(b.RightCollection[i]))
