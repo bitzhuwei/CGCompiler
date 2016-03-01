@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
@@ -13,26 +14,39 @@ namespace bitzhuwei.CGCompiler
     {
         #region 生成整个词法分析器的源代码
 
-        /// <summary>
-        /// 生成整个词法分析器的源代码
-        /// </summary>
-        /// <returns></returns>
-        public string GenerateLexicalAnalyzer()
-        {
-            int preSpace = 0;
-            LL1GeneraterInput input = new LL1GeneraterInput(this);
-            return GenerateLexicalAnalyzer(ref preSpace, input);
-        }
-        /// <summary>
-        /// 生成整个词法分析器的源代码
-        /// </summary>
-        /// <param name="input">输入</param>
-        /// <returns></returns>
-        public string GenerateLexicalAnalyzer(LL1GeneraterInput input)
-        {
-            int preSpace = 0;
+        ///// <summary>
+        ///// 生成整个词法分析器的源代码
+        ///// </summary>
+        ///// <returns></returns>
+        //public string GenerateLexicalAnalyzer()
+        //{
+        //    int preSpace = 0;
+        //    LL1GeneraterInput input = new LL1GeneraterInput(this);
+        //    return GenerateLexicalAnalyzer(ref preSpace, input);
+        //}
+        ///// <summary>
+        ///// 生成整个词法分析器的源代码
+        ///// </summary>
+        ///// <param name="input">输入</param>
+        ///// <returns></returns>
+        //public string GenerateLexicalAnalyzer(LL1GeneraterInput input)
+        //{
+        //    int preSpace = 0;
 
-            return GenerateLexicalAnalyzer(ref preSpace, input);
+        //    return GenerateLexicalAnalyzer(ref preSpace, input);
+        //}
+        public void GenerateLexicalAnalyzer(string fullname, LL1GeneraterInput input)
+        {
+            TextWriterTraceListener listener = new TextWriterTraceListener(fullname);
+            Debug.Listeners.Add(listener);
+
+            Debug.IndentSize = 4;
+            Debug.IndentLevel = 0;
+            GenerateLexicalAnalyzer(input);
+
+            Debug.Flush();
+            Debug.Close();
+            Debug.Listeners.Remove(listener);
         }
         /// <summary>
         /// 生成整个词法分析器的源代码
@@ -41,49 +55,26 @@ namespace bitzhuwei.CGCompiler
         /// <param name="preSpace">预留空白长度</param>
         /// <param name="input"></param>
         /// <returns></returns>
-        public string GenerateLexicalAnalyzer(ref int preSpace, LL1GeneraterInput input)
+        public void GenerateLexicalAnalyzer(LL1GeneraterInput input)
         {
-            StringBuilder builder = new StringBuilder();
-            builder.AppendLine(GetSpaces(preSpace) + "using System;");
-            builder.AppendLine(GetSpaces(preSpace) + "using System.Text;");
-            builder.AppendLine(GetSpaces(preSpace) + "using System.Text.RegularExpressions;");
-            builder.AppendLine(GetSpaces(preSpace) + "using System.Collections.Generic;");
-            builder.AppendLine(GetSpaces(preSpace) + "using bitzhuwei.CompilerBase;");
-            builder.AppendLine(GetSpaces(preSpace));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("using System;");
+            Debug.WriteLine("using System.Text;");
+            Debug.WriteLine("using System.Text.RegularExpressions;");
+            Debug.WriteLine("using System.Collections.Generic;");
+            Debug.WriteLine("using bitzhuwei.CompilerBase;");
+            Debug.WriteLine("");
+            Debug.WriteLine(
                 string.Format("namespace {0}", this.Namespace));
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GenerateLexicalAnalyzerClass(ref preSpace, input));
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace));
-            return builder.ToString();
+            Debug.WriteLine("{");
+            Debug.Indent();
+            GenerateLexicalAnalyzerClass(input);
+            Debug.Unindent(); 
+            Debug.WriteLine("}");
+            Debug.WriteLine("");
         }
         #endregion 生成整个词法分析器的源代码
 
         #region 生成词法分析器类的源代码
-        /// <summary>
-        /// 生成LL1生成词法分析器类的源代码（只包含类）
-        /// </summary>
-        /// <returns></returns>
-        public string GenerateLexicalAnalyzerClass()
-        {
-            int preSpace = m_preSpaceOfLL1SyntaxParser;
-            LL1GeneraterInput input = new LL1GeneraterInput(this);
-            return GenerateLexicalAnalyzer(ref preSpace, input);
-        }
-        /// <summary>
-        /// 生成LL1生成词法分析器类的源代码（只包含类）
-        /// </summary>
-        /// <param name="input">输入</param>
-        /// <returns></returns>
-        public string GenerateLexicalAnalyzerClass(LL1GeneraterInput input)
-        {
-            int preSpace = m_preSpaceOfLL1SyntaxParser;
-
-            return GenerateLexicalAnalyzerClass(ref preSpace, input);
-        }
         /// <summary>
         /// 生成词法分析器类的源代码（只包含类）
         /// </summary>
@@ -91,33 +82,29 @@ namespace bitzhuwei.CGCompiler
         /// <param name="preSpace">预留空白长度</param>
         /// <param name="input"></param>
         /// <returns></returns>
-        public string GenerateLexicalAnalyzerClass(ref int preSpace, LL1GeneraterInput input)
+        public void GenerateLexicalAnalyzerClass(LL1GeneraterInput input)
         {
-            StringBuilder builder = new StringBuilder();
-
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) + string.Format("/// {0}的词法分析器", this.GrammarName));
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine(string.Format("/// {0}的词法分析器", this.GrammarName));
+            Debug.WriteLine("/// </summary>");
             //LexicalAnalyzerCG : LexicalAnalyzerBase<EnumTokenTypeCG>
 
-            builder.AppendLine(GetSpaces(preSpace) + string.Format("public partial class {0} : {1}<{2}>"
+            Debug.WriteLine(string.Format("public partial class {0} : {1}<{2}>"
                 , GetLexicalAnalyzerName()
                 , GetLexicalAnalyzerBaseName()
                 , GetEnumTokenTypeSG()));
 
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
+            Debug.WriteLine("{");
+            Debug.Indent();
 
-            GenerateLexicalAnalyzerConstructor(builder, ref preSpace, input);
-            GenerateLexicalAnalyzerMethodNextToken(builder, ref preSpace, input);
-            GenerateLexicalAnalyzerTokenFactory(builder, ref preSpace, input);
-            GenerateLexicalAnalyzerMethodGetCharType(builder, ref preSpace, input);
-            GenerateLexicalAnalyzerFieldregChineseLetter(builder, ref preSpace, input);
+            GenerateLexicalAnalyzerConstructor(input);
+            GenerateLexicalAnalyzerMethodNextToken(input);
+            GenerateLexicalAnalyzerTokenFactory(input);
+            GenerateLexicalAnalyzerMethodGetCharType(input);
+            GenerateLexicalAnalyzerFieldregChineseLetter(input);
 
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-
-            return builder.ToString();
+            Debug.Unindent();
+            Debug.WriteLine("}");
         }
         /// <summary>
         /// 字段：汉字
@@ -126,139 +113,139 @@ namespace bitzhuwei.CGCompiler
         /// <param name="grammarName"></param>
         /// <param name="preSpace"></param>
         /// <param name="input"></param>
-        private void GenerateLexicalAnalyzerFieldregChineseLetter(StringBuilder builder, ref int preSpace, LL1GeneraterInput input)
+        private void GenerateLexicalAnalyzerFieldregChineseLetter(LL1GeneraterInput input)
         {
             //private static readonly Regex regChineseLetter = new Regex("^[^\x00-\xFF]");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// 汉字 new Regex(\"^[^\\x00-\\xFF]\")");
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine("/// 汉字 new Regex(\"^[^\\x00-\\xFF]\")");
+            Debug.WriteLine("/// </summary>");
+            Debug.WriteLine(
                 "private static readonly Regex regChineseLetter = new Regex(\"^[^\\x00-\\xFF]\");");
         }
 
-        private void GenerateLexicalAnalyzerMethodGetCharType(StringBuilder builder, ref int preSpace, LL1GeneraterInput input)
+        private void GenerateLexicalAnalyzerMethodGetCharType(LL1GeneraterInput input)
         {
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// 获取字符类型");
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"c\">要归类的字符</param>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine("/// 获取字符类型");
+            Debug.WriteLine("/// </summary>");
+            Debug.WriteLine("/// <param name=\"c\">要归类的字符</param>");
+            Debug.WriteLine("/// <returns></returns>");
+            Debug.WriteLine(
                 string.Format("protected virtual {0} GetCharType(char c)"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine(
                 string.Format("if (('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z')) return {0}.Letter;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if ('0' <= c && c <= '9') return {0}.Number;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '_') return {0}.UnderLine;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '.') return {0}.Dot;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == ',') return {0}.Comma;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '+') return {0}.Plus;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '-') return {0}.Minus;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '*') return {0}.Multiply;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '/') return {0}.Divide;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '%') return {0}.Percent;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '^') return {0}.Xor;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '&') return {0}.And;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '|') return {0}.Or;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '~') return {0}.Reverse;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '$') return {0}.Dollar;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '<') return {0}.LessThan;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '>') return {0}.GreaterThan;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '(') return {0}.LeftParentheses;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == ')') return {0}.RightParentheses;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '[') return {0}.LeftBracket;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == ']') return {0}.RightBracket;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '{1}') return {0}.LeftBrace;"
                 , GetEnumCharTypeSG(), "{"));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '{1}') return {0}.RightBrace;"
                 , GetEnumCharTypeSG(), "}"));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '!') return {0}.Not;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '#') return {0}.Pound;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '\\\\') return {0}.Slash;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '?') return {0}.Question;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '\\\'') return {0}.Quotation;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '\"') return {0}.DoubleQuotation;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == ':') return {0}.Colon;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == ';') return {0}.Semicolon;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '=') return {0}.Equality;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == '@') return {0}.At;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if ({1}.IsMatch(Convert.ToString(c))) return {0}.ChineseLetter;"
                 , GetEnumCharTypeSG()
                 , GetFieldregChineseLetter()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("if (c == ' ' || c == '\\t' || c == '\\r' || c == '\\n') return {0}.Space;"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("return {0}.Unknown;"
                 , GetEnumCharTypeSG()));
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
+            Debug.Unindent();
+            Debug.WriteLine("}");
         }
 
         public string GetFieldregChineseLetter()
@@ -271,9 +258,9 @@ namespace bitzhuwei.CGCompiler
             return string.Format("EnumCharType{0}", this.GrammarName);
         }
 
-        private void GenerateLexicalAnalyzerTokenFactory(StringBuilder builder, ref int preSpace, LL1GeneraterInput input)
+        private void GenerateLexicalAnalyzerTokenFactory(LL1GeneraterInput input)
         {
-            builder.AppendLine(GetSpaces(preSpace) + "#region 获取某类型的单词");
+            Debug.WriteLine("#region 获取某类型的单词");
 
             var map = GetTokenMap(input);
             //map.Map.Add(CharProductionNodeListList.letter);
@@ -291,32 +278,32 @@ namespace bitzhuwei.CGCompiler
                     || charType == EnumCharType.DoubleQuotation)
                     continue;
                 int conditions = item.MappedNodes.Count;
-                builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-                builder.AppendLine(GetSpaces(preSpace) + "/// )");
-                builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-                builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"result\"></param>");
-                builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-                builder.AppendLine(GetSpaces(preSpace) +
+                Debug.WriteLine("/// <summary>");
+                Debug.WriteLine("/// )");
+                Debug.WriteLine("/// </summary>");
+                Debug.WriteLine("/// <param name=\"result\"></param>");
+                Debug.WriteLine("/// <returns></returns>");
+                Debug.WriteLine(
                     string.Format("protected virtual bool Get{0}{1}(Token<{2}> result)"
                     , item.CharType
                     , conditions > 1 ? "Opt" : ""
                     , GetEnumTokenTypeSG()));
-                builder.AppendLine(GetSpaces(preSpace) + "{");
-                IncreasepreSpace(ref preSpace);
-                builder.AppendLine(GetSpaces(preSpace) + "var count = this.GetSourceCode().Length;");
-                builder.AppendLine(GetSpaces(preSpace) +
+                Debug.WriteLine("{");
+                Debug.Indent();
+                Debug.WriteLine("var count = this.GetSourceCode().Length;");
+                Debug.WriteLine(
                     string.Format("//item.CharType: {0}"
                     , item.CharType));
                 if (item.MappedNodes.Count > 1)
                 {
-                    builder.AppendLine("//todo: maybe you need to set TokenType to their right position.");
+                    Debug.WriteLine("//todo: maybe you need to set TokenType to their right position.");
                 }
-                builder.AppendLine(GetSpaces(preSpace) + "//Mapped nodes:");
+                Debug.WriteLine("//Mapped nodes:");
                 foreach (var node in item.MappedNodes)
                 {
-                    builder.AppendLine(GetSpaces(preSpace) +
+                    Debug.WriteLine(
                         string.Format("//    {0}", node));
-                    builder.AppendLine(GetSpaces(preSpace) +
+                    Debug.WriteLine(
                         string.Format("//result.TokenType = {0}.{1};"
                         , GetEnumTokenTypeSG()
                         , GetEnumTokenTypeSGItem(node)));
@@ -329,760 +316,769 @@ namespace bitzhuwei.CGCompiler
                 foreach (var token in tokens)
                 {
                     var key = token.Key;
-                    builder.AppendLine(GetSpaces(preSpace) +
+                    Debug.WriteLine(
                         string.Format("if (PtNextLetter + {0} <= count)", key));
-                    builder.AppendLine(GetSpaces(preSpace) + "{");
-                    IncreasepreSpace(ref preSpace);
-                    builder.AppendLine(GetSpaces(preSpace) +
+                    Debug.WriteLine("{");
+                    Debug.Indent();
+                    Debug.WriteLine(
                         string.Format("var str = this.GetSourceCode().Substring(PtNextLetter, {0});"
                         , key));
                     foreach (var sign in token)
                     {
                         if (key == 2 && sign.NodeName[1] == '/')
                         {
-                            builder.AppendLine(GetSpaces(preSpace) + 
+                            Debug.WriteLine(
                                 "if (\"//\" == str) { SkipSingleLineNote(); return false; }");
                         }
                         //var start = sign.NodeName[0] == '"' ? 1 : 0;
-                        builder.AppendLine(GetSpaces(preSpace) +
+                        Debug.WriteLine(
                             string.Format("if ({0} == str)"
                             , sign.NodeName
                             //.Substring(start, sign.NodeName.Length - start - start)
                             ));
-                        builder.AppendLine(GetSpaces(preSpace) + "{");
-                        IncreasepreSpace(ref preSpace);
-                        builder.AppendLine(GetSpaces(preSpace) +
+                        Debug.WriteLine("{");
+                        Debug.Indent();
+                        Debug.WriteLine(
                             string.Format("result.TokenType = {0}.{1};"
                             , GetEnumTokenTypeSG()
                             , GetEnumTokenTypeSGItem(sign)));
-                        builder.AppendLine(GetSpaces(preSpace) + "result.Detail = str;");
-                        builder.AppendLine(GetSpaces(preSpace) +
+                        Debug.WriteLine("result.Detail = str;");
+                        Debug.WriteLine(
                             string.Format("PtNextLetter += {0};", key));
-                        builder.AppendLine(GetSpaces(preSpace) + "return true;");
-                        DecreasepreSpace(ref preSpace);
-                        builder.AppendLine(GetSpaces(preSpace) + "}");
+                        Debug.WriteLine("return true;");
+                        Debug.Unindent();
+                        Debug.WriteLine("}");
 
                     }
-                    DecreasepreSpace(ref preSpace);
-                    builder.AppendLine(GetSpaces(preSpace) + "}");
+                    Debug.Unindent();
+                    Debug.WriteLine("}");
                 }
 
-                builder.AppendLine(GetSpaces(preSpace));
-                builder.AppendLine(GetSpaces(preSpace) + "return false;");
-                DecreasepreSpace(ref preSpace);
-                builder.AppendLine(GetSpaces(preSpace) + "}");
+                Debug.WriteLine("");
+                Debug.WriteLine("return false;");
+                Debug.Unindent();
+                Debug.WriteLine("}");
             }
             if (map.Contains(EnumCharType.Letter)
                 || map.Contains(EnumCharType.ChineseLetter)
                 || map.Contains(EnumCharType.UnderLine)
                 )
-                GenerateLexicalAnalyzerTokenFactoryIdentifier(builder, ref preSpace, input);
+                GenerateLexicalAnalyzerTokenFactoryIdentifier(input);
             if (map.Contains(EnumCharType.Number))
-                GenerateLexicalAnalyzerTokenFactoryConstentNumber(builder, ref preSpace, input);
+                GenerateLexicalAnalyzerTokenFactoryConstentNumber(input);
             if (map.Contains(EnumCharType.Quotation))
-                GenerateLexicalAnalyzerTokenFactoryConstentChar(builder, ref preSpace, input);
+                GenerateLexicalAnalyzerTokenFactoryConstentChar(input);
             if (map.Contains(EnumCharType.DoubleQuotation))
-                GenerateLexicalAnalyzerTokenFactoryConstentString(builder, ref preSpace, input);
-            GenerateLexicalAnalyzerTokenFactoryUnknown(builder, ref preSpace, input);
-            GenerateLexicalAnalyzerTokenFactorySpace(builder, ref preSpace, input);
-            GenerateLexicalAnalyzerTokenFactoryMultilineNote(builder, ref preSpace, input);
-            GenerateLexicalAnalyzerTokenFactorySingleLineNote(builder, ref preSpace, input);
+                GenerateLexicalAnalyzerTokenFactoryConstentString(input);
+            GenerateLexicalAnalyzerTokenFactoryUnknown(input);
+            GenerateLexicalAnalyzerTokenFactorySpace(input);
+            GenerateLexicalAnalyzerTokenFactoryMultilineNote(input);
+            GenerateLexicalAnalyzerTokenFactorySingleLineNote(input);
 
 
-            builder.AppendLine(GetSpaces(preSpace) + "#endregion 获取某类型的单词");
+            Debug.WriteLine("#endregion 获取某类型的单词");
         }
 
-        private void GenerateLexicalAnalyzerTokenFactorySingleLineNote(StringBuilder builder, ref int preSpace, LL1GeneraterInput input)
+        private void GenerateLexicalAnalyzerTokenFactorySingleLineNote(LL1GeneraterInput input)
         {
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// 跳过单行注释");
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) + "protected virtual void SkipSingleLineNote()");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "int count = this.GetSourceCode().Length;");
-            builder.AppendLine(GetSpaces(preSpace) + "char cNext;");
-            builder.AppendLine(GetSpaces(preSpace) + "while (PtNextLetter < count)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "cNext = GetSourceCode()[PtNextLetter];");
-            builder.AppendLine(GetSpaces(preSpace) + "if (cNext == '\\r' || cNext == '\\n')");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "break;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine("/// 跳过单行注释");
+            Debug.WriteLine("/// </summary>");
+            Debug.WriteLine("/// <returns></returns>");
+            Debug.WriteLine("protected virtual void SkipSingleLineNote()");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("int count = this.GetSourceCode().Length;");
+            Debug.WriteLine("char cNext;");
+            Debug.WriteLine("while (PtNextLetter < count)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("cNext = GetSourceCode()[PtNextLetter];");
+            Debug.WriteLine("if (cNext == '\\r' || cNext == '\\n')");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("break;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.Unindent();
+            Debug.WriteLine("}");
         }
 
-        private void GenerateLexicalAnalyzerTokenFactoryMultilineNote(StringBuilder builder, ref int preSpace, LL1GeneraterInput input)
+        private void GenerateLexicalAnalyzerTokenFactoryMultilineNote(LL1GeneraterInput input)
         {
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// 跳过多行注释");
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) + "protected virtual void SkipMultilineNote()");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "int count = this.GetSourceCode().Length;");
-            builder.AppendLine(GetSpaces(preSpace) + "while (PtNextLetter < count)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "if (GetSourceCode()[PtNextLetter] == '*')");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            builder.AppendLine(GetSpaces(preSpace) + "if (PtNextLetter < count)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "if (GetSourceCode()[PtNextLetter] == '/')");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            builder.AppendLine(GetSpaces(preSpace) + "break;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "else");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            DecreasepreSpace(ref preSpace);
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "else");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            DecreasepreSpace(ref preSpace);
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine("/// 跳过多行注释");
+            Debug.WriteLine("/// </summary>");
+            Debug.WriteLine("/// <returns></returns>");
+            Debug.WriteLine("protected virtual void SkipMultilineNote()");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("int count = this.GetSourceCode().Length;");
+            Debug.WriteLine("while (PtNextLetter < count)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("if (GetSourceCode()[PtNextLetter] == '*')");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.WriteLine("if (PtNextLetter < count)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("if (GetSourceCode()[PtNextLetter] == '/')");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.WriteLine("break;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("else");
+            Debug.Indent();
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.Unindent();
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("else");
+            Debug.Indent();
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.Unindent();
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.Unindent();
+            Debug.WriteLine("}");
         }
 
-        private void GenerateLexicalAnalyzerTokenFactorySpace(StringBuilder builder, ref int preSpace, LL1GeneraterInput input)
+        private void GenerateLexicalAnalyzerTokenFactorySpace(LL1GeneraterInput input)
         {
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// space tab \\r \\n");
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"result\"></param>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine("/// space tab \\r \\n");
+            Debug.WriteLine("/// </summary>");
+            Debug.WriteLine("/// <param name=\"result\"></param>");
+            Debug.WriteLine("/// <returns></returns>");
+            Debug.WriteLine(
                 string.Format("protected virtual bool GetSpace(Token<{0}> result)"
                 , GetEnumTokenTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "char c = this.GetSourceCode()[PtNextLetter];");
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            builder.AppendLine(GetSpaces(preSpace) + "if (c == '\\n')// || c == '\\r') //换行：Windows：\\r\\n Linux：\\n");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "this.m_CurrentLine++;");
-            builder.AppendLine(GetSpaces(preSpace) + "this.m_CurrentColumn = 0;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "return false;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("char c = this.GetSourceCode()[PtNextLetter];");
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.WriteLine("if (c == '\\n')// || c == '\\r') //换行：Windows：\\r\\n Linux：\\n");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("this.m_CurrentLine++;");
+            Debug.WriteLine("this.m_CurrentColumn = 0;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("return false;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
         }
 
-        private void GenerateLexicalAnalyzerTokenFactoryUnknown(StringBuilder builder, ref int preSpace, LL1GeneraterInput input)
+        private void GenerateLexicalAnalyzerTokenFactoryUnknown(LL1GeneraterInput input)
         {
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// 未知符号");
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"result\"></param>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine("/// 未知符号");
+            Debug.WriteLine("/// </summary>");
+            Debug.WriteLine("/// <param name=\"result\"></param>");
+            Debug.WriteLine("/// <returns></returns>");
+            Debug.WriteLine(
                 string.Format("protected virtual bool GetUnknown(Token<{0}> result)"
                 , GetEnumTokenTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine(
                 string.Format("result.TokenType = {0}.unknown;"
                 , GetEnumTokenTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) + "result.Detail = this.GetSourceCode()[PtNextLetter].ToString();");
-            builder.AppendLine(GetSpaces(preSpace) + "result.LexicalError = true;");
-            builder.AppendLine(GetSpaces(preSpace) + "result.Tag = string.Format(\"发现未知字符[{0}]。\", result.Detail);");
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            builder.AppendLine(GetSpaces(preSpace) + "return true;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
+            Debug.WriteLine("result.Detail = this.GetSourceCode()[PtNextLetter].ToString();");
+            Debug.WriteLine("result.LexicalError = true;");
+            Debug.WriteLine("result.Tag = string.Format(\"发现未知字符[{0}]。\", result.Detail);");
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.WriteLine("return true;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
         }
 
-        private void GenerateLexicalAnalyzerTokenFactoryConstentString(StringBuilder builder, ref int preSpace, LL1GeneraterInput input)
+        private void GenerateLexicalAnalyzerTokenFactoryConstentString(LL1GeneraterInput input)
         {
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// 字符串常量 \"XXX\"");
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"result\"></param>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine("/// 字符串常量 \"XXX\"");
+            Debug.WriteLine("/// </summary>");
+            Debug.WriteLine("/// <param name=\"result\"></param>");
+            Debug.WriteLine("/// <returns></returns>");
+            Debug.WriteLine(
                 string.Format("protected virtual bool GetConstentString(Token<{0}> result)"
                 , GetEnumTokenTypeSG()));//GetMethodGetSomeTokenWithCharType
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine(
                 string.Format("result.TokenType = {0}.constString;"
                 , GetEnumTokenTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) + "int count = this.GetSourceCode().Length;");
-            builder.AppendLine(GetSpaces(preSpace) + "StringBuilder constString = new StringBuilder(\"\\\"\");");
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            builder.AppendLine(GetSpaces(preSpace) + "bool notMatched = true;");
-            builder.AppendLine(GetSpaces(preSpace) + "char c;");
-            builder.AppendLine(GetSpaces(preSpace) + "while ((PtNextLetter < count) && notMatched)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "c = this.GetSourceCode()[PtNextLetter];");
-            builder.AppendLine(GetSpaces(preSpace) + "if (c == '\"')");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "constString.Append(c);");
-            builder.AppendLine(GetSpaces(preSpace) + "notMatched = false;");
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "else if (c == '\\r' || c == '\\n')");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "break;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "else");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "constString.Append(c);");
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "result.Detail = constString.ToString();");
-            builder.AppendLine(GetSpaces(preSpace) + "return true;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
+            Debug.WriteLine("int count = this.GetSourceCode().Length;");
+            Debug.WriteLine("StringBuilder constString = new StringBuilder(\"\\\"\");");
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.WriteLine("bool notMatched = true;");
+            Debug.WriteLine("char c;");
+            Debug.WriteLine("while ((PtNextLetter < count) && notMatched)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("c = this.GetSourceCode()[PtNextLetter];");
+            Debug.WriteLine("if (c == '\"')");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("constString.Append(c);");
+            Debug.WriteLine("notMatched = false;");
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("else if (c == '\\r' || c == '\\n')");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("break;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("else");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("constString.Append(c);");
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("result.Detail = constString.ToString();");
+            Debug.WriteLine("return true;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
         }
 
-        private void GenerateLexicalAnalyzerTokenFactoryConstentChar(StringBuilder builder, ref int preSpace, LL1GeneraterInput input)
+        private void GenerateLexicalAnalyzerTokenFactoryConstentChar(LL1GeneraterInput input)
         {
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// 字符常量 'X'");
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"result\"></param>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine("/// 字符常量 'X'");
+            Debug.WriteLine("/// </summary>");
+            Debug.WriteLine("/// <param name=\"result\"></param>");
+            Debug.WriteLine("/// <returns></returns>");
+            Debug.WriteLine(
                 string.Format("protected virtual bool GetQuotation(Token<{0}> result)"
                 , GetEnumTokenTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine(
                 string.Format("result.TokenType = {0}.ConstentChar;"
                 , GetEnumTokenTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) + "int count = this.GetSourceCode().Length;");
-            builder.AppendLine(GetSpaces(preSpace) + "int ptCharHead = PtNextLetter;");
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            builder.AppendLine(GetSpaces(preSpace) + "char cNext;");
-            builder.AppendLine(GetSpaces(preSpace) + "while (PtNextLetter < count && PtNextLetter - ptCharHead < 4)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "cNext = this.GetSourceCode()[PtNextLetter];");
-            builder.AppendLine(GetSpaces(preSpace) + "if (cNext == '\\'')");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            builder.AppendLine(GetSpaces(preSpace) + "break;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "else if (cNext == '\\\\')");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter += 2;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "int length = PtNextLetter - ptCharHead;");
-            builder.AppendLine(GetSpaces(preSpace) + "result.Detail = this.GetSourceCode().Substring(ptCharHead, length);");
-            builder.AppendLine(GetSpaces(preSpace) + "if (length < 3)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "result.LexicalError = true;");
-            builder.AppendLine(GetSpaces(preSpace) + "result.Tag = string.Format(\"字符标识[{0}]错误。\", result.Detail);");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "else if (length == 3)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "var ect = GetCharType(this.GetSourceCode()[ptCharHead + 1]);");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("int count = this.GetSourceCode().Length;");
+            Debug.WriteLine("int ptCharHead = PtNextLetter;");
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.WriteLine("char cNext;");
+            Debug.WriteLine("while (PtNextLetter < count && PtNextLetter - ptCharHead < 4)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("cNext = this.GetSourceCode()[PtNextLetter];");
+            Debug.WriteLine("if (cNext == '\\'')");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.WriteLine("break;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("else if (cNext == '\\\\')");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("PtNextLetter += 2;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("int length = PtNextLetter - ptCharHead;");
+            Debug.WriteLine("result.Detail = this.GetSourceCode().Substring(ptCharHead, length);");
+            Debug.WriteLine("if (length < 3)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("result.LexicalError = true;");
+            Debug.WriteLine("result.Tag = string.Format(\"字符标识[{0}]错误。\", result.Detail);");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("else if (length == 3)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("var ect = GetCharType(this.GetSourceCode()[ptCharHead + 1]);");
+            Debug.WriteLine(
                 string.Format("if (ect == {0}.{1})"
                 , GetEnumCharTypeSG()
                 , GetEnumCharTypeSGItemDefaultName()));
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "result.LexicalError = true;");
-            builder.AppendLine(GetSpaces(preSpace) + "result.Tag = string.Format(\"字符标识[{0}]错误。\", result.Detail);");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "else //if (length == 4)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "if (this.GetSourceCode()[ptCharHead] != '\\''");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "|| this.GetSourceCode()[ptCharHead + 1] != '\\\\'");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("result.LexicalError = true;");
+            Debug.WriteLine("result.Tag = string.Format(\"字符标识[{0}]错误。\", result.Detail);");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("else //if (length == 4)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("if (this.GetSourceCode()[ptCharHead] != '\\''");
+            Debug.Indent();
+            Debug.WriteLine("|| this.GetSourceCode()[ptCharHead + 1] != '\\\\'");
+            Debug.WriteLine(
                 string.Format("|| GetCharType(this.GetSourceCode()[ptCharHead + 2]) == {0}.{1}"
                 , GetEnumCharTypeSG()
                 , GetEnumCharTypeSGItemDefaultName()));
-            builder.AppendLine(GetSpaces(preSpace) + "|| this.GetSourceCode()[ptCharHead + 3] != '\\'')");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "result.LexicalError = true;");
-            builder.AppendLine(GetSpaces(preSpace) + "result.Tag = string.Format(\"字符标识[{0}]错误。\", result.Detail);");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "return true;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
+            Debug.WriteLine("|| this.GetSourceCode()[ptCharHead + 3] != '\\'')");
+            Debug.Unindent();
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("result.LexicalError = true;");
+            Debug.WriteLine("result.Tag = string.Format(\"字符标识[{0}]错误。\", result.Detail);");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("return true;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
         }
 
-        private void GenerateLexicalAnalyzerTokenFactoryConstentNumber(StringBuilder builder, ref int preSpace, LL1GeneraterInput input)
+        private void GenerateLexicalAnalyzerTokenFactoryConstentNumber(LL1GeneraterInput input)
         {
-            builder.AppendLine(GetSpaces(preSpace) + "#region GetConstentNumber");
+            Debug.WriteLine("#region GetConstentNumber");
             //GetConstentNumber
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// 数值");
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"result\"></param>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine("/// 数值");
+            Debug.WriteLine("/// </summary>");
+            Debug.WriteLine("/// <param name=\"result\"></param>");
+            Debug.WriteLine("/// <returns></returns>");
+            Debug.WriteLine(
                 string.Format("protected virtual bool GetConstentNumber(Token<{0}> result)"
                 , GetEnumTokenTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine(
                 string.Format("result.TokenType = {0}.{1};"
                 , GetEnumTokenTypeSG()
                 , GetEnumTokenTypeSGItem(ProductionNode.tail_number)));
-            builder.AppendLine(GetSpaces(preSpace) + "if (this.GetSourceCode()[PtNextLetter] == '0')//可能是八进制或十六进制数");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "if (PtNextLetter + 1 < this.GetSourceCode().Length)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "char c = this.GetSourceCode()[PtNextLetter + 1];");
-            builder.AppendLine(GetSpaces(preSpace) + "if (c == 'x' || c == 'X')");
-            builder.AppendLine(GetSpaces(preSpace) + "{//十六进制数");
-            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) + "return GetConstentHexadecimalNumber(result);");
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("if (this.GetSourceCode()[PtNextLetter] == '0')//可能是八进制或十六进制数");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("if (PtNextLetter + 1 < this.GetSourceCode().Length)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("char c = this.GetSourceCode()[PtNextLetter + 1];");
+            Debug.WriteLine("if (c == 'x' || c == 'X')");
+            Debug.WriteLine("{//十六进制数");
+            Debug.Indent();
+            Debug.WriteLine("return GetConstentHexadecimalNumber(result);");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine(
                 string.Format("else if (GetCharType(c) == {0}.Number)"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) + "{//八进制数");
-            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) + "return GetConstentOctonaryNumber(result);");
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "else//十进制数");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) + "return GetConstentDecimalNumber(result);");
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "else");
-            builder.AppendLine(GetSpaces(preSpace) + "{//源代码最后一个字符 0");
-            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) + "result.Detail = \"0\";//0");
-            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) + "PtNextLetter++;");
-            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) + "return true;");
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "else//十进制数");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) + "return GetConstentDecimalNumber(result);");
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// 十进制数");
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"result\"></param>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("{//八进制数");
+            Debug.Indent();
+            Debug.WriteLine("return GetConstentOctonaryNumber(result);");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("else//十进制数");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("return GetConstentDecimalNumber(result);");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("else");
+            Debug.WriteLine("{//源代码最后一个字符 0");
+            Debug.Indent();
+            Debug.WriteLine("result.Detail = \"0\";//0");
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.WriteLine("return true;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("else//十进制数");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("return GetConstentDecimalNumber(result);");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine("/// 十进制数");
+            Debug.WriteLine("/// </summary>");
+            Debug.WriteLine("/// <param name=\"result\"></param>");
+            Debug.WriteLine("/// <returns></returns>");
+            Debug.WriteLine(
                 string.Format("protected virtual bool GetConstentDecimalNumber(Token<{0}> result)"
                 , GetEnumTokenTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "char c;");
-            builder.AppendLine(GetSpaces(preSpace) + "StringBuilder tag = new StringBuilder();");
-            builder.AppendLine(GetSpaces(preSpace) + "c = this.GetSourceCode()[PtNextLetter];");
-            builder.AppendLine(GetSpaces(preSpace) + "string numberSerial1, numberSerial2, numberSerial3;");
-            builder.AppendLine(GetSpaces(preSpace) + "numberSerial1 = GetNumberSerial(this.GetSourceCode(), 10);");
-            builder.AppendLine(GetSpaces(preSpace) + "tag.Append(numberSerial1);");
-            builder.AppendLine(GetSpaces(preSpace) + "result.LexicalError = string.IsNullOrEmpty(numberSerial1);");
-            builder.AppendLine(GetSpaces(preSpace) + "if (PtNextLetter < this.GetSourceCode().Length)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "c = this.GetSourceCode()[PtNextLetter];");
-            builder.AppendLine(GetSpaces(preSpace) + "if (c == 'l' || c == 'L')");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "tag.Append(c);");
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "if (c == '.')");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "tag.Append(c);");
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            builder.AppendLine(GetSpaces(preSpace) + "numberSerial2 = GetNumberSerial(this.GetSourceCode(), 10);");
-            builder.AppendLine(GetSpaces(preSpace) + "tag.Append(numberSerial2);");
-            builder.AppendLine(GetSpaces(preSpace) + "result.LexicalError = result.LexicalError || string.IsNullOrEmpty(numberSerial2);");
-            builder.AppendLine(GetSpaces(preSpace) + "if (PtNextLetter < this.GetSourceCode().Length)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "c = this.GetSourceCode()[PtNextLetter];");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "if (c == 'e' || c == 'E')");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "tag.Append(c);");
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            builder.AppendLine(GetSpaces(preSpace) + "if (PtNextLetter < this.GetSourceCode().Length)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "c = this.GetSourceCode()[PtNextLetter];");
-            builder.AppendLine(GetSpaces(preSpace) + "if (c == '+' || c == '-')");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "tag.Append(c);");
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "numberSerial3 = GetNumberSerial(this.GetSourceCode(), 10);");
-            builder.AppendLine(GetSpaces(preSpace) + "tag.Append(numberSerial3);");
-            builder.AppendLine(GetSpaces(preSpace) + "result.LexicalError = result.LexicalError || string.IsNullOrEmpty(numberSerial3);");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "result.Detail = tag.ToString();");
-            builder.AppendLine(GetSpaces(preSpace) + "if (result.LexicalError)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "result.Tag = string.Format(\"十进制数[{0}]格式错误，无法解析。\", tag.ToString());");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "return true;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// 八进制数");
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"result\"></param>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("char c;");
+            Debug.WriteLine("StringBuilder tag = new StringBuilder();");
+            Debug.WriteLine("c = this.GetSourceCode()[PtNextLetter];");
+            Debug.WriteLine("string numberSerial1, numberSerial2, numberSerial3;");
+            Debug.WriteLine("numberSerial1 = GetNumberSerial(this.GetSourceCode(), 10);");
+            Debug.WriteLine("tag.Append(numberSerial1);");
+            Debug.WriteLine("result.LexicalError = string.IsNullOrEmpty(numberSerial1);");
+            Debug.WriteLine("if (PtNextLetter < this.GetSourceCode().Length)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("c = this.GetSourceCode()[PtNextLetter];");
+            Debug.WriteLine("if (c == 'l' || c == 'L')");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("tag.Append(c);");
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("if (c == '.')");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("tag.Append(c);");
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.WriteLine("numberSerial2 = GetNumberSerial(this.GetSourceCode(), 10);");
+            Debug.WriteLine("tag.Append(numberSerial2);");
+            Debug.WriteLine("result.LexicalError = result.LexicalError || string.IsNullOrEmpty(numberSerial2);");
+            Debug.WriteLine("if (PtNextLetter < this.GetSourceCode().Length)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("c = this.GetSourceCode()[PtNextLetter];");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("if (c == 'e' || c == 'E')");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("tag.Append(c);");
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.WriteLine("if (PtNextLetter < this.GetSourceCode().Length)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("c = this.GetSourceCode()[PtNextLetter];");
+            Debug.WriteLine("if (c == '+' || c == '-')");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("tag.Append(c);");
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("numberSerial3 = GetNumberSerial(this.GetSourceCode(), 10);");
+            Debug.WriteLine("tag.Append(numberSerial3);");
+            Debug.WriteLine("result.LexicalError = result.LexicalError || string.IsNullOrEmpty(numberSerial3);");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("result.Detail = tag.ToString();");
+            Debug.WriteLine("if (result.LexicalError)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("result.Tag = string.Format(\"十进制数[{0}]格式错误，无法解析。\", tag.ToString());");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("return true;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine("/// 八进制数");
+            Debug.WriteLine("/// </summary>");
+            Debug.WriteLine("/// <param name=\"result\"></param>");
+            Debug.WriteLine("/// <returns></returns>");
+            Debug.WriteLine(
                 string.Format("protected virtual bool GetConstentOctonaryNumber(Token<{0}> result)"
                 , GetEnumTokenTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "char c;");
-            builder.AppendLine(GetSpaces(preSpace) + "StringBuilder tag = new StringBuilder(this.GetSourceCode().Substring(PtNextLetter, 1));");
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            builder.AppendLine(GetSpaces(preSpace) + "string numberSerial = GetNumberSerial(this.GetSourceCode(), 8);");
-            builder.AppendLine(GetSpaces(preSpace) + "tag.Append(numberSerial);");
-            builder.AppendLine(GetSpaces(preSpace) + "if (PtNextLetter < this.GetSourceCode().Length)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "c = this.GetSourceCode()[PtNextLetter];");
-            builder.AppendLine(GetSpaces(preSpace) + "if (c == 'l' || c == 'L')");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "tag.Append(c);");
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "result.Detail = tag.ToString();");
-            builder.AppendLine(GetSpaces(preSpace) + "if (string.IsNullOrEmpty(numberSerial))");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "result.LexicalError = true;");
-            builder.AppendLine(GetSpaces(preSpace) + "result.Tag = string.Format(\"八进制数[{0}]格式错误，无法解析。\", tag.ToString());");
-            builder.AppendLine(GetSpaces(preSpace) + "return false;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "return true;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// 十六进制数");
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"result\"></param>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("char c;");
+            Debug.WriteLine("StringBuilder tag = new StringBuilder(this.GetSourceCode().Substring(PtNextLetter, 1));");
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.WriteLine("string numberSerial = GetNumberSerial(this.GetSourceCode(), 8);");
+            Debug.WriteLine("tag.Append(numberSerial);");
+            Debug.WriteLine("if (PtNextLetter < this.GetSourceCode().Length)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("c = this.GetSourceCode()[PtNextLetter];");
+            Debug.WriteLine("if (c == 'l' || c == 'L')");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("tag.Append(c);");
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("result.Detail = tag.ToString();");
+            Debug.WriteLine("if (string.IsNullOrEmpty(numberSerial))");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("result.LexicalError = true;");
+            Debug.WriteLine("result.Tag = string.Format(\"八进制数[{0}]格式错误，无法解析。\", tag.ToString());");
+            Debug.WriteLine("return false;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("return true;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine("/// 十六进制数");
+            Debug.WriteLine("/// </summary>");
+            Debug.WriteLine("/// <param name=\"result\"></param>");
+            Debug.WriteLine("/// <returns></returns>");
+            Debug.WriteLine(
                 string.Format("protected virtual bool GetConstentHexadecimalNumber(Token<{0}> result)"
                 , GetEnumTokenTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "char c;");
-            builder.AppendLine(GetSpaces(preSpace) + "StringBuilder tag = new StringBuilder(this.GetSourceCode().Substring(PtNextLetter, 2));");
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter += 2;");
-            builder.AppendLine(GetSpaces(preSpace) + "string numberSerial = GetNumberSerial(this.GetSourceCode(), 16);");
-            builder.AppendLine(GetSpaces(preSpace) + "tag.Append(numberSerial);");
-            builder.AppendLine(GetSpaces(preSpace) + "if (PtNextLetter < this.GetSourceCode().Length)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "c = this.GetSourceCode()[PtNextLetter];");
-            builder.AppendLine(GetSpaces(preSpace) + "if (c == 'l' || c == 'L')");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "tag.Append(c);");
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "result.Detail = tag.ToString();");
-            builder.AppendLine(GetSpaces(preSpace) + "if (string.IsNullOrEmpty(numberSerial))");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "result.LexicalError = true;");
-            builder.AppendLine(GetSpaces(preSpace) + "result.Tag = string.Format(\"十六进制数[{0}]格式错误。\", tag.ToString());");
-            builder.AppendLine(GetSpaces(preSpace) + "return false;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "return true;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// 数字序列");
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"sourceCode\"></param>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"scale\">进制</param>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) + "protected virtual string GetNumberSerial(string sourceCode, int scale)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "if (scale == 10)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "return GetNumberSerialDecimal(this.GetSourceCode());");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "if (scale == 16)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "return GetNumberSerialHexadecimal(this.GetSourceCode());");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "if (scale == 8)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "return GetNumberSerialOctonary(this.GetSourceCode());");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "return string.Empty;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// 十进制数序列");
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"sourceCode\"></param>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) + "protected virtual string GetNumberSerialDecimal(string sourceCode)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "StringBuilder result = new StringBuilder(String.Empty);");
-            builder.AppendLine(GetSpaces(preSpace) + "char c;");
-            builder.AppendLine(GetSpaces(preSpace) + "while (PtNextLetter < this.GetSourceCode().Length)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "c = this.GetSourceCode()[PtNextLetter];");
-            builder.AppendLine(GetSpaces(preSpace) + "if ('0' <= c && c <= '9')");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "result.Append(c);");
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "else");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "break;");
-            DecreasepreSpace(ref preSpace);
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "return result.ToString();");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// 八进制数序列");
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"sourceCode\"></param>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) + "protected virtual string GetNumberSerialOctonary(string sourceCode)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "StringBuilder result = new StringBuilder(String.Empty);");
-            builder.AppendLine(GetSpaces(preSpace) + "char c;");
-            builder.AppendLine(GetSpaces(preSpace) + "while (PtNextLetter < this.GetSourceCode().Length)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "c = this.GetSourceCode()[PtNextLetter];");
-            builder.AppendLine(GetSpaces(preSpace) + "if ('0' <= c && c <= '7')");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "result.Append(c);");
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "else");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "break;");
-            DecreasepreSpace(ref preSpace);
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "return result.ToString();");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// 十六进制数序列（不包括0x前缀）");
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"sourceCode\"></param>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) + "protected virtual string GetNumberSerialHexadecimal(string sourceCode)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "StringBuilder result = new StringBuilder(String.Empty);");
-            builder.AppendLine(GetSpaces(preSpace) + "char c;");
-            builder.AppendLine(GetSpaces(preSpace) + "while (PtNextLetter < this.GetSourceCode().Length)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "c = this.GetSourceCode()[PtNextLetter];");
-            builder.AppendLine(GetSpaces(preSpace) + "if (('0' <= c && c <= '9')");
-            builder.AppendLine(GetSpaces(preSpace) + "|| ('a' <= c && c <= 'f')");
-            builder.AppendLine(GetSpaces(preSpace) + "|| ('A' <= c && c <= 'F'))");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "result.Append(c);");
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "else");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "break;");
-            DecreasepreSpace(ref preSpace);
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "return result.ToString();");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("char c;");
+            Debug.WriteLine("StringBuilder tag = new StringBuilder(this.GetSourceCode().Substring(PtNextLetter, 2));");
+            Debug.WriteLine("PtNextLetter += 2;");
+            Debug.WriteLine("string numberSerial = GetNumberSerial(this.GetSourceCode(), 16);");
+            Debug.WriteLine("tag.Append(numberSerial);");
+            Debug.WriteLine("if (PtNextLetter < this.GetSourceCode().Length)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("c = this.GetSourceCode()[PtNextLetter];");
+            Debug.WriteLine("if (c == 'l' || c == 'L')");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("tag.Append(c);");
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("result.Detail = tag.ToString();");
+            Debug.WriteLine("if (string.IsNullOrEmpty(numberSerial))");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("result.LexicalError = true;");
+            Debug.WriteLine("result.Tag = string.Format(\"十六进制数[{0}]格式错误。\", tag.ToString());");
+            Debug.WriteLine("return false;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("return true;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine("/// 数字序列");
+            Debug.WriteLine("/// </summary>");
+            Debug.WriteLine("/// <param name=\"sourceCode\"></param>");
+            Debug.WriteLine("/// <param name=\"scale\">进制</param>");
+            Debug.WriteLine("/// <returns></returns>");
+            Debug.WriteLine("protected virtual string GetNumberSerial(string sourceCode, int scale)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("if (scale == 10)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("return GetNumberSerialDecimal(this.GetSourceCode());");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("if (scale == 16)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("return GetNumberSerialHexadecimal(this.GetSourceCode());");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("if (scale == 8)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("return GetNumberSerialOctonary(this.GetSourceCode());");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("return string.Empty;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine("/// 十进制数序列");
+            Debug.WriteLine("/// </summary>");
+            Debug.WriteLine("/// <param name=\"sourceCode\"></param>");
+            Debug.WriteLine("/// <returns></returns>");
+            Debug.WriteLine("protected virtual string GetNumberSerialDecimal(string sourceCode)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("StringBuilder result = new StringBuilder(String.Empty);");
+            Debug.WriteLine("char c;");
+            Debug.WriteLine("while (PtNextLetter < this.GetSourceCode().Length)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("c = this.GetSourceCode()[PtNextLetter];");
+            Debug.WriteLine("if ('0' <= c && c <= '9')");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("result.Append(c);");
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("else");
+            Debug.Indent();
+            Debug.WriteLine("break;");
+            Debug.Unindent();
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("return result.ToString();");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine("/// 八进制数序列");
+            Debug.WriteLine("/// </summary>");
+            Debug.WriteLine("/// <param name=\"sourceCode\"></param>");
+            Debug.WriteLine("/// <returns></returns>");
+            Debug.WriteLine("protected virtual string GetNumberSerialOctonary(string sourceCode)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("StringBuilder result = new StringBuilder(String.Empty);");
+            Debug.WriteLine("char c;");
+            Debug.WriteLine("while (PtNextLetter < this.GetSourceCode().Length)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("c = this.GetSourceCode()[PtNextLetter];");
+            Debug.WriteLine("if ('0' <= c && c <= '7')");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("result.Append(c);");
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("else");
+            Debug.Indent();
+            Debug.WriteLine("break;");
+            Debug.Unindent();
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("return result.ToString();");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine("/// 十六进制数序列（不包括0x前缀）");
+            Debug.WriteLine("/// </summary>");
+            Debug.WriteLine("/// <param name=\"sourceCode\"></param>");
+            Debug.WriteLine("/// <returns></returns>");
+            Debug.WriteLine("protected virtual string GetNumberSerialHexadecimal(string sourceCode)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("StringBuilder result = new StringBuilder(String.Empty);");
+            Debug.WriteLine("char c;");
+            Debug.WriteLine("while (PtNextLetter < this.GetSourceCode().Length)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("c = this.GetSourceCode()[PtNextLetter];");
+            Debug.WriteLine("if (('0' <= c && c <= '9')");
+            Debug.WriteLine("|| ('a' <= c && c <= 'f')");
+            Debug.WriteLine("|| ('A' <= c && c <= 'F'))");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("result.Append(c);");
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("else");
+            Debug.Indent();
+            Debug.WriteLine("break;");
+            Debug.Unindent();
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("return result.ToString();");
+            Debug.Unindent();
+            Debug.WriteLine("}");
 
-            builder.AppendLine(GetSpaces(preSpace) + "#endregion GetConstentNumber");
+            Debug.WriteLine("#endregion GetConstentNumber");
         }
 
-        private void GenerateLexicalAnalyzerTokenFactoryIdentifier(StringBuilder builder, ref int preSpace, LL1GeneraterInput input)
+        private void GenerateLexicalAnalyzerTokenFactoryIdentifier(LL1GeneraterInput input)
         {
-            builder.AppendLine(GetSpaces(preSpace) + "#region GetIdentifier");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// 获取标识符（函数名，变量名，等）");
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"result\"></param>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("#region GetIdentifier");
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine("/// 获取标识符（函数名，变量名，等）");
+            Debug.WriteLine("/// </summary>");
+            Debug.WriteLine("/// <param name=\"result\"></param>");
+            Debug.WriteLine("/// <returns></returns>");
+            Debug.WriteLine(
                 string.Format("protected virtual bool GetIdentifier(Token<{0}> result)"
                 , GetEnumTokenTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine(
                 string.Format("result.TokenType = {0}.identifier;"
                 , GetEnumTokenTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) + "StringBuilder builder = new StringBuilder();");
-            builder.AppendLine(GetSpaces(preSpace) + "while (PtNextLetter < this.GetSourceCode().Length)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "var ct = GetCharType(this.GetSourceCode()[PtNextLetter]);");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("StringBuilder builder = new StringBuilder();");
+            Debug.WriteLine("while (PtNextLetter < this.GetSourceCode().Length)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("var ct = GetCharType(this.GetSourceCode()[PtNextLetter]);");
+            Debug.WriteLine(
                 string.Format("if (ct == {0}.Letter"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) +
-                string.Format("|| ct == {0}.Number"
+            Debug.Indent();
+            Debug.WriteLine(string.Format("|| ct == {0}.Number"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) +
-                string.Format("|| ct == {0}.UnderLine"
+            Debug.WriteLine(string.Format("|| ct == {0}.UnderLine"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) +
-                string.Format("|| ct == {0}.ChineseLetter)"
+            Debug.WriteLine(string.Format("|| ct == {0}.ChineseLetter)"
                 , GetEnumCharTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "builder.Append(this.GetSourceCode()[PtNextLetter]);");
-            builder.AppendLine(GetSpaces(preSpace) + "PtNextLetter++;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "else");
-            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) + "break;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "result.Detail = builder.ToString();");
+            Debug.Unindent();
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("builder.Append(this.GetSourceCode()[PtNextLetter]);");
+            Debug.WriteLine("PtNextLetter++;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("else");
+            Debug.WriteLine("{ break; }");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("result.Detail = builder.ToString();");
 
-            builder.AppendLine(GetSpaces(preSpace) + "// specify if this string is a keyword");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("// specify if this string is a keyword");
+            Debug.WriteLine(
                 string.Format("foreach (var item in {0}.keywords)", GetLexicalAnalyzerName()));
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine(
                 string.Format("if (item.ToString().Substring({0}) == result.Detail)",
                     GetKeywordPrefix4Token().Length));
             //GetKeywordPrefix4SyntaxTreeNodeLeave(EnumProductionNodePosition.Leave).Length));
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "result.TokenType = item;");
-            builder.AppendLine(GetSpaces(preSpace) + "break;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine("result.TokenType = item;");
+            Debug.WriteLine("break;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.Unindent();
+            Debug.WriteLine("}");
 
-            builder.AppendLine(GetSpaces(preSpace) + "return true;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "");
+            Debug.WriteLine("return true;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("");
 
-            builder.AppendLine(GetSpaces(preSpace) + string.Format(
+            Debug.WriteLine(string.Format(
                 "public static readonly IEnumerable<{0}> keywords = new List<{0}>()", GetEnumTokenTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
+            Debug.WriteLine("{");
+            Debug.Indent();
             // add keywords of the language
             foreach (var item in input.TerminalList)
             {
                 if (IsIdentifier(item.NodeName))
                 {
-                    builder.AppendLine(GetSpaces(preSpace) + string.Format("{0}.{1},",
+                    Debug.WriteLine(string.Format("{0}.{1},",
                         GetEnumTokenTypeSG(),
                         GetEnumTokenTypeSGItem(item)));
                 }
             }
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "};");
-            builder.AppendLine(GetSpaces(preSpace) + "");
-            builder.AppendLine(GetSpaces(preSpace) + "#endregion GetIdentifier");
+            Debug.Unindent();
+            Debug.WriteLine("};");
+            Debug.WriteLine("");
+            Debug.WriteLine("#endregion GetIdentifier");
         }
 
         /// <summary>
@@ -1108,39 +1104,39 @@ namespace bitzhuwei.CGCompiler
             return true;
         }
 
-        private void GenerateLexicalAnalyzerMethodNextToken(StringBuilder builder, ref int preSpace, LL1GeneraterInput input)
+        private void GenerateLexicalAnalyzerMethodNextToken(LL1GeneraterInput input)
         {
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine(
                 string.Format("/// 从<code>{0}</code>开始获取下一个<code>Token</code>"
                 , GetPropertyPtNextLetter()));
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <returns></returns>");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("/// </summary>");
+            Debug.WriteLine("/// <returns></returns>");
+            Debug.WriteLine(
                 string.Format("protected override Token<{0}> NextToken()", GetEnumTokenTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
+            Debug.WriteLine("{");
+            Debug.Indent();
 
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("var result = new Token<{0}>();", GetEnumTokenTypeSG()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("result.Line = {0};"
                 , GetFieldm_CurrentLine()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("result.Column = {0};"
                 , GetFieldm_CurrentColumn()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("result.IndexOfSourceCode = {0};"
                 , GetPropertyPtNextLetter()));
-            builder.AppendLine(GetSpaces(preSpace) + "var count = this.GetSourceCode().Length;");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("var count = this.GetSourceCode().Length;");
+            Debug.WriteLine(
                 string.Format("if ({0} < 0 || {0} >= count) return result;"
                 , GetPropertyPtNextLetter()));
-            builder.AppendLine(GetSpaces(preSpace) + "var gotToken = false;");
-            builder.AppendLine(GetSpaces(preSpace) + "var ct = GetCharType(this.GetSourceCode()[PtNextLetter]);");
-            builder.AppendLine(GetSpaces(preSpace) + "switch (ct)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
+            Debug.WriteLine("var gotToken = false;");
+            Debug.WriteLine("var ct = GetCharType(this.GetSourceCode()[PtNextLetter]);");
+            Debug.WriteLine("switch (ct)");
+            Debug.WriteLine("{");
+            Debug.Indent();
 
             var map = GetTokenMap(input);
             map.Add(EnumCharType.Space, null);
@@ -1150,37 +1146,42 @@ namespace bitzhuwei.CGCompiler
             //map.Map.Add(CharProductionNodeListList.constentNumber);
             foreach (var enumValue in map.Map)
             {
-                builder.AppendLine(GetSpaces(preSpace) +
+                Debug.WriteLine(
                     string.Format("case {0}.{1}:"
                     , GetEnumCharTypeSG()
                     , enumValue.CharType));
-                builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) +
-                    string.Format("gotToken = {0}(result);"
+                Debug.Indent();
+                Debug.WriteLine(string.Format("gotToken = {0}(result);"
                     , GetMethodGetSomeTokenWithCharType(enumValue)));
-                builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) + "break;");
+                Debug.WriteLine("break;");
+                Debug.Unindent();
             }
 
-            builder.AppendLine(GetSpaces(preSpace) + "default:");
-            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) + "gotToken = GetUnknown(result);");
-            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) + "break;");
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "if (gotToken)");
-            builder.AppendLine(GetSpaces(preSpace) + "{");
-            IncreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("default:");
+            Debug.Indent();
+            Debug.WriteLine("gotToken = GetUnknown(result);");
+            Debug.WriteLine("break;");
+            Debug.Unindent();
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("if (gotToken)");
+            Debug.WriteLine("{");
+            Debug.Indent();
+            Debug.WriteLine(
                 string.Format("result.Length = {0} - result.IndexOfSourceCode;"
                 , GetPropertyPtNextLetter()));
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine(
                 string.Format("return result;"
                 , GetPropertyPtNextLetter()));
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
-            builder.AppendLine(GetSpaces(preSpace) + "else");
-            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) + "return null;");
+            Debug.Unindent();
+            Debug.WriteLine("}");
+            Debug.WriteLine("else");
+            Debug.Indent();
+            Debug.WriteLine("return null;");
+            Debug.Unindent();
 
-            DecreasepreSpace(ref preSpace);
-            builder.AppendLine(GetSpaces(preSpace) + "}");
+            Debug.Unindent();
+            Debug.WriteLine("}");
         }
 
         private CharProductionNodeListList GetTokenMap(LL1GeneraterInput input)
@@ -1383,26 +1384,28 @@ namespace bitzhuwei.CGCompiler
         /// <param name="grammarName"></param>
         /// <param name="preSpace"></param>
         /// <param name="input"></param>
-        private void GenerateLexicalAnalyzerConstructor(StringBuilder builder, ref int preSpace, LL1GeneraterInput input)
+        private void GenerateLexicalAnalyzerConstructor(LL1GeneraterInput input)
         {
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine(
                 string.Format("/// {0}的词法分析器", this.GrammarName));
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("/// </summary>");
+            Debug.WriteLine(
                 string.Format("public {0}()"
                 , GetLexicalAnalyzerName()));
-            builder.AppendLine(GetSpaces(preSpace) + "{ }");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <summary>");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("{ }");
+            Debug.WriteLine("/// <summary>");
+            Debug.WriteLine(
                 string.Format("/// {0}的词法分析器", this.GrammarName));
-            builder.AppendLine(GetSpaces(preSpace) + "/// </summary>");
-            builder.AppendLine(GetSpaces(preSpace) + "/// <param name=\"sourceCode\">要分析的源代码</param>");
-            builder.AppendLine(GetSpaces(preSpace) +
+            Debug.WriteLine("/// </summary>");
+            Debug.WriteLine("/// <param name=\"sourceCode\">要分析的源代码</param>");
+            Debug.WriteLine(
                 string.Format("public {0}(string sourceCode)"
                 , GetLexicalAnalyzerName()));
-            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) + ": base(sourceCode)");
-            builder.AppendLine(GetSpaces(preSpace) + "{ }");
+            Debug.Indent();
+            Debug.WriteLine(": base(sourceCode)");
+            Debug.Unindent();
+            Debug.WriteLine("{ }");
         }
 
         #endregion 生成词法分析器类的源代码

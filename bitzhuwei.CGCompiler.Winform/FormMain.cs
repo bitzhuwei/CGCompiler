@@ -162,9 +162,9 @@ namespace bitzhuwei.CGCompiler.Winform
             }
             input = new LL1GeneraterInput(grammar);
             {
-                var lexicalAnalyzerGenerated = grammar.GenerateLexicalAnalyzer(input);
+                string fullname = Path.Combine(param.folder, "LexicalAnalyzer" + param.compilerName + ".cs");
+                grammar.GenerateLexicalAnalyzer(fullname, input);
                 codeGenerator.ReportProgress(54, string.Format("自动生成\"{0}\"的代码！", grammar.GetLexicalAnalyzerName()));
-                lexicalAnalyzerGenerated.Save(Path.Combine(param.folder, "LexicalAnalyzer" + param.compilerName + ".cs"));
             }
             {
                 var ll1ParserGenerated = grammar.GenerateLL1SyntaxParser(input);
