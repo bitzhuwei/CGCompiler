@@ -1,19 +1,20 @@
-﻿// 目前阉割了对函数定义的解析。
+﻿
 
 <translation_unit> ::=
     <declaration_or_definition> <translation_unit> |
 	null ;
 <declaration_or_definition> ::=
-    <function_prototype> ";" |
+    <function_prototype> ";" | // 目前阉割了对函数定义的解析。
     <init_declarator_list> ";" |
-    <PRECISION> <precision_qualifier> <type_specifier> ";" |
+    "precision" <precision_qualifier> <type_specifier> ";" |
+	<declaration_with_type_qualifier> ;
+<declaration_with_type_qualifier> ::=
     <type_qualifier> "identifier" "{" <struct_declaration_list> "}" ";" |
     <type_qualifier> "identifier" "{" <struct_declaration_list> "}" "identifier" ";" |
     <type_qualifier> "identifier" "{" <struct_declaration_list> "}" "identifier" <array_specifier> ";" |
     <type_qualifier> ";" |
     <type_qualifier> "identifier" ";" |
     <type_qualifier> "identifier" <identifier_list> ";" ;
-
 
 <primary_expression> ::=
     <variable_identifier> |
@@ -340,9 +341,9 @@
     <struct_specifier> |
     <TYPE_NAME> ;
 <precision_qualifier> ::=
-    "high_precision" |
-    "medium_precision" |
-    "low_precision" ;
+    "highp" |
+    "mediump" |
+    "lowp" ;
 <struct_specifier> ::=
     "struct" "identifier" "{" <struct_declaration_list> "}" |
     "struct" "{" <struct_declaration_list> "}" ;
@@ -368,7 +369,7 @@
 <declaration_statement> ::=
     <function_prototype> ";" |
     <init_declarator_list> ";" |
-    <PRECISION> <precision_qualifier> <type_specifier> ";" |
+    "precision" <precision_qualifier> <type_specifier> ";" |
     <type_qualifier> "identifier" "{" <struct_declaration_list> "}" ";" |
     <type_qualifier> "identifier" "{" <struct_declaration_list> "}" "identifier" ";" |
     <type_qualifier> "identifier" "{" <struct_declaration_list> "}" "identifier" <array_specifier> ";" |
