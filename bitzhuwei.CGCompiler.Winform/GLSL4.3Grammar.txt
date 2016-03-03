@@ -7,8 +7,29 @@
     "precision" <precision_qualifier> <type_specifier> ";" |
     <declaration_with_type_qualifier> ;
 
-
-
+<function_prototype> ::=
+    <function_declarator> ")" ;
+<function_declarator> ::=
+    <function_header> <function_parameters> ;
+<function_header> ::=
+    <fully_specified_type> identifier "(" ;
+<function_parameters> ::=
+    <parameter_declaration> <function_parameters_body> |
+    null ;
+<function_parameters_body> ::=
+    "," <parameter_declaration> <function_parameters_body> |
+    null ;
+<parameter_declaration> ::=
+    <type_qualifier> <type_specifier_parameter_declaration> |
+    <type_specifier_parameter_declaration> ;
+<type_specifier_parameter_declaration> ::=
+    <type_specifier> <identifier_array_for_parameter_declaration> ;
+<identifier_array_for_parameter_declaration> ::=
+    identifier <array_specifier_for_parameter_declaration> |
+    null ;
+<array_specifier_for_parameter_declaration> ::=
+    <array_specifier> |
+    null ;
 
 
 <init_declarator_list> ::=
@@ -24,34 +45,35 @@
     "=" <initializer> |
     null ;
 
-
-
-
-
-
 <declaration_with_type_qualifier> ::=
     <type_qualifier> <declaration_body> ;
 <declaration_body> ::=
-    ";" |
-    <variable_or_struct_variable_declaration> ;
+    <variable_or_struct_variable_declaration> |
+    ";" ;
 <variable_or_struct_variable_declaration> ::=
     identifier <variable_or_struct_body> ;
 <variable_or_struct_body> ::=
     <variable_body> |
     <struct_body> ;
 <variable_body> ::=
-    ";" |
-    <identifier_list> ";" ;
+    <identifier_list> ";" |
+    ";" ;
 <struct_body> ::=
     "{" <struct_declaration_list> "}" <variable_after_struct_definition> ;
 <variable_after_struct_definition> ::=
-    ";" |
-    identifier <single_variable_or_array> ;
+    identifier <single_variable_or_array> |
+    ";" ;
 <single_variable_or_array> ::=
-    ";" |
-    <array_specifier> ";" ;
+    <array_specifier> ";" |
+    ";" ;
 
 
+
+
+
+<fully_specified_type> ::=
+    <type_specifier> |
+    <type_qualifier> <type_specifier> ;
 
 
 
@@ -176,26 +198,7 @@
 <identifier_list> ::=
     "," identifier |
     <identifier_list> "," identifier ;
-<function_prototype> ::=
-    <function_declarator> ")" ;
-<function_declarator> ::=
-    <function_header> |
-    <function_header_with_parameters> ;
-<function_header_with_parameters> ::=
-    <function_header> <parameter_declaration> |
-    <function_header_with_parameters> "," <parameter_declaration> ;
-<function_header> ::=
-    <fully_specified_type> identifier "(" ;
-<parameter_declarator> ::=
-    <type_specifier> identifier |
-    <type_specifier> identifier <array_specifier> ;
-<parameter_declaration> ::=
-    <type_qualifier> <parameter_declarator> |
-    <parameter_declarator> |
-    <type_qualifier> <parameter_type_specifier> |
-    <parameter_type_specifier> ;
-<parameter_type_specifier> ::=
-    <type_specifier> ;
+
 
 <single_declaration> ::=
     <fully_specified_type> |
@@ -203,9 +206,7 @@
     <fully_specified_type> identifier <array_specifier> |
     <fully_specified_type> identifier <array_specifier> "=" <initializer> |
     <fully_specified_type> identifier "=" <initializer> ;
-<fully_specified_type> ::=
-    <type_specifier> |
-    <type_qualifier> <type_specifier> ;
+
 <invariant_qualifier> ::=
     "invariant" ;
 <interpolation_qualifier> ::=
