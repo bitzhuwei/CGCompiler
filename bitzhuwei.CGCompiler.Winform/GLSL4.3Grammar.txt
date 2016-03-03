@@ -1,32 +1,68 @@
 ﻿<translation_unit> ::=
     <declaration_or_definition> <translation_unit> |
-	null ;
+    null ;
 <declaration_or_definition> ::=
     <function_prototype> ";" | // 目前阉割了对函数定义的解析。
     <init_declarator_list> ";" |
     "precision" <precision_qualifier> <type_specifier> ";" |
-	<declaration_with_type_qualifier> ;
+    <declaration_with_type_qualifier> ;
+
+
+
+
+
+<init_declarator_list> ::=
+    <single_declaration> <init_declarator_list_body> ;
+<init_declarator_list_body> ::=
+    "," identifier <init_declarator_list_body_postfix> <init_declarator_list_body> |
+    null ;
+<init_declarator_list_body_postfix> ::=
+    <array_specifier> <init_delcarator_list_body_postfix_array_Specifier_postfix> |
+    "=" <initializer> |
+    null ;
+<init_delcarator_list_body_postfix_array_Specifier_postfix> ::=
+    "=" <initializer> |
+    null ;
+
+
+
+
+
+
 <declaration_with_type_qualifier> ::=
     <type_qualifier> <declaration_body> ;
 <declaration_body> ::=
-	";" |
-	<variable_or_struct_variable_declaration> ;
+    ";" |
+    <variable_or_struct_variable_declaration> ;
 <variable_or_struct_variable_declaration> ::=
-	identifier <variable_or_struct_body> ;
+    identifier <variable_or_struct_body> ;
 <variable_or_struct_body> ::=
-	<variable_body> |
-	<struct_body> ;
+    <variable_body> |
+    <struct_body> ;
 <variable_body> ::=
     ";" |
     <identifier_list> ";" ;
 <struct_body> ::=
-	"{" <struct_declaration_list> "}" <variable_after_struct_definition> ;
+    "{" <struct_declaration_list> "}" <variable_after_struct_definition> ;
 <variable_after_struct_definition> ::=
-	";" |
-	identifier <single_variable_or_array> ;
+    ";" |
+    identifier <single_variable_or_array> ;
 <single_variable_or_array> ::=
     ";" |
     <array_specifier> ";" ;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <primary_expression> ::=
     <variable_identifier> |
@@ -160,12 +196,7 @@
     <parameter_type_specifier> ;
 <parameter_type_specifier> ::=
     <type_specifier> ;
-<init_declarator_list> ::=
-    <single_declaration> |
-    <init_declarator_list> "," identifier |
-    <init_declarator_list> "," identifier <array_specifier> |
-    <init_declarator_list> "," identifier <array_specifier> "=" <initializer> |
-    <init_declarator_list> "," identifier "=" <initializer> ;
+
 <single_declaration> ::=
     <fully_specified_type> |
     <fully_specified_type> identifier |
