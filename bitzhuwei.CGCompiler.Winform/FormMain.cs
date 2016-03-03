@@ -215,9 +215,6 @@ namespace bitzhuwei.CGCompiler.Winform
         {
             string fullname = Path.Combine(param.folder, "FirstCollection" + param.compilerName + ".txt");
             File.WriteAllText(fullname, firstCollection.ToString());
-            var sameFirst2 = (from firstA in firstCollection
-                              join firstB in firstCollection on firstA.ObjectiveProduction equals firstB.ObjectiveProduction
-                              select new { firstA, firstB });
 
             List<Tuple<FIRSTCollectionItem, FIRSTCollectionItem, List<ProductionNode>>> sameFirst =
                 new List<Tuple<FIRSTCollectionItem, FIRSTCollectionItem, List<ProductionNode>>>();
@@ -227,9 +224,11 @@ namespace bitzhuwei.CGCompiler.Winform
                 {
                     var rightA = firstCollection[i];
                     var rightB = firstCollection[j];
+                    if (rightA.ObjectiveProduction != rightB.ObjectiveProduction) { continue; }
                     List<ProductionNode> sameNode = new List<ProductionNode>();
                     foreach (var item in rightA.Value)
                     {
+                        if (item.NodeName == "null") { continue; }
                         if (rightB.Value.Contains(item))
                         {
                             sameNode.Add(item);
