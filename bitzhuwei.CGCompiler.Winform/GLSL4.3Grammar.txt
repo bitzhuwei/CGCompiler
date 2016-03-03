@@ -1,13 +1,20 @@
-﻿<translation_unit> ::=
-    <external_declaration> |
-    <external_declaration> <translation_unit> ;
-<external_declaration> ::=
-    <function_definition> |
-    <declaration> ;
-<function_definition> ::=
-    <function_prototype> <compound_statement_no_new_scope> ;
-<variable_identifier> ::=
-    "identifier" ;
+﻿// 目前阉割了对函数定义的解析。
+
+<translation_unit> ::=
+    <declaration_or_definition> <translation_unit> |
+	null ;
+<declaration_or_definition> ::=
+    <function_prototype> ";" |
+    <init_declarator_list> ";" |
+    <PRECISION> <precision_qualifier> <type_specifier> ";" |
+    <type_qualifier> "identifier" "{" <struct_declaration_list> "}" ";" |
+    <type_qualifier> "identifier" "{" <struct_declaration_list> "}" "identifier" ";" |
+    <type_qualifier> "identifier" "{" <struct_declaration_list> "}" "identifier" <array_specifier> ";" |
+    <type_qualifier> ";" |
+    <type_qualifier> "identifier" ";" |
+    <type_qualifier> "identifier" <identifier_list> ";" ;
+
+
 <primary_expression> ::=
     <variable_identifier> |
     <INTCONSTANT> |
@@ -117,16 +124,6 @@
     <expression> "," <assignment_expression> ;
 <constant_expression> ::=
     <conditional_expression> ;
-<declaration> ::=
-    <function_prototype> ";" |
-    <init_declarator_list> ";" |
-    <PRECISION> <precision_qualifier> <type_specifier> ";" |
-    <type_qualifier> "identifier" "{" <struct_declaration_list> "}" ";" |
-    <type_qualifier> "identifier" "{" <struct_declaration_list> "}" "identifier" ";" |
-    <type_qualifier> "identifier" "{" <struct_declaration_list> "}" "identifier" <array_specifier> ";" |
-    <type_qualifier> ";" |
-    <type_qualifier> "identifier" ";" |
-    <type_qualifier> "identifier" <identifier_list> ";" ;
 <identifier_list> ::=
     "," "identifier" |
     <identifier_list> "," "identifier" ;
@@ -369,7 +366,15 @@
     <initializer> |
     <initializer_list> "," <initializer> ;
 <declaration_statement> ::=
-    <declaration> ;
+    <function_prototype> ";" |
+    <init_declarator_list> ";" |
+    <PRECISION> <precision_qualifier> <type_specifier> ";" |
+    <type_qualifier> "identifier" "{" <struct_declaration_list> "}" ";" |
+    <type_qualifier> "identifier" "{" <struct_declaration_list> "}" "identifier" ";" |
+    <type_qualifier> "identifier" "{" <struct_declaration_list> "}" "identifier" <array_specifier> ";" |
+    <type_qualifier> ";" |
+    <type_qualifier> "identifier" ";" |
+    <type_qualifier> "identifier" <identifier_list> ";" ;
 <statement> ::=
     <compound_statement> |
     <simple_statement> ;
@@ -429,3 +434,5 @@
     "return" ";" |
     "return" <expression> ";" |
     "discard" ";" ;
+<variable_identifier> ::=
+    "identifier" ;
