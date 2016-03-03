@@ -7,14 +7,6 @@
     "precision" <precision_qualifier> <type_specifier> ";" |
 	<declaration_with_type_qualifier> ;
 <declaration_with_type_qualifier> ::=
-    <type_qualifier> identifier "{" <struct_declaration_list> "}" ";" |
-    <type_qualifier> identifier "{" <struct_declaration_list> "}" identifier ";" |
-    <type_qualifier> identifier "{" <struct_declaration_list> "}" identifier <array_specifier> ";" |
-    <type_qualifier> ";" |
-    <type_qualifier> identifier ";" |
-    <type_qualifier> identifier <identifier_list> ";" ;
-
-<declaration_with_type_qualifier> ::=
     <type_qualifier> <declaration_body> ;
 <declaration_body> ::=
 	";" |
