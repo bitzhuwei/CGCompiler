@@ -1,6 +1,4 @@
-﻿
-
-<translation_unit> ::=
+﻿<translation_unit> ::=
     <declaration_or_definition> <translation_unit> |
 	null ;
 <declaration_or_definition> ::=
