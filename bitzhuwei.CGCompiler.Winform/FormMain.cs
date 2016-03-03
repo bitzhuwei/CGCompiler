@@ -241,9 +241,9 @@ namespace bitzhuwei.CGCompiler.Winform
                 }
             }
 
+            StringBuilder builder = new StringBuilder();
             if (sameFirst.Count > 0)
             {
-                StringBuilder builder = new StringBuilder();
                 foreach (var item in sameFirst)
                 {
                     builder.AppendLine(string.Format(
@@ -263,9 +263,13 @@ namespace bitzhuwei.CGCompiler.Winform
                     builder.AppendLine();
                     builder.AppendLine();
                 }
-                string errorFile = Path.Combine(param.folder, "FirstCollectionError" + param.compilerName + ".txt");
-                File.WriteAllText(errorFile, builder.ToString());
             }
+            else
+            {
+                builder.AppendLine("First集没有问题。");
+            }
+            string errorFile = Path.Combine(param.folder, "FirstCollectionError" + param.compilerName + ".txt");
+            File.WriteAllText(errorFile, builder.ToString());
         }
 
         private ContextfreeGrammar TestGetCGGrammar()
