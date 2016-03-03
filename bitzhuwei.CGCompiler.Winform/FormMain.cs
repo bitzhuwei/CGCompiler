@@ -148,6 +148,7 @@ namespace bitzhuwei.CGCompiler.Winform
             }
             {
                 var firstCollection = grammar.GetFirstCollection();
+                DumpFirstCollection(param, firstCollection);
                 codeGenerator.ReportProgress(36, "得到文法的FIRST集！");
                 if (firstCollection.Conflicts())
                 {
@@ -155,10 +156,18 @@ namespace bitzhuwei.CGCompiler.Winform
                     codeGenerator.ReportProgress(37, "冲突的FIRST集所在的产生式：" + Environment.NewLine + conflicted.ToString());
                     throw new Exception("您给定的文法的FIRST集有冲突，详情见状态框。");
                 }
-                //var followCollection = grammar.GetFollowCollection();
-                //codeGenerator.ReportProgress(42, "得到文法的FOLLOW集！");
-                //var ll1ParserMap = grammar.GetLL1ParserMap();
-                //codeGenerator.ReportProgress(48, "得到文法的LL1分析表！");
+            }
+            {
+                var followCollection = grammar.GetFollowCollection();
+                string fullname = Path.Combine(param.folder, "FollowCollection" + param.compilerName + ".txt");
+                File.WriteAllText(fullname, followCollection.ToString());
+            }
+            codeGenerator.ReportProgress(42, "得到文法的FOLLOW集！");
+            {
+                var ll1ParserMap = grammar.GetLL1ParserMap();
+                string fullname = Path.Combine(param.folder, "LL1ParserMap" + param.compilerName + ".txt");
+                File.WriteAllText(fullname, ll1ParserMap.ToString());
+                codeGenerator.ReportProgress(48, "得到文法的LL1分析表！");
             }
             input = new LL1GeneraterInput(grammar);
             {
@@ -199,6 +208,65 @@ namespace bitzhuwei.CGCompiler.Winform
             {
                 e.Result = param;
                 codeGenerator.ReportProgress(100, "代码生成成功！");
+            }
+        }
+
+        private static void DumpFirstCollection(CodeGeneratorParam param, FIRSTCollection firstCollection)
+        {
+            string fullname = Path.Combine(param.folder, "FirstCollection" + param.compilerName + ".txt");
+            File.WriteAllText(fullname, firstCollection.ToString());
+            var sameFirst2 = (from firstA in firstCollection
+                              join firstB in firstCollection on firstA.ObjectiveProduction equals firstB.ObjectiveProduction
+                              select new { firstA, firstB });
+
+            List<Tuple<FIRSTCollectionItem, FIRSTCollectionItem, List<ProductionNode>>> sameFirst =
+                new List<Tuple<FIRSTCollectionItem, FIRSTCollectionItem, List<ProductionNode>>>();
+            for (int i = 0; i < firstCollection.Count - 1; i++)
+            {
+                for (int j = i + 1; j < firstCollection.Count; j++)
+                {
+                    var rightA = firstCollection[i];
+                    var rightB = firstCollection[j];
+                    List<ProductionNode> sameNode = new List<ProductionNode>();
+                    foreach (var item in rightA.Value)
+                    {
+                        if (rightB.Value.Contains(item))
+                        {
+                            sameNode.Add(item);
+                        }
+                    }
+                    if (sameNode.Count > 0)
+                    {
+                        sameFirst.Add(new Tuple<FIRSTCollectionItem, FIRSTCollectionItem, List<ProductionNode>>(
+                            rightA, rightB, sameNode));
+                    }
+                }
+            }
+
+            if (sameFirst.Count > 0)
+            {
+                StringBuilder builder = new StringBuilder();
+                foreach (var item in sameFirst)
+                {
+                    builder.AppendLine(string.Format(
+                        "产生式【{0}】的下列候选式的First集之间的交集不为空：", item.Item1.ObjectiveProduction));
+                    builder.AppendLine("RightA:");
+                    builder.Append("    ");
+                    builder.AppendLine(item.Item1.ToString());
+                    builder.AppendLine("RightB:");
+                    builder.Append("    ");
+                    builder.AppendLine(item.Item2.ToString());
+                    builder.AppendLine("相同的成分:");
+                    foreach (var member in item.Item3)
+                    {
+                        builder.Append(member);
+                        builder.Append(", ");
+                    }
+                    builder.AppendLine();
+                    builder.AppendLine();
+                }
+                string errorFile = Path.Combine(param.folder, "FirstCollectionError" + param.compilerName + ".txt");
+                File.WriteAllText(errorFile, builder.ToString());
             }
         }
 
@@ -469,13 +537,13 @@ namespace bitzhuwei.CGCompiler.Winform
         {
             this.btnOK.Enabled = false;
             this.btnSave.Enabled = false;
-			
-			var info = string.Empty;
-			if (!this.Ready4Generation(ref info))
-			{
-				this.lblInfo.Text = info;
-				return;
-			}
+
+            var info = string.Empty;
+            if (!this.Ready4Generation(ref info))
+            {
+                this.lblInfo.Text = info;
+                return;
+            }
 
             var grammar = cmbGrammarList.SelectedItem as Grammar;
             if (grammar != null)
@@ -490,9 +558,9 @@ namespace bitzhuwei.CGCompiler.Winform
             this.btnOK.Enabled = true;
             this.btnSave.Enabled = true;
         }
-		
-		private bool Ready4Generation(ref string resultInfo)
-		{
+
+        private bool Ready4Generation(ref string resultInfo)
+        {
             if (!Directory.Exists(txtCodeFolder.Text))
             {
                 resultInfo = string.Format("folder not exists : {0}", txtCodeFolder.Text);
@@ -508,8 +576,8 @@ namespace bitzhuwei.CGCompiler.Winform
                 resultInfo = string.Format("compiler name not valid : {0}", txtCompilerName.Text);
                 return false;
             }
-			return true;
-		}
+            return true;
+        }
 
         private static bool IsValidNamespaceName(string namespaceName)
         {
@@ -567,12 +635,12 @@ namespace bitzhuwei.CGCompiler.Winform
                 this.btnRemove.Enabled = true;
                 this.btnSave.Enabled = true;
                 this.AddcontentTextChangedEvent();
-				var info = string.Empty;
-				this.btnOK.Enabled = this.Ready4Generation(ref info);
-				if (info != string.Empty)
-				{
-					this.lblInfo.Text = info;
-				}
+                var info = string.Empty;
+                this.btnOK.Enabled = this.Ready4Generation(ref info);
+                if (info != string.Empty)
+                {
+                    this.lblInfo.Text = info;
+                }
             }
             else
             {
