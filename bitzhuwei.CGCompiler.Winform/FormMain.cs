@@ -228,7 +228,6 @@ namespace bitzhuwei.CGCompiler.Winform
                     List<ProductionNode> sameNode = new List<ProductionNode>();
                     foreach (var item in rightA.Value)
                     {
-                        if (item.NodeName == "null") { continue; }
                         if (rightB.Value.Contains(item))
                         {
                             sameNode.Add(item);
