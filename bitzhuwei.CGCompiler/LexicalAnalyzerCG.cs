@@ -66,6 +66,9 @@ namespace bitzhuwei.CGCompiler
                 case EnumCharTypeCG.Space:
                     gotToken = GetSpace(result);
                     break;
+                case EnumCharTypeCG.Divide:
+                    gotToken = GetDivide(result);
+                    break;
                 default:
                     gotToken = GetUnknown(result);
                     break;
@@ -102,7 +105,7 @@ namespace bitzhuwei.CGCompiler
                     return true;
                 }
             }
-            
+
             return false;
         }
         /// <summary>
@@ -128,7 +131,7 @@ namespace bitzhuwei.CGCompiler
                     return true;
                 }
             }
-            
+
             return false;
         }
         /// <summary>
@@ -154,7 +157,7 @@ namespace bitzhuwei.CGCompiler
                     return true;
                 }
             }
-            
+
             return false;
         }
         /// <summary>
@@ -180,7 +183,7 @@ namespace bitzhuwei.CGCompiler
                     return true;
                 }
             }
-            
+
             return false;
         }
         /// <summary>
@@ -206,7 +209,7 @@ namespace bitzhuwei.CGCompiler
                     return true;
                 }
             }
-            
+
             return false;
         }
         #region GetIdentifier
@@ -245,7 +248,7 @@ namespace bitzhuwei.CGCompiler
             }
             return true;
         }
-        
+
         public static readonly List<EnumTokenTypeCG> keywords = new List<EnumTokenTypeCG>()
         {
             EnumTokenTypeCG.token_null,
@@ -253,7 +256,7 @@ namespace bitzhuwei.CGCompiler
             EnumTokenTypeCG.token_number,
             EnumTokenTypeCG.token_constString,
         };
-        
+
         #endregion GetIdentifier
         #region GetConstentNumber
         /// <summary>
@@ -567,6 +570,30 @@ namespace bitzhuwei.CGCompiler
                 this.m_CurrentLine++;
                 this.m_CurrentColumn = 0;
             }
+            return false;
+        }
+        protected virtual bool GetDivide(Token<EnumTokenTypeCG> result)
+        {
+            var count = this.GetSourceCode().Length;
+            //item.CharType: Divide
+            //Mapped nodes:
+            //    "/"
+            //result.TokenType = EnumTokenTypeCG.token_GreaterThan_;
+            if (PtNextLetter + 1 <= count)
+            {
+                var str = this.GetSourceCode().Substring(PtNextLetter, 2);
+                if ("//" == str)
+                {
+                    SkipSingleLineNote();
+                    return false;
+                }
+                else if ("/*" == str)
+                {
+                    SkipMultilineNote();
+                    return false;
+                }
+            }
+
             return false;
         }
         /// <summary>
