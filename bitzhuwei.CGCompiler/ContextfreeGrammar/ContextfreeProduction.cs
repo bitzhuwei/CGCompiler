@@ -18,7 +18,8 @@ namespace bitzhuwei.CGCompiler
         public override bool Equals(object obj)
         {
             var another = obj as ContextfreeProduction;
-            if (another == null) return false;
+            if (another == null) { return false; }
+            if (this.Left != another.Left) { return false; }
             for (int i = 0; i < this.RightCollection.Count; i++)
             {
                 if (!this.RightCollection[i].Equals(another.RightCollection[i]))
@@ -48,6 +49,7 @@ namespace bitzhuwei.CGCompiler
             }
             else if ((object)b == null) return false;
 
+            if (a.Left != b.Left) { return false; }
             if (a.RightCollection.Count != b.RightCollection.Count) { return false; }
 
             for (int i = 0; i < a.RightCollection.Count; i++)
