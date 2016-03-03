@@ -2,10 +2,25 @@
     <declaration_or_definition> <translation_unit> |
     null ;
 <declaration_or_definition> ::=
-    <function_prototype> ";" | // 目前阉割了对函数定义的解析。
+    <function_prototype> <function_declaration_or_definition_body> |
     <init_declarator_list> ";" |
     "precision" <precision_qualifier> <type_specifier> ";" |
     <declaration_with_type_qualifier> ;
+
+<function_declaration_or_definition_body> ::=
+    <compound_statement> |
+    ";" ;
+<compound_statement> ::=
+    "{" <statement_list_nullable> "}" ;
+<statement_list_nullable> ::=
+    <statement_list> |
+    null ;
+<statement_list> ::=
+    <statement> <statement_list_body> ;
+<statement_list_body> ::=
+    <statement> <statement_list_body> |
+    null ;
+
 
 <function_prototype> ::=
     <function_declarator> ")" ;
@@ -75,9 +90,11 @@
     <type_specifier> |
     <type_qualifier> <type_specifier> ;
 
-
-
-
+<type_specifier> ::=
+    <type_specifier_nonarray> <array_specifier_or_null> ;
+<array_specifier_or_null> ::=
+    <array_specifier> |
+    null ;
 
 
 
@@ -254,9 +271,7 @@
 <type_name_list> ::=
     <TYPE_NAME> |
     <type_name_list> "," <TYPE_NAME> ;
-<type_specifier> ::=
-    <type_specifier_nonarray> |
-    <type_specifier_nonarray> <array_specifier> ;
+
 <array_specifier> ::=
     "[" "]" |
     "[" <constant_expression> "]" |
@@ -431,18 +446,9 @@
     <case_label> |
     <iteration_statement> |
     <jump_statement> ;
-<compound_statement> ::=
-    "{" "}" |
-    "{" <statement_list> "}" ;
-<statement_no_new_scope> ::=
-    <compound_statement_no_new_scope> |
-    <simple_statement> ;
-<compound_statement_no_new_scope> ::=
-    "{" "}" |
-    "{" <statement_list> "}" ;
-<statement_list> ::=
-    <statement> |
-    <statement_list> <statement> ;
+
+
+
 <expression_statement> ::=
     ";" |
     <expression> ";" ;
@@ -462,9 +468,9 @@
     "case" <expression> ":" |
     "default" ":" ;
 <iteration_statement> ::=
-    "while" "(" <condition> ")" <statement_no_new_scope> |
+    "while" "(" <condition> ")" <statement> |
     "do" <statement> "while" "(" <expression> ")" ";" |
-    "for" "(" <for_init_statement> <for_rest_statement> ")" <statement_no_new_scope> ;
+    "for" "(" <for_init_statement> <for_rest_statement> ")" <statement> ;
 <for_init_statement> ::=
     <expression_statement> |
     <declaration_statement> ;
