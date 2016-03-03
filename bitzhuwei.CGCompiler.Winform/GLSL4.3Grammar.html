@@ -1,0 +1,431 @@
+﻿<translation_unit> ::=
+    <external_declaration> |
+    <external_declaration> <translation_unit> ;
+<external_declaration> ::=
+    <function_definition> |
+    <declaration> ;
+<function_definition> ::=
+    <function_prototype> <compound_statement_no_new_scope> ;
+<variable_identifier> ::=
+    "identifier" ;
+<primary_expression> ::=
+    <variable_identifier> |
+    <INTCONSTANT> |
+    <UINTCONSTANT> |
+    <FLOATCONSTANT> |
+    <BOOLCONSTANT> |
+    <DOUBLECONSTANT> |
+    "(" <expression> ")" ;
+<postfix_expression> ::=
+    <primary_expression> |
+    <postfix_expression> "[" <integer_expression> "]" |
+    <function_call> |
+    <postfix_expression> "\." <FIELD_SELECTION> |
+    <postfix_expression> "++" |
+    <postfix_expression> "--" ;
+<integer_expression> ::=
+    <expression> ;
+<function_call> ::=
+    <function_call_or_method> ;
+<function_call_or_method> ::=
+    <function_call_generic> ;
+<function_call_generic> ::=
+    <function_call_header_with_parameters> ")" |
+    <function_call_header_no_parameters> ")" ;
+<function_call_header_no_parameters> ::=
+    <function_call_header> "void" |
+    <function_call_header> ;
+<function_call_header_with_parameters> ::=
+    <function_call_header> <assignment_expression> |
+    <function_call_header_with_parameters> "," <assignment_expression> ;
+<function_call_header> ::=
+    <function_identifier> "(" ;
+<function_identifier> ::=
+    <type_specifier> |
+    <postfix_expression> ;
+<unary_expression> ::=
+    <postfix_expression> |
+    "++" <unary_expression> |
+    "--" <unary_expression> |
+    <unary_operator> <unary_expression> ;
+<unary_operator> ::=
+    "+" |
+    "-" |
+    "!" |
+    "~" ;
+<multiplicative_expression> ::=
+    <unary_expression> |
+    <multiplicative_expression> "*" <unary_expression> |
+    <multiplicative_expression> "/" <unary_expression> |
+    <multiplicative_expression> "%" <unary_expression> ;
+<additive_expression> ::=
+    <multiplicative_expression> |
+    <additive_expression> "+" <multiplicative_expression> |
+    <additive_expression> "-" <multiplicative_expression> ;
+<shift_expression> ::=
+    <additive_expression> |
+    <shift_expression> "<<" <additive_expression> |
+    <shift_expression> ">>" <additive_expression> ;
+<relational_expression> ::=
+    <shift_expression> |
+    <relational_expression> "<" <shift_expression> |
+    <relational_expression> ">" <shift_expression> |
+    <relational_expression> "<=" <shift_expression> |
+    <relational_expression> ">=" <shift_expression> ;
+<equality_expression> ::=
+    <relational_expression> |
+    <equality_expression> "==" <relational_expression> |
+    <equality_expression> "!=" <relational_expression> ;
+<and_expression> ::=
+    <equality_expression> |
+    <and_expression> "&" <equality_expression> ;
+<exclusive_or_expression> ::=
+    <and_expression> |
+    <exclusive_or_expression> "^" <and_expression> ;
+<inclusive_or_expression> ::=
+    <exclusive_or_expression> |
+    <inclusive_or_expression> "|" <exclusive_or_expression> ;
+<logical_and_expression> ::=
+    <inclusive_or_expression> |
+    <logical_and_expression> "&&" <inclusive_or_expression> ;
+<logical_xor_expression> ::=
+    <logical_and_expression> |
+    <logical_xor_expression> "^^" <logical_and_expression> ;
+<logical_or_expression> ::=
+    <logical_xor_expression> |
+    <logical_or_expression> "||" <logical_xor_expression> ;
+<conditional_expression> ::=
+    <logical_or_expression> |
+    <logical_or_expression> "?" <expression> ":" <assignment_expression> ;
+<assignment_expression> ::=
+    <conditional_expression> |
+    <unary_expression> <assignment_operator> <assignment_expression> ;
+<assignment_operator> ::=
+    "=" |
+    "*=" |
+    "/=" |
+    "%=" |
+    "+=" |
+    "-=" |
+    "<=" |
+    ">=" |
+    "&=" |
+    "^=" |
+    "|=" ;
+<expression> ::=
+    <assignment_expression> |
+    <expression> "," <assignment_expression> ;
+<constant_expression> ::=
+    <conditional_expression> ;
+<declaration> ::=
+    <function_prototype> ";" |
+    <init_declarator_list> ";" |
+    <PRECISION> <precision_qualifier> <type_specifier> ";" |
+    <type_qualifier> "identifier" "{" <struct_declaration_list> "}" ";" |
+    <type_qualifier> "identifier" "{" <struct_declaration_list> "}" "identifier" ";" |
+    <type_qualifier> "identifier" "{" <struct_declaration_list> "}" "identifier" <array_specifier> ";" |
+    <type_qualifier> ";" |
+    <type_qualifier> "identifier" ";" |
+    <type_qualifier> "identifier" <identifier_list> ";" ;
+<identifier_list> ::=
+    "," "identifier" |
+    <identifier_list> "," "identifier" ;
+<function_prototype> ::=
+    <function_declarator> ")" ;
+<function_declarator> ::=
+    <function_header> |
+    <function_header_with_parameters> ;
+<function_header_with_parameters> ::=
+    <function_header> <parameter_declaration> |
+    <function_header_with_parameters> "," <parameter_declaration> ;
+<function_header> ::=
+    <fully_specified_type> "identifier" "(" ;
+<parameter_declarator> ::=
+    <type_specifier> "identifier" |
+    <type_specifier> "identifier" <array_specifier> ;
+<parameter_declaration> ::=
+    <type_qualifier> <parameter_declarator> |
+    <parameter_declarator> |
+    <type_qualifier> <parameter_type_specifier> |
+    <parameter_type_specifier> ;
+<parameter_type_specifier> ::=
+    <type_specifier> ;
+<init_declarator_list> ::=
+    <single_declaration> |
+    <init_declarator_list> "," "identifier" |
+    <init_declarator_list> "," "identifier" <array_specifier> |
+    <init_declarator_list> "," "identifier" <array_specifier> "=" <initializer> |
+    <init_declarator_list> "," "identifier" "=" <initializer> ;
+<single_declaration> ::=
+    <fully_specified_type> |
+    <fully_specified_type> "identifier" |
+    <fully_specified_type> "identifier" <array_specifier> |
+    <fully_specified_type> "identifier" <array_specifier> "=" <initializer> |
+    <fully_specified_type> "identifier" "=" <initializer> ;
+<fully_specified_type> ::=
+    <type_specifier> |
+    <type_qualifier> <type_specifier> ;
+<invariant_qualifier> ::=
+    "invariant" ;
+<interpolation_qualifier> ::=
+    "smooth" |
+    "flat" |
+    "noperspective" ;
+<layout_qualifier> ::=
+    "layout" "(" <layout_qualifier_id_list> ")" ;
+<layout_qualifier_id_list> ::=
+    <layout_qualifier_id> |
+    <layout_qualifier_id_list> "," <layout_qualifier_id> ;
+<layout_qualifier_id> ::=
+    "identifier" |
+    "identifier" "=" <INTCONSTANT> ;
+<precise_qualifier> ::=
+    "precise" ;
+<type_qualifier> ::=
+    <single_type_qualifier> |
+    <type_qualifier> <single_type_qualifier> ;
+<single_type_qualifier> ::=
+    <storage_qualifier> |
+    <layout_qualifier> |
+    <precision_qualifier> |
+    <interpolation_qualifier> |
+    <invariant_qualifier> |
+    <precise_qualifier> ;
+<storage_qualifier> ::=
+    "const" |
+    "inout" |
+    "in" |
+    "out" |
+    "centroid" |
+    "patch" |
+    "sample" |
+    "uniform" |
+    "buffer" |
+    "shared" |
+    "coherent" |
+    "volatile" |
+    "restrict" |
+    "readonly" |
+    "writeonly" |
+    "subroutine" |
+    "subroutine" "(" <type_name_list> ")" ;
+<type_name_list> ::=
+    <TYPE_NAME> |
+    <type_name_list> "," <TYPE_NAME> ;
+<type_specifier> ::=
+    <type_specifier_nonarray> |
+    <type_specifier_nonarray> <array_specifier> ;
+<array_specifier> ::=
+    "[" "]" |
+    "[" <constant_expression> "]" |
+    <array_specifier> "[" "]" |
+    <array_specifier> "[" <constant_expression> "]" ;
+<type_specifier_nonarray> ::=
+    "void" |
+    "float" |
+    "double" |
+    "int" |
+    "uint" |
+    "bool" |
+    "vec2" |
+    "vec3" |
+    "vec4" |
+    "dvec2" |
+    "dvec3" |
+    "dvec4" |
+    "bvec2" |
+    "bvec3" |
+    "bvec4" |
+    "ivec2" |
+    "ivec3" |
+    "ivec4" |
+    "uvec2" |
+    "uvec3" |
+    "uvec4" |
+    "mat2" |
+    "mat3" |
+    "mat4" |
+    "mat2x2" |
+    "mat2x3" |
+    "mat2x4" |
+    "mat3x2" |
+    "mat3x3" |
+    "mat3x4" |
+    "mat4x2" |
+    "mat4x3" |
+    "mat4x4" |
+    "dmat2" |
+    "dmat3" |
+    "dmat4" |
+    "dmat2x2" |
+    "dmat2x3" |
+    "dmat2x4" |
+    "dmat3x2" |
+    "dmat3x3" |
+    "dmat3x4" |
+    "dmat4x2" |
+    "dmat4x3" |
+    "dmat4x4" |
+    "atomic_uint" |
+    "sampler1D" |
+    "sampler2D" |
+    "sampler3D" |
+    "samplerCube" |
+    "sampler1DShadow" |
+    "sampler2DShadow" |
+    "samplerCubeShadow" |
+    "sampler1DArray" |
+    "sampler2DArray" |
+    "sampler1DArrayShadow" |
+    "sampler2DArrayShadow" |
+    "samplerCubeArray" |
+    "samplerCubeArrayShadow" |
+    "isampler1D" |
+    "isampler2D" |
+    "isampler3D" |
+    "isamplerCube" |
+    "isampler1DArray" |
+    "isampler2DArray" |
+    "isamplerCubeArray" |
+    "usampler1D" |
+    "usampler2D" |
+    "usampler3D" |
+    "usamplerCube" |
+    "usampler1DArray" |
+    "usampler2DArray" |
+    "usamplerCubeArray" |
+    "sampler2DRect" |
+    "sampler2DRectShadow" |
+    "isampler2DRect" |
+    "usampler2DRect" |
+    "samplerBuffer" |
+    "isamplerBuffer" |
+    "usamplerBuffer" |
+    "sampler2DMS" |
+    "isampler2DMS" |
+    "usampler2DMS" |
+    "sampler2DMSArray" |
+    "isampler2DMSArray" |
+    "usampler2DMSArray" |
+    "image1D" |
+    "iimage1D" |
+    "uimage1D" |
+    "image2D" |
+    "iimage2D" |
+    "uimage2D" |
+    "image3D" |
+    "iimage3D" |
+    "uimage3D" |
+    "image2DRect" |
+    "iimage2DRect" |
+    "uimage2DRect" |
+    "imageCube" |
+    "iimageCube" |
+    "uimageCube" |
+    "imageBuffer" |
+    "iimageBuffer" |
+    "uimageBuffer" |
+    "image1DArray" |
+    "iimage1DArray" |
+    "uimage1DArray" |
+    "image2DArray" |
+    "iimage2DArray" |
+    "uimage2DArray" |
+    "imageCubeArray" |
+    "iimageCubeArray" |
+    "uimageCubeArray" |
+    "image2DMS" |
+    "iimage2DMS" |
+    "uimage2DMS" |
+    "image2DMSArray" |
+    "iimage2DMSArray" |
+    "uimage2DMSArray" |
+    <struct_specifier> |
+    <TYPE_NAME> ;
+<precision_qualifier> ::=
+    "high_precision" |
+    "medium_precision" |
+    "low_precision" ;
+<struct_specifier> ::=
+    "struct" "identifier" "{" <struct_declaration_list> "}" |
+    "struct" "{" <struct_declaration_list> "}" ;
+<struct_declaration_list> ::=
+    <struct_declaration> |
+    <struct_declaration_list> <struct_declaration> ;
+<struct_declaration> ::=
+    <type_specifier> <struct_declarator_list> ";" |
+    <type_qualifier> <type_specifier> <struct_declarator_list> ";" ;
+<struct_declarator_list> ::=
+    <struct_declarator> |
+    <struct_declarator_list> "," <struct_declarator> ;
+<struct_declarator> ::=
+    "identifier" |
+    "identifier" <array_specifier> ;
+<initializer> ::=
+    <assignment_expression> |
+    "{" <initializer_list> "}" |
+    "{" <initializer_list> "," "}" ;
+<initializer_list> ::=
+    <initializer> |
+    <initializer_list> "," <initializer> ;
+<declaration_statement> ::=
+    <declaration> ;
+<statement> ::=
+    <compound_statement> |
+    <simple_statement> ;
+<simple_statement> ::=
+    <declaration_statement> |
+    <expression_statement> |
+    <selection_statement> |
+    <switch_statement> |
+    <case_label> |
+    <iteration_statement> |
+    <jump_statement> ;
+<compound_statement> ::=
+    "{" "}" |
+    "{" <statement_list> "}" ;
+<statement_no_new_scope> ::=
+    <compound_statement_no_new_scope> |
+    <simple_statement> ;
+<compound_statement_no_new_scope> ::=
+    "{" "}" |
+    "{" <statement_list> "}" ;
+<statement_list> ::=
+    <statement> |
+    <statement_list> <statement> ;
+<expression_statement> ::=
+    ";" |
+    <expression> ";" ;
+<selection_statement> ::=
+    "if" "(" <expression> ")" <selection_rest_statement> ;
+<selection_rest_statement> ::=
+    <statement> "else" <statement> |
+    <statement> ;
+<condition> ::=
+    <expression> |
+    <fully_specified_type> "identifier" "=" <initializer> ;
+<switch_statement> ::=
+    "switch" "(" <expression> ")" "{" <switch_statement_list> "}" ;
+<switch_statement_list> ::=
+    <statement_list> ;
+<case_label> ::=
+    "case" <expression> ":" |
+    "default" ":" ;
+<iteration_statement> ::=
+    "while" "(" <condition> ")" <statement_no_new_scope> |
+    "do" <statement> "while" "(" <expression> ")" ";" |
+    "for" "(" <for_init_statement> <for_rest_statement> ")" <statement_no_new_scope> ;
+<for_init_statement> ::=
+    <expression_statement> |
+    <declaration_statement> ;
+<conditionopt> ::=
+    <condition> ;
+<for_rest_statement> ::=
+    <conditionopt> ";" |
+    <conditionopt> ";" <expression> ;
+<jump_statement> ::=
+    "continue" ";" |
+    "break" ";" |
+    "return" ";" |
+    "return" <expression> ";" |
+    "discard" ";" ;

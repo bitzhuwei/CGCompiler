@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
@@ -37,7 +38,9 @@ namespace bitzhuwei.CGCompiler
         //}
         public void GenerateLexicalAnalyzer(string fullname, LL1GeneraterInput input)
         {
-            TextWriterTraceListener listener = new TextWriterTraceListener(fullname);
+            //TextWriterTraceListener listener = new TextWriterTraceListener(fullname);
+            StreamWriter writer = new StreamWriter(fullname, false);
+            TextWriterTraceListener listener = new TextWriterTraceListener(writer);
             Debug.Listeners.Add(listener);
 
             Debug.IndentSize = 4;
