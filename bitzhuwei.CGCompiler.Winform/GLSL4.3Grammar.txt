@@ -7,12 +7,34 @@
     "precision" <precision_qualifier> <type_specifier> ";" |
 	<declaration_with_type_qualifier> ;
 <declaration_with_type_qualifier> ::=
-    <type_qualifier> "identifier" "{" <struct_declaration_list> "}" ";" |
-    <type_qualifier> "identifier" "{" <struct_declaration_list> "}" "identifier" ";" |
-    <type_qualifier> "identifier" "{" <struct_declaration_list> "}" "identifier" <array_specifier> ";" |
+    <type_qualifier> identifier "{" <struct_declaration_list> "}" ";" |
+    <type_qualifier> identifier "{" <struct_declaration_list> "}" identifier ";" |
+    <type_qualifier> identifier "{" <struct_declaration_list> "}" identifier <array_specifier> ";" |
     <type_qualifier> ";" |
-    <type_qualifier> "identifier" ";" |
-    <type_qualifier> "identifier" <identifier_list> ";" ;
+    <type_qualifier> identifier ";" |
+    <type_qualifier> identifier <identifier_list> ";" ;
+
+<declaration_with_type_qualifier> ::=
+    <type_qualifier> <declaration_body> ;
+<declaration_body> ::=
+	";" |
+	<variable_or_struct_variable_declaration> ;
+<variable_or_struct_variable_declaration> ::=
+	identifier <variable_or_struct_body> ;
+<variable_or_struct_body> ::=
+	<variable_body> |
+	<struct_body> ;
+<variable_body> ::=
+    ";" |
+    <identifier_list> ";" ;
+<struct_body> ::=
+	"{" <struct_declaration_list> "}" <variable_after_struct_definition> ;
+<variable_after_struct_definition> ::=
+	";" |
+	identifier <single_variable_or_array> ;
+<single_variable_or_array> ::=
+    ";" |
+    <array_specifier> ";" ;
 
 <primary_expression> ::=
     <variable_identifier> |
@@ -124,8 +146,8 @@
 <constant_expression> ::=
     <conditional_expression> ;
 <identifier_list> ::=
-    "," "identifier" |
-    <identifier_list> "," "identifier" ;
+    "," identifier |
+    <identifier_list> "," identifier ;
 <function_prototype> ::=
     <function_declarator> ")" ;
 <function_declarator> ::=
@@ -135,10 +157,10 @@
     <function_header> <parameter_declaration> |
     <function_header_with_parameters> "," <parameter_declaration> ;
 <function_header> ::=
-    <fully_specified_type> "identifier" "(" ;
+    <fully_specified_type> identifier "(" ;
 <parameter_declarator> ::=
-    <type_specifier> "identifier" |
-    <type_specifier> "identifier" <array_specifier> ;
+    <type_specifier> identifier |
+    <type_specifier> identifier <array_specifier> ;
 <parameter_declaration> ::=
     <type_qualifier> <parameter_declarator> |
     <parameter_declarator> |
@@ -148,16 +170,16 @@
     <type_specifier> ;
 <init_declarator_list> ::=
     <single_declaration> |
-    <init_declarator_list> "," "identifier" |
-    <init_declarator_list> "," "identifier" <array_specifier> |
-    <init_declarator_list> "," "identifier" <array_specifier> "=" <initializer> |
-    <init_declarator_list> "," "identifier" "=" <initializer> ;
+    <init_declarator_list> "," identifier |
+    <init_declarator_list> "," identifier <array_specifier> |
+    <init_declarator_list> "," identifier <array_specifier> "=" <initializer> |
+    <init_declarator_list> "," identifier "=" <initializer> ;
 <single_declaration> ::=
     <fully_specified_type> |
-    <fully_specified_type> "identifier" |
-    <fully_specified_type> "identifier" <array_specifier> |
-    <fully_specified_type> "identifier" <array_specifier> "=" <initializer> |
-    <fully_specified_type> "identifier" "=" <initializer> ;
+    <fully_specified_type> identifier |
+    <fully_specified_type> identifier <array_specifier> |
+    <fully_specified_type> identifier <array_specifier> "=" <initializer> |
+    <fully_specified_type> identifier "=" <initializer> ;
 <fully_specified_type> ::=
     <type_specifier> |
     <type_qualifier> <type_specifier> ;
@@ -173,8 +195,8 @@
     <layout_qualifier_id> |
     <layout_qualifier_id_list> "," <layout_qualifier_id> ;
 <layout_qualifier_id> ::=
-    "identifier" |
-    "identifier" "=" <INTCONSTANT> ;
+    identifier |
+    identifier "=" <INTCONSTANT> ;
 <precise_qualifier> ::=
     "precise" ;
 <type_qualifier> ::=
@@ -343,7 +365,7 @@
     "mediump" |
     "lowp" ;
 <struct_specifier> ::=
-    "struct" "identifier" "{" <struct_declaration_list> "}" |
+    "struct" identifier "{" <struct_declaration_list> "}" |
     "struct" "{" <struct_declaration_list> "}" ;
 <struct_declaration_list> ::=
     <struct_declaration> |
@@ -355,8 +377,8 @@
     <struct_declarator> |
     <struct_declarator_list> "," <struct_declarator> ;
 <struct_declarator> ::=
-    "identifier" |
-    "identifier" <array_specifier> ;
+    identifier |
+    identifier <array_specifier> ;
 <initializer> ::=
     <assignment_expression> |
     "{" <initializer_list> "}" |
@@ -368,12 +390,12 @@
     <function_prototype> ";" |
     <init_declarator_list> ";" |
     "precision" <precision_qualifier> <type_specifier> ";" |
-    <type_qualifier> "identifier" "{" <struct_declaration_list> "}" ";" |
-    <type_qualifier> "identifier" "{" <struct_declaration_list> "}" "identifier" ";" |
-    <type_qualifier> "identifier" "{" <struct_declaration_list> "}" "identifier" <array_specifier> ";" |
+    <type_qualifier> identifier "{" <struct_declaration_list> "}" ";" |
+    <type_qualifier> identifier "{" <struct_declaration_list> "}" identifier ";" |
+    <type_qualifier> identifier "{" <struct_declaration_list> "}" identifier <array_specifier> ";" |
     <type_qualifier> ";" |
-    <type_qualifier> "identifier" ";" |
-    <type_qualifier> "identifier" <identifier_list> ";" ;
+    <type_qualifier> identifier ";" |
+    <type_qualifier> identifier <identifier_list> ";" ;
 <statement> ::=
     <compound_statement> |
     <simple_statement> ;
@@ -407,7 +429,7 @@
     <statement> ;
 <condition> ::=
     <expression> |
-    <fully_specified_type> "identifier" "=" <initializer> ;
+    <fully_specified_type> identifier "=" <initializer> ;
 <switch_statement> ::=
     "switch" "(" <expression> ")" "{" <switch_statement_list> "}" ;
 <switch_statement_list> ::=
@@ -434,4 +456,4 @@
     "return" <expression> ";" |
     "discard" ";" ;
 <variable_identifier> ::=
-    "identifier" ;
+    identifier ;
