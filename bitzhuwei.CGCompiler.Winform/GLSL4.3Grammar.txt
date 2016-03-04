@@ -39,6 +39,157 @@
 <statement> ::=
     <compound_statement> |
     <simple_statement> ;
+<simple_statement> ::=
+    <declaration_statement> |
+    <expression_statement> |
+    <selection_statement> |
+    <switch_statement> |
+    <case_label> |
+    <iteration_statement> |
+    <jump_statement> ;
+<declaration_statement> ::=
+    "precision" <precision_qualifier> <type_specifier> ";" |
+    <type_specifier> <type_specifier_fan_for_declaration_statement> |
+    <type_qualifier> <type_qualifier_fan_for_declaration_statement> ;
+
+<type_qualifier_fan_for_declaration_statement> ::=
+    <type_specifier> <type_specifier_fan_for_declaration_statement> |
+    identifier <identifier_fan_for_type_qualifier_fan_for_declaration_statement> |
+    ";" ;
+<type_specifier_fan_for_declaration_statement> ::=
+    identifier <identifier_fan_for_type_specifier_fan_for_declaration_statement> |
+    null ;
+<identifier_fan_for_type_specifier_fan_for_declaration_statement> ::=
+    <array_specifier> <array_specifier_fan_for_identifier_fan_for_type_specifier_fan_for_declaration_statement> |
+    "=" <initializer> |
+    "(" <function_parameters> ")" ";" |
+    null ;
+<array_specifier_fan_for_identifier_fan_for_type_specifier_fan_for_declaration_statement> ::=
+    "=" <initializer> |
+    null ;
+<identifier_fan_for_type_qualifier_fan_for_declaration_statement> ::=
+    "{" <struct_declaration_list> "}" <variable_after_struct_definition> |
+    <identifier_list> ";" |
+    ";" ;
+
+<variable_after_struct_definition> ::=
+    identifier <array_specifier_nullable> ";" ;
+<array_specifier_nullable> ::=
+    <array_specifier> |
+    null ;
+<expression_statement> ::=
+    <expression> ";" |
+    ";" ;
+<expression> ::=
+    <assignment_expression> <expression_nullable> ;
+<expression_nullable> ::=
+    "," <assignment_expression> <expression_nullable> |
+    null ;
+<assignment_expression> ::=
+    <conditional_expression> |
+    <unary_expression> <assignment_operator> <assignment_expression> ;
+<conditional_expression> ::=
+    <logical_or_expression> |
+    <logical_or_expression> "?" <expression> ":" <assignment_expression> ;
+<unary_expression> ::=
+    <postfix_expression> |
+    "++" <unary_expression> |
+    "--" <unary_expression> |
+    <unary_operator> <unary_expression> ;
+<assignment_operator> ::=
+    "=" |
+    "*=" |
+    "/=" |
+    "%=" |
+    "+=" |
+    "-=" |
+    "<=" |
+    ">=" |
+    "&=" |
+    "^=" |
+    "|=" ;
+<logical_or_expression> ::=
+    <logical_xor_expression> <logical_or_expression_tail> ;
+<logical_or_expression_tail> ::=
+    "||" <logical_xor_expression> <logical_or_expression_tail> |
+    null ;
+<logical_xor_expression> ::=
+    <logical_and_expression> <logical_xor_expression_tail> ;
+<logical_xor_expression_tail> ::=
+    "^^" <logical_and_expression> <logical_xor_expression_tail> |
+    null ;
+<logical_and_expression> ::=
+    <inclusive_or_expression> <logical_and_expression_tail> ;
+<logical_and_expression_tail> ::=
+    "&&" <inclusive_or_expression> <logical_and_expression_tail> |
+    null ;
+<inclusive_or_expression> ::=
+    <exclusive_or_expression> <inclusive_or_expression_tail> ;
+<inclusive_or_expression_tail> ::=
+    "|" <exclusive_or_expression> <inclusive_or_expression_tail> |
+    null ;
+<exclusive_or_expression> ::=
+    <and_expression> <exclusive_or_expression_tail> ;
+<exclusive_or_expression_tail> ::=
+    "^" <and_expression> <exclusive_or_expression_tail> |
+    null ;
+<and_expression> ::=
+    <equality_expression> <and_expression_tail> ;
+<and_expression_tail> ::=
+    "&" <equality_expression> <and_expression_tail> |
+    null ;
+<equality_expression> ::=
+    <relational_expression> <equality_expression_tail> ;
+<equality_expression_tail> ::=
+    "==" <relational_expression> <equality_expression_tail> |
+    "!=" <relational_expression> <equality_expression_tail> |
+    null ;
+<relational_expression> ::=
+    <shift_expression> <relational_expression_tail> ;
+<relational_expression_tail> ::=
+    "<" <shift_expression> <relational_expression_tail> |
+    ">" <shift_expression> <relational_expression_tail> |
+    "<=" <shift_expression> <relational_expression_tail> |
+    ">=" <shift_expression> <relational_expression_tail> |
+    null ;
+<shift_expression> ::=
+    <additive_expression> <shift_expression_tail> ;
+<shift_expression_tail> ::=
+    "<<" <additive_expression> <shift_expression_tail> |
+    ">>" <additive_expression> <shift_expression_tail> |
+    null ;
+<additive_expression> ::=
+    <multiplicative_expression> <additive_expression_tail> ;
+<additive_expression_tail> ::=
+    "+" <multiplicative_expression> <additive_expression_tail> |
+    "-" <multiplicative_expression> <additive_expression_tail> |
+    null ;
+<multiplicative_expression> ::=
+    <unary_expression> <multiplicative_expression_tail> ;
+<multiplicative_expression_tail> ::=
+    "*" <unary_expression> <multiplicative_expression_tail> |
+    "/" <unary_expression> <multiplicative_expression_tail> |
+    "%" <unary_expression> <multiplicative_expression_tail> |
+    null ;
+
+<postfix_expression> ::=
+    <primary_expression> <postfix_expression_tail> |
+    <function_call>  <postfix_expression_tail> ;
+<postfix_expression_tail> ::=
+    "[" <integer_expression> "]" <postfix_expression_tail> |
+    "." <FIELD_SELECTION> <postfix_expression_tail> |
+    "++" <postfix_expression_tail> |
+    "--" <postfix_expression_tail> |
+    null ;
+<integer_expression> ::=
+    <expression> ;
+
+<unary_operator> ::=
+    "+" |
+    "-" |
+    "!" |
+    "~" ;
+
 
 <function_parameters> ::=
     <parameter_declaration> <function_parameters_body> |
@@ -106,15 +257,8 @@
     <BOOLCONSTANT> |
     <DOUBLECONSTANT> |
     "(" <expression> ")" ;
-<postfix_expression> ::=
-    <primary_expression> |
-    <postfix_expression> "[" <integer_expression> "]" |
-    <function_call> |
-    <postfix_expression> "." <FIELD_SELECTION> |
-    <postfix_expression> "++" |
-    <postfix_expression> "--" ;
-<integer_expression> ::=
-    <expression> ;
+
+
 <function_call> ::=
     <function_call_or_method> ;
 <function_call_or_method> ::=
@@ -133,78 +277,23 @@
 <function_identifier> ::=
     <type_specifier> |
     <postfix_expression> ;
-<unary_expression> ::=
-    <postfix_expression> |
-    "++" <unary_expression> |
-    "--" <unary_expression> |
-    <unary_operator> <unary_expression> ;
-<unary_operator> ::=
-    "+" |
-    "-" |
-    "!" |
-    "~" ;
-<multiplicative_expression> ::=
-    <unary_expression> |
-    <multiplicative_expression> "*" <unary_expression> |
-    <multiplicative_expression> "/" <unary_expression> |
-    <multiplicative_expression> "%" <unary_expression> ;
-<additive_expression> ::=
-    <multiplicative_expression> |
-    <additive_expression> "+" <multiplicative_expression> |
-    <additive_expression> "-" <multiplicative_expression> ;
-<shift_expression> ::=
-    <additive_expression> |
-    <shift_expression> "<<" <additive_expression> |
-    <shift_expression> ">>" <additive_expression> ;
-<relational_expression> ::=
-    <shift_expression> |
-    <relational_expression> "<" <shift_expression> |
-    <relational_expression> ">" <shift_expression> |
-    <relational_expression> "<=" <shift_expression> |
-    <relational_expression> ">=" <shift_expression> ;
-<equality_expression> ::=
-    <relational_expression> |
-    <equality_expression> "==" <relational_expression> |
-    <equality_expression> "!=" <relational_expression> ;
-<and_expression> ::=
-    <equality_expression> |
-    <and_expression> "&" <equality_expression> ;
-<exclusive_or_expression> ::=
-    <and_expression> |
-    <exclusive_or_expression> "^" <and_expression> ;
-<inclusive_or_expression> ::=
-    <exclusive_or_expression> |
-    <inclusive_or_expression> "|" <exclusive_or_expression> ;
-<logical_and_expression> ::=
-    <inclusive_or_expression> |
-    <logical_and_expression> "&&" <inclusive_or_expression> ;
-<logical_xor_expression> ::=
-    <logical_and_expression> |
-    <logical_xor_expression> "^^" <logical_and_expression> ;
-<logical_or_expression> ::=
-    <logical_xor_expression> |
-    <logical_or_expression> "||" <logical_xor_expression> ;
-<conditional_expression> ::=
-    <logical_or_expression> |
-    <logical_or_expression> "?" <expression> ":" <assignment_expression> ;
-<assignment_expression> ::=
-    <conditional_expression> |
-    <unary_expression> <assignment_operator> <assignment_expression> ;
-<assignment_operator> ::=
-    "=" |
-    "*=" |
-    "/=" |
-    "%=" |
-    "+=" |
-    "-=" |
-    "<=" |
-    ">=" |
-    "&=" |
-    "^=" |
-    "|=" ;
-<expression> ::=
-    <assignment_expression> |
-    <expression> "," <assignment_expression> ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <constant_expression> ::=
     <conditional_expression> ;
 
@@ -417,54 +506,19 @@
     <initializer_list> "," <initializer> ;
 
 
-<simple_statement> ::=
-    <declaration_statement> |
-    <expression_statement> |
-    <selection_statement> |
-    <switch_statement> |
-    <case_label> |
-    <iteration_statement> |
-    <jump_statement> ;
-
-
-<declaration_statement> ::=
-    "precision" <precision_qualifier> <type_specifier> ";" |
-    <type_specifier> <type_specifier_fan_for_declaration_statement> |
-    <type_qualifier> <type_qualifier_fan_for_declaration_statement> ;
-
-<type_qualifier_fan_for_declaration_statement> ::=
-    <type_specifier> <type_specifier_fan_for_declaration_statement> |
-    identifier <identifier_fan_for_type_qualifier_fan_for_declaration_statement> ;
-    ";" ;
-<identifier_fan_for_type_qualifier_fan_for_declaration_statement> ::=
-    "{" <struct_declaration_list> "}" <variable_after_struct_definition> |
-    <identifier_list> ";" ;
-    ";" ;
-<variable_after_struct_definition> ::=
-    identifier <array_specifier> ";" |
-    identifier ";" |
-    ";" ;
 
 
 
 
-<type_specifier_fan_for_declaration_statement> ::=
-    identifier <identifier_fan_for_type_specifier_fan_for_declaration_statement> |
-    null ;
-<identifier_fan_for_type_specifier_fan_for_declaration_statement> ::=
-    <array_specifier> <array_specifier_fan_for_identifier_fan_for_type_specifier_fan_for_declaration_statement> |
-    "=" <initializer> |
-    "(" <function_parameters> ")" ";" |
-    null ;
-<array_specifier_fan_for_identifier_fan_for_type_specifier_fan_for_declaration_statement> ::=
-    "=" <initializer> |
-    null ;
 
 
 
-<expression_statement> ::=
-    ";" |
-    <expression> ";" ;
+
+
+
+
+
+
 <selection_statement> ::=
     "if" "(" <expression> ")" <selection_rest_statement> ;
 <selection_rest_statement> ::=
