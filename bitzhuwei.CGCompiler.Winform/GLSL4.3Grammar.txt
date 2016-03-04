@@ -6,7 +6,6 @@
     <type_qualifier> <identifier_for_declaration_or_function_with_type_qualifier> |
     <type_specifier> <identifier_for_declaration_or_function> ;
 
-
 <identifier_for_declaration_or_function_with_type_qualifier> ::=
     <type_specifier> <identifier_for_declaration_or_function> |
     identifier <variable_or_struct_body> |
@@ -24,8 +23,6 @@
     <init_declarator_list_body> |
     "=" <initializer> <init_declarator_list_body> ;
 
-
-
 <function_declaration_or_definition_body> ::=
     <compound_statement> |
     ";" ;
@@ -39,7 +36,9 @@
 <statement_list_body> ::=
     <statement> <statement_list_body> |
     null ;
-
+<statement> ::=
+    <compound_statement> |
+    <simple_statement> ;
 
 <function_parameters> ::=
     <parameter_declaration> <function_parameters_body> |
@@ -59,7 +58,6 @@
     <array_specifier> |
     null ;
 
-
 <init_declarator_list_body> ::=
     "," identifier <init_declarator_list_body_postfix> <init_declarator_list_body> |
     null ;
@@ -76,6 +74,7 @@
     <struct_body> ;
 <variable_body> ::=
     <identifier_list> ";" |
+
     ";" ;
 <struct_body> ::=
     "{" <struct_declaration_list> "}" <variable_after_struct_definition> ;
@@ -85,10 +84,6 @@
 <single_variable_or_array> ::=
     <array_specifier> ";" |
     ";" ;
-
-
-
-
 
 <type_specifier> ::=
     <type_specifier_nonarray> <array_specifier_or_null> ;
@@ -421,9 +416,7 @@
     <initializer> |
     <initializer_list> "," <initializer> ;
 
-<statement> ::=
-    <compound_statement> |
-    <simple_statement> ;
+
 <simple_statement> ::=
     <declaration_statement> |
     <expression_statement> |
