@@ -86,11 +86,15 @@
     "," <assignment_expression> <expression_nullable> |
     null ;
 <assignment_expression> ::=
-    <conditional_expression> |
-    <unary_expression> <assignment_operator> <assignment_expression> ;
+    <conditional_expression> | // x + y or x || y or x << y
+    <unary_expression> <assignment_operator> <assignment_expression> ;// x = y = z = 1.0f or x = y + z
+
 <conditional_expression> ::=
-    <logical_or_expression> |
-    <logical_or_expression> "?" <expression> ":" <assignment_expression> ;
+    <logical_or_expression> <question_selection_expresition> ;
+<question_selection_expresition> ::=
+    "?" <expression> ":" <assignment_expression> |
+    null ;
+
 <unary_expression> ::=
     <postfix_expression> |
     "++" <unary_expression> |
