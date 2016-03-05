@@ -185,6 +185,8 @@
     null ;
 <integer_expression> ::=
     <expression> ;
+<FIELD_SELECTION> ::=
+    identifier ;
 
 <unary_operator> ::=
     "+" |
