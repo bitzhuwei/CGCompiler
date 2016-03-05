@@ -98,6 +98,11 @@
     <statement> "else" <statement> |
     <statement> ;
 
+<switch_statement> ::=
+    "switch" "(" <expression> ")" "{" <switch_statement_list> "}" ;
+<switch_statement_list> ::=
+    <statement_list> ;
+
 <unary_expression> ::=
     <postfix_expression> |
     "++" <unary_expression> |
@@ -536,10 +541,7 @@
     <expression> |
     <type_specifier> identifier "=" <initializer> |
     <type_qualifier> <type_specifier> identifier "=" <initializer> ;
-<switch_statement> ::=
-    "switch" "(" <expression> ")" "{" <switch_statement_list> "}" ;
-<switch_statement_list> ::=
-    <statement_list> ;
+
 <case_label> ::=
     "case" <expression> ":" |
     "default" ":" ;
