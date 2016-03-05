@@ -290,6 +290,17 @@
     <array_specifier> |
     null ;
 
+<initializer> ::=
+    <assignment_expression> |
+    "{" <initializer_list> <comma_nullable> "}" ;
+<comma_nullable> ::=
+    "," |
+    null ;
+<initializer_list> ::=
+    <initializer> <initializer_list_nullable> ;
+<initializer_list_nullable> ::=
+    "," <initializer> <initializer_list_nullable> |
+    null ;
 
 
 
@@ -548,13 +559,7 @@
 <struct_declarator> ::=
     identifier |
     identifier <array_specifier> ;
-<initializer> ::=
-    <assignment_expression> |
-    "{" <initializer_list> "}" |
-    "{" <initializer_list> "," "}" ;
-<initializer_list> ::=
-    <initializer> |
-    <initializer_list> "," <initializer> ;
+
 
 
 
