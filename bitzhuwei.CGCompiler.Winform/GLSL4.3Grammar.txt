@@ -53,9 +53,14 @@
     <type_qualifier> <type_qualifier_fan_for_declaration_statement> ;
 
 <type_qualifier_fan_for_declaration_statement> ::=
-    <type_specifier> <type_specifier_fan_for_declaration_statement> |
-    identifier <identifier_fan_for_type_qualifier_fan_for_declaration_statement> |
+    <direct_type_specifier> <type_specifier_fan_for_declaration_statement> |
+    identifier <indirect_type_specifier_fan_for_declaration_statement_vs_identifier_fan_for_type_qualifier_fan_for_declaration_statement> |
     ";" ;
+<indirect_type_specifier_fan_for_declaration_statement_vs_identifier_fan_for_type_qualifier_fan_for_declaration_statement> ::=
+    <array_specifier_or_null> <type_specifier_fan_for_declaration_statement> | // "[" or identifier or null
+    <identifier_fan_for_type_qualifier_fan_for_declaration_statement> ; // "{" or "," or ";"
+
+
 <type_specifier_fan_for_declaration_statement> ::=
     identifier <identifier_fan_for_type_specifier_fan_for_declaration_statement> |
     null ;
@@ -285,10 +290,38 @@
     ";" ;
 
 <type_specifier> ::=
+    <direct_type_specifier> |
+    <indirect_type_specifier> ;
+<direct_type_specifier> ::=
     <type_specifier_nonarray> <array_specifier_or_null> ;
 <array_specifier_or_null> ::=
     <array_specifier> |
     null ;
+<type_specifier_nonarray> ::=
+    <build_in_type> |
+    <struct_specifier> ;
+<indirect_type_specifier> ::=
+    identifier <array_specifier_or_null> ;
+<struct_specifier> ::=
+    "struct" <struct_body> ;
+<struct_body> ::=
+    identifier "{" <struct_declaration_list> "}" |
+	"{" <struct_declaration_list> "}" ; 
+<struct_declaration_list> ::=
+    <struct_declaration> <struct_declaration_list_nullable> ;
+<struct_declaration_list_nullable> ::=
+    <struct_declaration> <struct_declaration_list_nullable> |
+    null ;
+<struct_declaration> ::=
+    <type_specifier> <struct_declarator_list> ";" | // GLSL支持struct内嵌套struct吗？
+    <type_qualifier> <type_specifier> <struct_declarator_list> ";" ;
+<struct_declarator_list> ::=
+    <struct_declarator> <struct_declarator_list_nullable> ;
+<struct_declarator_list_nullable> ::=
+    "," <struct_declarator> <struct_declarator_list_nullable> |
+    null ;
+<struct_declarator> ::=
+    identifier <array_specifier_or_null> ;
 
 <initializer> ::=
     <assignment_expression> |
@@ -324,26 +357,14 @@
 
 
 <function_call> ::=
-    <function_call_or_method> ;
-<function_call_or_method> ::=
-    <function_call_generic> ;
-<function_call_generic> ::=
-    <function_call_header_with_parameters> ")" |
-    <function_call_header_no_parameters> ")" ;
-<function_call_header_no_parameters> ::=
-    <function_call_header> "void" |
-    <function_call_header> ;
-<function_call_header_with_parameters> ::=
-    <function_call_header> <assignment_expression> |
-    <function_call_header_with_parameters> "," <assignment_expression> ;
-<function_call_header> ::=
-    <function_identifier> "(" ;
+    <function_identifier> "(" <function_call_parameters> ")" ;
+<function_call_parameters> ::=
+    <expression> |
+    "void" |
+    null ;
 <function_identifier> ::=
-    <type_specifier> |
-    <postfix_expression> ;
-
-
-
+    <build_in_type> |
+    identifier ;
 
 
 
@@ -411,15 +432,51 @@
     "subroutine" |
     "subroutine" "(" <type_name_list> ")" ;
 <type_name_list> ::=
-    <TYPE_NAME> |
-    <type_name_list> "," <TYPE_NAME> ;
+    <build_in_type> <type_name_list_nullable> 
+    identifier <type_name_list_nullable> ;
+<type_name_list_nullable> ::=
+    "," <build_in_type> <type_name_list_nullable> |
+    "," identifider <type_name_list_nullable> |
+    null ;
 
 <array_specifier> ::=
     "[" "]" |
     "[" <constant_expression> "]" |
     <array_specifier> "[" "]" |
     <array_specifier> "[" <constant_expression> "]" ;
-<type_specifier_nonarray> ::=
+
+<precision_qualifier> ::=
+    "highp" |
+    "mediump" |
+    "lowp" ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<variable_identifier> ::=
+    identifier ;
+
+<build_in_type> ::=
     "void" |
     "float" |
     "double" |
@@ -538,50 +595,5 @@
     "uimage2DMS" |
     "image2DMSArray" |
     "iimage2DMSArray" |
-    "uimage2DMSArray" |
-    <struct_specifier> |
-    <TYPE_NAME> ;
-<precision_qualifier> ::=
-    "highp" |
-    "mediump" |
-    "lowp" ;
-<struct_specifier> ::=
-    "struct" identifier "{" <struct_declaration_list> "}" |
-    "struct" "{" <struct_declaration_list> "}" ;
-<struct_declaration_list> ::=
-    <struct_declaration> |
-    <struct_declaration_list> <struct_declaration> ;
-<struct_declaration> ::=
-    <type_specifier> <struct_declarator_list> ";" |
-    <type_qualifier> <type_specifier> <struct_declarator_list> ";" ;
-<struct_declarator_list> ::=
-    <struct_declarator> |
-    <struct_declarator_list> "," <struct_declarator> ;
-<struct_declarator> ::=
-    identifier |
-    identifier <array_specifier> ;
+    "uimage2DMSArray" ;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<variable_identifier> ::=
-    identifier ;
