@@ -92,6 +92,11 @@
     <assignment_operator> <assignment_expression> | // x = y = z = 1.0f or x = y + z
     <logical_or_expression_tail> ; // + y or || y or  << y 
 
+<selection_statement> ::=
+    "if" "(" <expression> ")" <selection_rest_statement> ;
+<selection_rest_statement> ::=
+    <statement> "else" <statement> |
+    <statement> ;
 
 <unary_expression> ::=
     <postfix_expression> |
@@ -526,11 +531,7 @@
 
 
 
-<selection_statement> ::=
-    "if" "(" <expression> ")" <selection_rest_statement> ;
-<selection_rest_statement> ::=
-    <statement> "else" <statement> |
-    <statement> ;
+
 <condition> ::=
     <expression> |
     <type_specifier> identifier "=" <initializer> |
