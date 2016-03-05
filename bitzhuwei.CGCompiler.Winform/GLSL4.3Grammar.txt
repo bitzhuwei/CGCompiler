@@ -80,20 +80,18 @@
 <expression_statement> ::=
     <expression> ";" |
     ";" ;
-<expression> ::=
+<expression> ::= // x + y, y + z, z + w
     <assignment_expression> <expression_nullable> ;
 <expression_nullable> ::=
     "," <assignment_expression> <expression_nullable> |
     null ;
-<assignment_expression> ::=
-    <conditional_expression> | // x + y or x || y or x << y
-    <unary_expression> <assignment_operator> <assignment_expression> ;// x = y = z = 1.0f or x = y + z
+<assignment_expression> ::= // x + y * (z + w)
+    <unary_expression> <expression_right_part> ; // x .....
+<expression_right_part> ::=
+    "?" <expression> ":" <assignment_expression> | // ? ... : ...
+    <assignment_operator> <assignment_expression> | // x = y = z = 1.0f or x = y + z
+    <logical_or_expression_tail> ; // + y or || y or  << y 
 
-<conditional_expression> ::=
-    <logical_or_expression> <question_selection_expresition> ;
-<question_selection_expresition> ::=
-    "?" <expression> ":" <assignment_expression> |
-    null ;
 
 <unary_expression> ::=
     <postfix_expression> |
@@ -299,7 +297,10 @@
 
 
 <constant_expression> ::=
-    <conditional_expression> ;
+    <logical_or_expression> <question_selection_expresition> ;
+<question_selection_expresition> ::=
+    "?" <expression> ":" <assignment_expression> |
+    null ;
 
 <identifier_list> ::=
     "," identifier <identifier_list_nullable> ;
