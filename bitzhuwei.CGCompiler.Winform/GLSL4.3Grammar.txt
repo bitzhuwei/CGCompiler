@@ -302,6 +302,11 @@
     "," <initializer> <initializer_list_nullable> |
     null ;
 
+<identifier_list> ::=
+    "," identifier <identifier_list_nullable> ;
+<identifier_list_nullable> ::=
+    "," identifier <identifier_list_nullable> |
+    null ;
 
 
 
@@ -359,11 +364,7 @@
     "?" <expression> ":" <assignment_expression> |
     null ;
 
-<identifier_list> ::=
-    "," identifier <identifier_list_nullable> ;
-<identifier_list_nullable> ::=
-    "," identifier <identifier_list_nullable> |
-    null ;
+
 
 <invariant_qualifier> ::=
     "invariant" ;
