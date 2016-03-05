@@ -81,9 +81,9 @@
     <expression> ";" |
     ";" ;
 <expression> ::= // x + y, y + z, z + w
-    <assignment_expression> <expression_nullable> ;
-<expression_nullable> ::=
-    "," <assignment_expression> <expression_nullable> |
+    <assignment_expression> <assignment_expression_nullable> ;
+<assignment_expression_nullable> ::=
+    "," <assignment_expression> <assignment_expression_nullable> |
     null ;
 <assignment_expression> ::= // x + y * (z + w)
     <unary_expression> <expression_right_part> ; // x .....
@@ -113,6 +113,24 @@
 <case_label> ::=
     "case" <expression> ":" |
     "default" ":" ;
+
+<iteration_statement> ::=
+    "while" "(" <condition> ")" <statement> |
+    "do" <statement> "while" "(" <expression> ")" ";" |
+    "for" "(" <for_init_statement> <for_rest_statement> ")" <statement> ;
+<condition> ::=
+    <expression> |
+    <type_specifier> identifier "=" <initializer> |
+    <type_qualifier> <type_specifier> identifier "=" <initializer> ;
+<for_init_statement> ::=
+    <expression_statement> |
+    <declaration_statement> ;
+<for_rest_statement> ::=
+    <condition> ";" <expression_nullable> ;
+<expression_nullable> ::=
+    <expression> |
+    null ;
+
 
 <unary_expression> ::=
     <postfix_expression> |
@@ -548,24 +566,11 @@
 
 
 
-<condition> ::=
-    <expression> |
-    <type_specifier> identifier "=" <initializer> |
-    <type_qualifier> <type_specifier> identifier "=" <initializer> ;
 
 
-<iteration_statement> ::=
-    "while" "(" <condition> ")" <statement> |
-    "do" <statement> "while" "(" <expression> ")" ";" |
-    "for" "(" <for_init_statement> <for_rest_statement> ")" <statement> ;
-<for_init_statement> ::=
-    <expression_statement> |
-    <declaration_statement> ;
-<conditionopt> ::=
-    <condition> ;
-<for_rest_statement> ::=
-    <conditionopt> ";" |
-    <conditionopt> ";" <expression> ;
+
+
+
 <jump_statement> ::=
     "continue" ";" |
     "break" ";" |
