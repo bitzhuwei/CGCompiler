@@ -98,10 +98,21 @@
     <statement> "else" <statement> |
     <statement> ;
 
+<selection_rest_statement> ::=
+    <statement> <else_statement_nullable> ;
+<else_statement_nullable> ::=
+    "else" <statement> |
+    null ;
+
+
 <switch_statement> ::=
     "switch" "(" <expression> ")" "{" <switch_statement_list> "}" ;
 <switch_statement_list> ::=
     <statement_list> ;
+
+<case_label> ::=
+    "case" <expression> ":" |
+    "default" ":" ;
 
 <unary_expression> ::=
     <postfix_expression> |
@@ -542,9 +553,7 @@
     <type_specifier> identifier "=" <initializer> |
     <type_qualifier> <type_specifier> identifier "=" <initializer> ;
 
-<case_label> ::=
-    "case" <expression> ":" |
-    "default" ":" ;
+
 <iteration_statement> ::=
     "while" "(" <condition> ")" <statement> |
     "do" <statement> "while" "(" <expression> ")" ";" |
