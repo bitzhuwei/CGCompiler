@@ -131,6 +131,11 @@
     <expression> |
     null ;
 
+<jump_statement> ::=
+    "continue" ";" |
+    "break" ";" |
+    "return" <expression_nullable> ";" |
+    "discard" ";" ;
 
 <unary_expression> ::=
     <postfix_expression> |
@@ -571,11 +576,6 @@
 
 
 
-<jump_statement> ::=
-    "continue" ";" |
-    "break" ";" |
-    "return" ";" |
-    "return" <expression> ";" |
-    "discard" ";" ;
+
 <variable_identifier> ::=
     identifier ;
