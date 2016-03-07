@@ -754,7 +754,11 @@ namespace bitzhuwei.CGCompiler.Winform
             }
 
             var form = new FormNotImplementedNodes(notImplementedNodeList);
-            form.ShowDialog();
+            if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                this.txtSourceCode.AppendText(Environment.NewLine);
+                this.txtSourceCode.AppendText(form.NotimplementedNodeListCode);
+            }
         }
 
     }

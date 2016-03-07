@@ -34,6 +34,7 @@ namespace bitzhuwei.CGCompiler.Winform
                 builder.Append("\"");
                 builder.Append("tmp_" + node.NodeName);
                 builder.Append("\"");
+                builder.Append(" ;");
                 builder.AppendLine();
             }
 
@@ -41,5 +42,18 @@ namespace bitzhuwei.CGCompiler.Winform
         }
 
 
+
+        public string NotimplementedNodeListCode { get; set; }
+
+        private void btnAddToGrammar_Click(object sender, EventArgs e)
+        {
+            this.NotimplementedNodeListCode = this.txtContent.Text;
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+        }
+
+        private void btnQuit_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+        }
     }
 }
