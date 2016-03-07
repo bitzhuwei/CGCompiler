@@ -708,6 +708,55 @@ namespace bitzhuwei.CGCompiler.Winform
             this.btnSave.Enabled = false;
         }
 
+        private void btnDumpLastNodes2Leave_Click(object sender, EventArgs e)
+        {
+            string sourceCode = this.txtSourceCode.Text;
+
+            var lexAna = new bitzhuwei.CGCompiler.LexicalAnalyzerCG();
+            lexAna.SetSourceCode(sourceCode);
+            var tokens = lexAna.Analyze();
+            var syntaxParser = new bitzhuwei.CGCompiler.LL1SyntaxParserCG();
+            syntaxParser.SetTokenListSource(tokens);
+            var tree = syntaxParser.Parse();
+            ContextfreeGrammar grammar = tree.GetGrammar();
+            grammar.GrammarName = "TmpGrammarName";
+            grammar.Namespace = "TmpNamespace";
+
+            List<ProductionNode> testedNodeList = new List<ProductionNode>();
+            List<ProductionNode> notImplementedNodeList = new List<ProductionNode>();
+
+            foreach (var production in grammar.ProductionCollection)
+            {
+                foreach (var candidate in production.RightCollection)
+                {
+                    foreach (var node in candidate)
+                    {
+                        if (node.Position != EnumProductionNodePosition.NonLeave) { continue; }
+                        if (testedNodeList.Contains(node)) { continue; }
+
+                        bool implemented = false;
+                        foreach (var p in grammar.ProductionCollection)
+                        {
+                            if (p.Left == node)
+                            {
+                                testedNodeList.Add(node);
+                                implemented = true;
+                                break;
+                            }
+                        }
+
+                        if ((!implemented) && (!notImplementedNodeList.Contains(node)))
+                        {
+                            notImplementedNodeList.Add(node);
+                        }
+                    }
+                }
+            }
+
+            var form = new FormNotImplementedNodes(notImplementedNodeList);
+            form.ShowDialog();
+        }
+
     }
     static class StringExtension
     {

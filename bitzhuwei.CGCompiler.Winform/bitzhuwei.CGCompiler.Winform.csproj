@@ -66,6 +66,12 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormNotImplementedNodes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNotImplementedNodes.Designer.cs">
+      <DependentUpon>FormNotImplementedNodes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Grammar.cs" />
     <Compile Include="GrammarList.cs" />
     <Compile Include="Program.cs" />
@@ -76,6 +82,9 @@
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormNotImplementedNodes.resx">
+      <DependentUpon>FormNotImplementedNodes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -85,7 +94,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Content Include="GLSL4.3Grammar.html" />
+    <Content Include="GLSL4.3Grammar.txt" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
