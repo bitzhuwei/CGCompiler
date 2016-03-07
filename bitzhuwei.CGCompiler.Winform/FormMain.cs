@@ -270,6 +270,11 @@ namespace bitzhuwei.CGCompiler.Winform
             }
             string errorFile = Path.Combine(param.folder, "FirstCollectionError" + param.compilerName + ".txt");
             File.WriteAllText(errorFile, builder.ToString());
+
+            if (sameFirst.Count > 0)
+            {
+                Process.Start("notepad", errorFile);
+            }
         }
 
         private ContextfreeGrammar TestGetCGGrammar()
