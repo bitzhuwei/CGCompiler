@@ -17,8 +17,8 @@ postfix_expression INC_OP
 postfix_expression DEC_OP
 integer_expression:
 expression
-176
-9 Shading Language Grammar for Core Profile
+
+
 function_call:
 function_call_or_method
 function_call_or_method:
@@ -48,8 +48,6 @@ unary_operator unary_expression
 // Grammar Note: No traditional style type casts.
 unary_operator:
 PLUS
-177
-9 Shading Language Grammar for Core Profile
 DASH
 BANG
 TILDE
@@ -82,8 +80,6 @@ equality_expression
 and_expression AMPERSAND equality_expression
 exclusive_or_expression:
 and_expression
-178
-9 Shading Language Grammar for Core Profile
 exclusive_or_expression CARET and_expression
 inclusive_or_expression:
 exclusive_or_expression
@@ -116,8 +112,6 @@ AND_ASSIGN
 XOR_ASSIGN
 OR_ASSIGN
 expression:
-179
-9 Shading Language Grammar for Core Profile
 assignment_expression
 expression COMMA assignment_expression
 constant_expression:
@@ -127,10 +121,8 @@ function_prototype SEMICOLON
 init_declarator_list SEMICOLON
 PRECISION precision_qualifier type_specifier SEMICOLON
 type_qualifier IDENTIFIER LEFT_BRACE struct_declaration_list RIGHT_BRACE SEMICOLON
-type_qualifier IDENTIFIER LEFT_BRACE struct_declaration_list RIGHT_BRACE
-IDENTIFIER SEMICOLON
-type_qualifier IDENTIFIER LEFT_BRACE struct_declaration_list RIGHT_BRACE
-IDENTIFIER array_specifier SEMICOLON
+type_qualifier IDENTIFIER LEFT_BRACE struct_declaration_list RIGHT_BRACE IDENTIFIER SEMICOLON
+type_qualifier IDENTIFIER LEFT_BRACE struct_declaration_list RIGHT_BRACE IDENTIFIER array_specifier SEMICOLON
 type_qualifier SEMICOLON
 type_qualifier IDENTIFIER SEMICOLON
 type_qualifier IDENTIFIER identifier_list SEMICOLON
@@ -150,8 +142,6 @@ fully_specified_type IDENTIFIER LEFT_PAREN
 parameter_declarator:
 type_specifier IDENTIFIER
 type_specifier IDENTIFIER array_specifier
-180
-9 Shading Language Grammar for Core Profile
 parameter_declaration:
 type_qualifier parameter_declarator
 parameter_declarator
@@ -181,8 +171,6 @@ interpolation_qualifier:
 SMOOTH
 FLAT
 NOPERSPECTIVE
-181
-9 Shading Language Grammar for Core Profile
 layout_qualifier:
 LAYOUT LEFT_PAREN layout_qualifier_id_list RIGHT_PAREN
 layout_qualifier_id_list:
@@ -216,8 +204,6 @@ BUFFER
 SHARED
 COHERENT
 VOLATILE
-182
-9 Shading Language Grammar for Core Profile
 RESTRICT
 READONLY
 WRITEONLY
@@ -251,8 +237,6 @@ BVEC2
 BVEC3
 BVEC4
 IVEC2
-183
-9 Shading Language Grammar for Core Profile
 IVEC3
 IVEC4
 UVEC2
@@ -290,8 +274,6 @@ SAMPLERCUBE
 SAMPLER1DSHADOW
 SAMPLER2DSHADOW
 SAMPLERCUBESHADOW
-184
-9 Shading Language Grammar for Core Profile
 SAMPLER1DARRAY
 SAMPLER2DARRAY
 SAMPLER1DARRAYSHADOW
@@ -329,8 +311,6 @@ IMAGE1D
 IIMAGE1D
 UIMAGE1D
 IMAGE2D
-185
-9 Shading Language Grammar for Core Profile
 IIMAGE2D
 UIMAGE2D
 IMAGE3D
@@ -369,8 +349,6 @@ LOW_PRECISION
 struct_specifier:
 STRUCT IDENTIFIER LEFT_BRACE struct_declaration_list RIGHT_BRACE
 STRUCT LEFT_BRACE struct_declaration_list RIGHT_BRACE
-186
-9 Shading Language Grammar for Core Profile
 struct_declaration_list:
 struct_declaration
 struct_declaration_list struct_declaration
@@ -401,8 +379,6 @@ declaration_statement
 expression_statement
 selection_statement
 switch_statement
-187
-9 Shading Language Grammar for Core Profile
 case_label
 iteration_statement
 jump_statement
@@ -430,12 +406,9 @@ condition:
 expression
 fully_specified_type IDENTIFIER EQUAL initializer
 switch_statement:
-SWITCH LEFT_PAREN expression RIGHT_PAREN LEFT_BRACE switch_statement_list
-RIGHT_BRACE
+SWITCH LEFT_PAREN expression RIGHT_PAREN LEFT_BRACE switch_statement_list RIGHT_BRACE
 switch_statement_list:
-/* nothing */
-188
-9 Shading Language Grammar for Core Profile
+// /* nothing */
 statement_list
 case_label:
 CASE expression COLON
@@ -443,8 +416,7 @@ DEFAULT COLON
 iteration_statement:
 WHILE LEFT_PAREN condition RIGHT_PAREN statement_no_new_scope
 DO statement WHILE LEFT_PAREN expression RIGHT_PAREN SEMICOLON
-FOR LEFT_PAREN for_init_statement for_rest_statement RIGHT_PAREN
-statement_no_new_scope
+FOR LEFT_PAREN for_init_statement for_rest_statement RIGHT_PAREN statement_no_new_scope
 for_init_statement:
 expression_statement
 declaration_statement
@@ -467,8 +439,6 @@ translation_unit external_declaration
 external_declaration:
 function_definition
 declaration
-189
-9 Shading Language Grammar for Core Profile
+
 function_definition:
 function_prototype compound_statement_no_new_scope
-190
