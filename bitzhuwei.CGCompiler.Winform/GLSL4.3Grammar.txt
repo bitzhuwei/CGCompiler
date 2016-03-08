@@ -4,3 +4,6 @@ expression:
 expression_2:
 	COMMA assignment_expression expression_2
 	null
+assignment_expression:
+	conditional_expression
+	unary_expression assignment_operator assignment_expression

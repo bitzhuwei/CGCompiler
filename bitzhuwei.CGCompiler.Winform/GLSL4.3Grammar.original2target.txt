@@ -96,9 +96,7 @@ logical_or_expression:
 conditional_expression:
 	logical_or_expression
 	logical_or_expression QUESTION expression COLON assignment_expression
-assignment_expression:
-	conditional_expression
-	unary_expression assignment_operator assignment_expression
+
 assignment_operator:
 	EQUAL
 	MUL_ASSIGN

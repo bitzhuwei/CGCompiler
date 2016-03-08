@@ -503,6 +503,8 @@ namespace bitzhuwei.CGCompiler.Winform
             this.btnSave.Enabled = false;
             this.textChangedEvent = new EventHandler(this.content_TextChanged);
             AddcontentTextChangedEvent();
+
+            btnOK_Click(btnOK, null);
         }
 
         private void AddcontentTextChangedEvent()
