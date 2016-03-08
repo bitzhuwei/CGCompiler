@@ -1,4 +1,6 @@
 ﻿
 expression:
-	assignment_expression
-	expression COMMA assignment_expression
+	assignment_expression expression_2
+expression_2:
+	COMMA assignment_expression expression_2
+	null
