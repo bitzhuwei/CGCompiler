@@ -65,18 +65,7 @@ unary_operator:
 
 
 
-assignment_operator:
-	EQUAL
-	MUL_ASSIGN
-	DIV_ASSIGN
-	MOD_ASSIGN
-	ADD_ASSIGN
-	SUB_ASSIGN
-	LEFT_ASSIGN
-	RIGHT_ASSIGN
-	AND_ASSIGN
-	XOR_ASSIGN
-	OR_ASSIGN
+
 
 constant_expression:
 	conditional_expression
