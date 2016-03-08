@@ -94,7 +94,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Content Include="GLSL4.3Grammar.iriginal.txt" />
+    <Content Include="GLSL4.3Grammar.original.txt" />
     <Content Include="GLSL4.3Grammar.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
