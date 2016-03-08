@@ -8,6 +8,17 @@ using System.Windows.Forms;
 
 namespace bitzhuwei.CGCompiler.Winform
 {
+    static class StringExtension
+    {
+        public static void Save(this string source, string filename)
+        {
+            using (StreamWriter sw = new StreamWriter(filename, false))
+            {
+                sw.Write(source);
+            }
+        }
+    }
+
     static class Program
     {
         /// <summary>
@@ -19,7 +30,7 @@ namespace bitzhuwei.CGCompiler.Winform
             string sourceCode = 预处理originalGrammar();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMain(sourceCode));
+            Application.Run(new FormMain4BuildingGrammar(sourceCode));
         }
 
         private static string 预处理originalGrammar()

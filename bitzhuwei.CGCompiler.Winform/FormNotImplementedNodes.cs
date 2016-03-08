@@ -17,8 +17,6 @@ namespace bitzhuwei.CGCompiler.Winform
             InitializeComponent();
 
             this.notImplementedNodeList = notImplementedNodeList;
-
-            this.FormNotImplementedNodes_Load(this, null);
         }
 
         private void FormNotImplementedNodes_Load(object sender, EventArgs e)
@@ -40,8 +38,8 @@ namespace bitzhuwei.CGCompiler.Winform
                 builder.AppendLine();
             }
 
-            this.txtContent.Text = builder.ToString();
             this.NotimplementedNodeListCode = this.txtContent.Text;
+            this.txtContent.Text = builder.ToString();
         }
 
 

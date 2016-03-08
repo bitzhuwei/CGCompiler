@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 namespace bitzhuwei.CGCompiler.Winform
 {
-    public partial class FormMain : Form
+    public partial class FormMain4BuildingGrammar : Form
     {
         class CodeGeneratorParam
         {
@@ -29,27 +29,30 @@ namespace bitzhuwei.CGCompiler.Winform
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public FormMain()
-        {
-            InitializeComponent();
-        }
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="sourceCode"></param>
-        public FormMain(string sourceCode)
+        public FormMain4BuildingGrammar(string sourceCode)
         {
             InitializeComponent();
             this.txtSourceCode.Text = sourceCode;
 
             List<ProductionNode> notImplementedNodeList = GetNotImplementedNodeList(sourceCode);
-
-            var form = new FormNotImplementedNodes(notImplementedNodeList);
+            StringBuilder builder = new StringBuilder();
+            foreach (var node in notImplementedNodeList)
+            {
+                builder.Append('<');
+                builder.Append(node.NodeName);
+                builder.Append('>');
+                builder.Append(" ::= ");
+                builder.Append("\"");
+                builder.Append("tmp_" + node.NodeName);
+                builder.Append("\"");
+                builder.Append(" ;");
+                builder.AppendLine();
+            }
             this.txtSourceCode.AppendText(Environment.NewLine);
-            this.txtSourceCode.AppendText(form.NotimplementedNodeListCode);
+            this.txtSourceCode.AppendText(builder.ToString());
 
         }
 
@@ -645,7 +648,7 @@ namespace bitzhuwei.CGCompiler.Winform
                 this.txtCodeFolder.Text = grammar.CodeFolder;
                 this.txtCompilerName.Text = grammar.CompilerName;
                 this.txtNamespace.Text = grammar.Namespace;
-                this.txtSourceCode.Text = grammar.Content;
+                //this.txtSourceCode.Text = grammar.Content;
                 this.btnRemove.Enabled = true;
                 this.btnSave.Enabled = true;
                 this.AddcontentTextChangedEvent();
@@ -718,20 +721,6 @@ namespace bitzhuwei.CGCompiler.Winform
             config.Grammars.SelectedIndex = this.cmbGrammarList.SelectedIndex;
             config.Save(configFilename);
             this.btnSave.Enabled = false;
-        }
-
-        private void btnDumpLastNodes2Leave_Click(object sender, EventArgs e)
-        {
-            string sourceCode = this.txtSourceCode.Text;
-
-            List<ProductionNode> notImplementedNodeList = GetNotImplementedNodeList(sourceCode);
-
-            var form = new FormNotImplementedNodes(notImplementedNodeList);
-            if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                this.txtSourceCode.AppendText(Environment.NewLine);
-                this.txtSourceCode.AppendText(form.NotimplementedNodeListCode);
-            }
         }
 
         private static List<ProductionNode> GetNotImplementedNodeList(string sourceCode)

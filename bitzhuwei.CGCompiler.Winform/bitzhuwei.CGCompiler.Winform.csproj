@@ -60,6 +60,12 @@
     <Compile Include="FormInsertNewGrammar.Designer.cs">
       <DependentUpon>FormInsertNewGrammar.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormMain4BuildingGrammar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain4BuildingGrammar.Designer.cs">
+      <DependentUpon>FormMain4BuildingGrammar.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +85,9 @@
     <EmbeddedResource Include="FormInsertNewGrammar.resx">
       <DependentUpon>FormInsertNewGrammar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormMain4BuildingGrammar.resx">
+      <DependentUpon>FormMain4BuildingGrammar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -94,6 +103,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Content Include="GLSL4.3Grammar.original2target.txt" />
     <Content Include="GLSL4.3Grammar.original.txt" />
     <Content Include="GLSL4.3Grammar.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
