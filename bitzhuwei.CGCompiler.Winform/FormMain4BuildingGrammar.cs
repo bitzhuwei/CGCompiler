@@ -453,10 +453,10 @@ namespace bitzhuwei.CGCompiler.Winform
             else
             {
 
-                if (MessageBox.Show("代码生成完成，是否立即打开所在文件夹？", "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
-                {
-                    Process.Start("explorer", (e.Result as CodeGeneratorParam).folder);
-                }
+                //if (MessageBox.Show("代码生成完成，是否立即打开所在文件夹？", "提示", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                //{
+                //    Process.Start("explorer", (e.Result as CodeGeneratorParam).folder);
+                //}
             }
 
             //this.DialogResult = System.Windows.Forms.DialogResult.OK;
