@@ -17,6 +17,8 @@ namespace bitzhuwei.CGCompiler.Winform
             InitializeComponent();
 
             this.notImplementedNodeList = notImplementedNodeList;
+
+            this.FormNotImplementedNodes_Load(this, null);
         }
 
         private void FormNotImplementedNodes_Load(object sender, EventArgs e)
@@ -39,6 +41,7 @@ namespace bitzhuwei.CGCompiler.Winform
             }
 
             this.txtContent.Text = builder.ToString();
+            this.NotimplementedNodeListCode = this.txtContent.Text;
         }
 
 
@@ -47,7 +50,6 @@ namespace bitzhuwei.CGCompiler.Winform
 
         private void btnAddToGrammar_Click(object sender, EventArgs e)
         {
-            this.NotimplementedNodeListCode = this.txtContent.Text;
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 

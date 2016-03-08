@@ -44,6 +44,13 @@ namespace bitzhuwei.CGCompiler.Winform
         {
             InitializeComponent();
             this.txtSourceCode.Text = sourceCode;
+
+            List<ProductionNode> notImplementedNodeList = GetNotImplementedNodeList(sourceCode);
+
+            var form = new FormNotImplementedNodes(notImplementedNodeList);
+            this.txtSourceCode.AppendText(Environment.NewLine);
+            this.txtSourceCode.AppendText(form.NotimplementedNodeListCode);
+
         }
 
         private void btnBrowseFolder_Click(object sender, EventArgs e)
@@ -717,6 +724,18 @@ namespace bitzhuwei.CGCompiler.Winform
         {
             string sourceCode = this.txtSourceCode.Text;
 
+            List<ProductionNode> notImplementedNodeList = GetNotImplementedNodeList(sourceCode);
+
+            var form = new FormNotImplementedNodes(notImplementedNodeList);
+            if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                this.txtSourceCode.AppendText(Environment.NewLine);
+                this.txtSourceCode.AppendText(form.NotimplementedNodeListCode);
+            }
+        }
+
+        private static List<ProductionNode> GetNotImplementedNodeList(string sourceCode)
+        {
             var lexAna = new bitzhuwei.CGCompiler.LexicalAnalyzerCG();
             lexAna.SetSourceCode(sourceCode);
             var tokens = lexAna.Analyze();
@@ -757,13 +776,7 @@ namespace bitzhuwei.CGCompiler.Winform
                     }
                 }
             }
-
-            var form = new FormNotImplementedNodes(notImplementedNodeList);
-            if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                this.txtSourceCode.AppendText(Environment.NewLine);
-                this.txtSourceCode.AppendText(form.NotimplementedNodeListCode);
-            }
+            return notImplementedNodeList;
         }
 
     }
