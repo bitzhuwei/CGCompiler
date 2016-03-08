@@ -8,13 +8,7 @@ primary_expression:
 	BOOLCONSTANT
 	DOUBLECONSTANT
 	LEFT_PAREN expression RIGHT_PAREN
-postfix_expression:
-	primary_expression
-	postfix_expression LEFT_BRACKET integer_expression RIGHT_BRACKET
-	function_call
-	postfix_expression DOT FIELD_SELECTION
-	postfix_expression INC_OP
-	postfix_expression DEC_OP
+
 integer_expression:
 	expression
 
@@ -40,17 +34,9 @@ function_call_header:
 function_identifier:
 	type_specifier
 	postfix_expression
-unary_expression:
-	postfix_expression
-	INC_OP unary_expression
-	DEC_OP unary_expression
-	unary_operator unary_expression
+
 // Grammar Note: No traditional style type casts.
-unary_operator:
-	PLUS
-	DASH
-	BANG
-	TILDE
+
 // Grammar Note: No '*' or '&' unary ops. Pointers are not supported.
 
 
