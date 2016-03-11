@@ -157,6 +157,229 @@ multiplicative_expression_2:
 	SLASH unary_expression multiplicative_expression_2
 	PERCENT unary_expression multiplicative_expression_2
 	null
-	
-	
+/////////////////////////////////////////////////////////////////////////////
+fully_specified_type:
+	type_specifier
+	type_qualifier type_specifier
+/////////////////////////////////////////////////////////////////////////////
+type_specifier:
+	type_specifier_nonarray array_specifier_nullable
+array_specifier:
+	LEFT_BRACKET constant_expression_or_null RIGHT_BRACKET array_specifier_nullable
+array_specifier_nullable:
+	LEFT_BRACKET constant_expression_or_null RIGHT_BRACKET array_specifier_nullable
+	null
+constant_expression_or_null:
+	conditional_expression
+	null
+constant_expression:
+	conditional_expression
+type_specifier_nonarray:
+	VOID
+	// 注：build_in_type 作为普通的 IDENTIFIER 存在，或者说没有内置类型
+	struct_specifier
+	// TYPE_NAME
+	IDENTIFIER
+build_in_type:
+	FLOAT
+	DOUBLE
+	INT
+	UINT
+	BOOL
+	VEC2
+	VEC3
+	VEC4
+	DVEC2
+	DVEC3
+	DVEC4
+	BVEC2
+	BVEC3
+	BVEC4
+	IVEC2
+	IVEC3
+	IVEC4
+	UVEC2
+	UVEC3
+	UVEC4
+	MAT2
+	MAT3
+	MAT4
+	MAT2X2
+	MAT2X3
+	MAT2X4
+	MAT3X2
+	MAT3X3
+	MAT3X4
+	MAT4X2
+	MAT4X3
+	MAT4X4
+	DMAT2
+	DMAT3
+	DMAT4
+	DMAT2X2
+	DMAT2X3
+	DMAT2X4
+	DMAT3X2
+	DMAT3X3
+	DMAT3X4
+	DMAT4X2
+	DMAT4X3
+	DMAT4X4
+	ATOMIC_UINT
+	SAMPLER1D
+	SAMPLER2D
+	SAMPLER3D
+	SAMPLERCUBE
+	SAMPLER1DSHADOW
+	SAMPLER2DSHADOW
+	SAMPLERCUBESHADOW
+	SAMPLER1DARRAY
+	SAMPLER2DARRAY
+	SAMPLER1DARRAYSHADOW
+	SAMPLER2DARRAYSHADOW
+	SAMPLERCUBEARRAY
+	SAMPLERCUBEARRAYSHADOW
+	ISAMPLER1D
+	ISAMPLER2D
+	ISAMPLER3D
+	ISAMPLERCUBE
+	ISAMPLER1DARRAY
+	ISAMPLER2DARRAY
+	ISAMPLERCUBEARRAY
+	USAMPLER1D
+	USAMPLER2D
+	USAMPLER3D
+	USAMPLERCUBE
+	USAMPLER1DARRAY
+	USAMPLER2DARRAY
+	USAMPLERCUBEARRAY
+	SAMPLER2DRECT
+	SAMPLER2DRECTSHADOW
+	ISAMPLER2DRECT
+	USAMPLER2DRECT
+	SAMPLERBUFFER
+	ISAMPLERBUFFER
+	USAMPLERBUFFER
+	SAMPLER2DMS
+	ISAMPLER2DMS
+	USAMPLER2DMS
+	SAMPLER2DMSARRAY
+	ISAMPLER2DMSARRAY
+	USAMPLER2DMSARRAY
+	IMAGE1D
+	IIMAGE1D
+	UIMAGE1D
+	IMAGE2D
+	IIMAGE2D
+	UIMAGE2D
+	IMAGE3D
+	IIMAGE3D
+	UIMAGE3D
+	IMAGE2DRECT
+	IIMAGE2DRECT
+	UIMAGE2DRECT
+	IMAGECUBE
+	IIMAGECUBE
+	UIMAGECUBE
+	IMAGEBUFFER
+	IIMAGEBUFFER
+	UIMAGEBUFFER
+	IMAGE1DARRAY
+	IIMAGE1DARRAY
+	UIMAGE1DARRAY
+	IMAGE2DARRAY
+	IIMAGE2DARRAY
+	UIMAGE2DARRAY
+	IMAGECUBEARRAY
+	IIMAGECUBEARRAY
+	UIMAGECUBEARRAY
+	IMAGE2DMS
+	IIMAGE2DMS
+	UIMAGE2DMS
+	IMAGE2DMSARRAY
+	IIMAGE2DMSARRAY
+	UIMAGE2DMSARRAY
+struct_specifier:
+	STRUCT identifier_or_null LEFT_BRACE struct_declaration_list RIGHT_BRACE
+identifier_or_null:
+	IDENTIFIER
+	null
+struct_declaration_list:
+	struct_declaration struct_declaration_list_nullable
+struct_declaration_list_nullable:
+	struct_declaration struct_declaration_list_nullable
+	null
+struct_declaration:
+	type_specifier struct_declarator_list SEMICOLON
+	type_qualifier type_specifier struct_declarator_list SEMICOLON
+struct_declarator_list:
+	struct_declarator struct_declarator_list_2
+struct_declarator_list_2:
+	COMMA struct_declarator struct_declarator_list_2
+	null
+struct_declarator:
+	IDENTIFIER array_specifier_nullable
+/////////////////////////////////////////////////////////////////////////////
+type_qualifier:
+	single_type_qualifier type_qualifier_nullable
+type_qualifier_nullable:
+	single_type_qualifier type_qualifier_nullable
+	null
+single_type_qualifier:
+	storage_qualifier
+	layout_qualifier
+	precision_qualifier
+	interpolation_qualifier
+	invariant_qualifier
+	precise_qualifier
+storage_qualifier:
+	CONST
+	INOUT
+	IN
+	OUT
+	CENTROID
+	PATCH
+	SAMPLE
+	UNIFORM
+	BUFFER
+	SHARED
+	COHERENT
+	VOLATILE
+	RESTRICT
+	READONLY
+	WRITEONLY
+	SUBROUTINE subroutine_2
+subroutine_2:
+	LEFT_PAREN type_name_list RIGHT_PAREN
+	null
+type_name_list:
+	// IDENTIFIER is TYPE_NAME
+	IDENTIFIER type_name_list_2
+type_name_list_2:
+	COMMA IDENTIFIER type_name_list_2
+	null
+layout_qualifier:
+	LAYOUT LEFT_PAREN layout_qualifier_id_list RIGHT_PAREN
+layout_qualifier_id_list:
+	layout_qualifier_id layout_qualifier_id_list_2
+layout_qualifier_id_list_2:
+	COMMA layout_qualifier_id layout_qualifier_id_list_2
+	null
+layout_qualifier_id:
+	IDENTIFIER layout_qualifier_id_2
+layout_qualifier_id_2:
+	EQUAL INTCONSTANT
+	null
+precision_qualifier:
+	HIGH_PRECISION
+	MEDIUM_PRECISION
+	LOW_PRECISION
+interpolation_qualifier:
+	SMOOTH
+	FLAT
+	NOPERSPECTIVE
+invariant_qualifier:
+	INVARIANT
+precise_qualifier:
+	PRECISE
 	
