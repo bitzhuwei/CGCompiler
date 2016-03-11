@@ -21,13 +21,16 @@ postfix_expression_2:
 	DEC_OP postfix_expression_2
 	null
 primary_expression:
-	variable_identifier
+	//variable_identifier
+	IDENTIFIER
+	constant_primary_expression
+	LEFT_PAREN expression RIGHT_PAREN
+constant_primary_expression:
 	INTCONSTANT
 	UINTCONSTANT
 	FLOATCONSTANT
 	BOOLCONSTANT
 	DOUBLECONSTANT
-	LEFT_PAREN expression RIGHT_PAREN
 unary_operator: // 一元运算符
 	PLUS
 	DASH
