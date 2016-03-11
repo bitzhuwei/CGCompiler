@@ -6,27 +6,7 @@ integer_expression:
 	expression
 
 
-function_call:
-	function_call_or_method
-function_call_or_method:
-	function_call_generic
-function_call_generic:
-	function_call_header_with_parameters RIGHT_PAREN
-	function_call_header_no_parameters RIGHT_PAREN
-function_call_header_no_parameters:
-	function_call_header VOID
-	function_call_header
-function_call_header_with_parameters:
-	function_call_header assignment_expression
-	function_call_header_with_parameters COMMA assignment_expression
-function_call_header:
-	function_identifier LEFT_PAREN
-// Grammar Note: Constructors look like functions, but lexical analysis recognized most of them as
-// keywords. They are now recognized through “type_specifier”.
-// Methods (.length), subroutine array calls, and identifiers are recognized through postfix_expression.
-function_identifier:
-	type_specifier
-	postfix_expression
+
 
 // Grammar Note: No traditional style type casts.
 
