@@ -90,7 +90,7 @@ initializer:
 initializer_list:
 	initializer
 	initializer_list COMMA initializer
-	declaration_statement:
+declaration_statement:
 	declaration
 
 
