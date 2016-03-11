@@ -12,10 +12,28 @@ unary_expression:
 	DEC_OP unary_expression
 	unary_operator unary_expression
 postfix_expression:
+	IDENTIFIER postfix_expression_3
 	// primary_expression postfix_expression_2
-	primary_expression postfix_expression_2
+	constant_primary_expression postfix_expression_2
+	// primary_expression postfix_expression_2
+	LEFT_PAREN expression RIGHT_PAREN postfix_expression_2
+postfix_expression_3:
+	LEFT_BRACKET integer_expression RIGHT_BRACKET postfix_expression_3_1
+	// primary_expression postfix_expression_2
+	DOT FIELD_SELECTION postfix_expression_2
+	// primary_expression postfix_expression_2
+	INC_OP postfix_expression_2
+	// primary_expression postfix_expression_2
+	DEC_OP postfix_expression_2
+	// primary_expression postfix_expression_2
+	null
 	// function call + postfix_expression_2
-	function_call postfix_expression_2
+	LEFT_PAREN expression_or_void_or_null RIGHT_PAREN postfix_expression_2
+postfix_expression_3_1:
+	// primary_expression postfix_expression_2
+	postfix_expression_2
+	// function call + postfix_expression_2
+	LEFT_PAREN expression_or_void_or_null RIGHT_PAREN postfix_expression_2
 postfix_expression_2:
 	LEFT_BRACKET integer_expression RIGHT_BRACKET postfix_expression_2
 	DOT FIELD_SELECTION postfix_expression_2
@@ -39,8 +57,6 @@ unary_operator: // 一元运算符
 	BANG
 	TILDE
 ///////////////////////////////////////////////////////////////////////////////////
-function_call:
-	function_identifier LEFT_PAREN expression_or_void_or_null RIGHT_PAREN
 expression_or_void_or_null:
 	expression
 	VOID
@@ -48,9 +64,8 @@ expression_or_void_or_null:
 // Grammar Note: Constructors look like functions, but lexical analysis recognized most of them as
 // keywords. They are now recognized through “type_specifier”.
 // Methods (.length), subroutine array calls, and identifiers are recognized through postfix_expression.
-function_identifier:
-	IDENTIFIER index_selector_nullable // TODO: shader只支持一维的函数指针数组吗？
-index_selector_nullable:
+
+index_selector_nullable: // TODO: shader只支持一维的函数指针数组吗？
 	LEFT_BRACKET integer_expression RIGHT_BRACKET
 	null
 //////////////////////////////////////////////////////////////////////////////////////
