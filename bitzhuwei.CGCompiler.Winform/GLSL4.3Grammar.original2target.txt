@@ -98,11 +98,7 @@ initializer_list:
 expression_statement:
 	SEMICOLON
 	expression SEMICOLON
-selection_statement:
-	IF LEFT_PAREN expression RIGHT_PAREN selection_rest_statement
-selection_rest_statement:
-	statement ELSE statement
-	statement
+
 
 
 

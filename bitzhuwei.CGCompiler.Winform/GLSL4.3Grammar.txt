@@ -18,6 +18,13 @@ simple_statement:
 	case_label
 	iteration_statement
 	jump_statement
+selection_statement:
+	IF LEFT_PAREN expression RIGHT_PAREN selection_rest_statement
+selection_rest_statement:
+	statement selection_rest_statement_2
+selection_rest_statement_2:
+	ELSE statement
+	null
 switch_statement:
 	SWITCH LEFT_PAREN expression RIGHT_PAREN LEFT_BRACE switch_statement_list RIGHT_BRACE
 switch_statement_list:
