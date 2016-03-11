@@ -18,6 +18,9 @@ simple_statement:
 	case_label
 	iteration_statement
 	jump_statement
+case_label:
+	CASE expression COLON
+	DEFAULT COLON
 iteration_statement:
 	WHILE LEFT_PAREN condition RIGHT_PAREN statement_no_new_scope
 	DO statement WHILE LEFT_PAREN expression RIGHT_PAREN SEMICOLON
