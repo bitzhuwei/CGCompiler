@@ -67,10 +67,18 @@ condition_2:
 	// TYPE_NAME
 	IDENTIFIER EQUAL initializer
 condition_2_1:
-	// expression
-	integer_expression RIGHT_BRACKET postfix_expression_3_1 assignment_expression_2 expression_2
+	unary_expression condition_2_1_1
 	// TYPE_NAME
-	constant_expression_or_null RIGHT_BRACKET array_specifier_nullable IDENTIFIER EQUAL initializer
+	RIGHT_BRACKET array_specifier_nullable IDENTIFIER EQUAL initializer
+condition_2_1_1:
+	multiplicative_expression_2 additive_expression_2 shift_expression_2 relational_expression_2 equality_expression_2 and_expression_2 exclusive_or_expression_2 inclusive_or_expression_2 logical_and_expression_2 logical_xor_expression_2 logical_or_expression_2 conditional_expression_2 condition_2_1_1_1
+	// expression
+	assignment_operator assignment_expression expression_2 RIGHT_BRACKET postfix_expression_3_1 assignment_expression_2 expression_2
+condition_2_1_1_1:
+	// expression
+	expression_2 RIGHT_BRACKET postfix_expression_3_1 assignment_expression_2 expression_2
+	// TYPE_NAME
+	RIGHT_BRACKET array_specifier_nullable IDENTIFIER EQUAL initializer
 statement_no_new_scope:
 	compound_statement_no_new_scope
 	simple_statement
