@@ -40,6 +40,8 @@ postfix_expression_2:
 	INC_OP postfix_expression_2
 	DEC_OP postfix_expression_2
 	null
+FIELD_SELECTION: // PDF里没有，我猜测的
+	IDENTIFIER
 primary_expression:
 	//variable_identifier
 	IDENTIFIER
