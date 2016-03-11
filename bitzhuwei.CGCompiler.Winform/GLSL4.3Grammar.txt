@@ -18,6 +18,72 @@ simple_statement:
 	case_label
 	iteration_statement
 	jump_statement
+iteration_statement:
+	WHILE LEFT_PAREN condition RIGHT_PAREN statement_no_new_scope
+	DO statement WHILE LEFT_PAREN expression RIGHT_PAREN SEMICOLON
+	FOR LEFT_PAREN for_init_statement for_rest_statement RIGHT_PAREN statement_no_new_scope
+for_init_statement:
+	expression_statement
+	declaration_statement
+for_rest_statement:
+	conditionopt SEMICOLON expression_or_null
+conditionopt:
+	condition
+condition:
+	IDENTIFIER condition_2
+	// expression
+	// primary_expression postfix_expression_2
+	constant_primary_expression postfix_expression_2 assignment_expression_2 expression_2
+	// expression
+	// primary_expression postfix_expression_2
+	LEFT_PAREN expression RIGHT_PAREN postfix_expression_2 assignment_expression_2 expression_2	
+	// expression
+	INC_OP unary_expression assignment_expression_2 expression_2
+	// expression
+	DEC_OP unary_expression assignment_expression_2 expression_2
+	// expression
+	unary_operator unary_expression assignment_expression_2 expression_2
+	VOID array_specifier_nullable IDENTIFIER EQUAL initializer
+	// 注：build_in_type 作为普通的 IDENTIFIER 存在，或者说没有内置类型
+	struct_specifier array_specifier_nullable IDENTIFIER EQUAL initializer
+	type_qualifier type_specifier IDENTIFIER EQUAL initializer
+condition_2:
+	LEFT_BRACKET condition_2_1
+	// expression
+	// primary_expression postfix_expression_2
+	DOT FIELD_SELECTION postfix_expression_2 assignment_expression_2 expression_2
+	// expression
+	// primary_expression postfix_expression_2
+	INC_OP postfix_expression_2 assignment_expression_2 expression_2
+	// expression
+	// primary_expression postfix_expression_2
+	DEC_OP postfix_expression_2 assignment_expression_2 expression_2
+	// expression
+	// primary_expression postfix_expression_2
+	assignment_expression_2 expression_2
+	// expression
+	// function call + postfix_expression_2
+	LEFT_PAREN expression_or_void_or_null RIGHT_PAREN postfix_expression_2 assignment_expression_2 expression_2
+	// TYPE_NAME
+	IDENTIFIER EQUAL initializer
+condition_2_1:
+	// expression
+	integer_expression RIGHT_BRACKET postfix_expression_3_1 assignment_expression_2 expression_2
+	// TYPE_NAME
+	constant_expression_or_null RIGHT_BRACKET array_specifier_nullable IDENTIFIER EQUAL initializer
+statement_no_new_scope:
+	compound_statement_no_new_scope
+	simple_statement
+compound_statement_no_new_scope:
+	LEFT_BRACE statement_list_nullable RIGHT_BRACE
+jump_statement:
+	CONTINUE SEMICOLON
+	BREAK SEMICOLON
+	RETURN expression_or_null SEMICOLON
+	DISCARD SEMICOLON // Fragment shader only.
+expression_or_null:
+	expression
+	null
 compound_statement:
 	LEFT_BRACE statement_list_nullable RIGHT_BRACE
 statement_list:

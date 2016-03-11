@@ -93,12 +93,7 @@ initializer_list:
 	declaration_statement:
 	declaration
 
-statement_no_new_scope:
-	compound_statement_no_new_scope
-	simple_statement
-compound_statement_no_new_scope:
-	LEFT_BRACE RIGHT_BRACE
-	LEFT_BRACE statement_list RIGHT_BRACE
+
 
 expression_statement:
 	SEMICOLON
@@ -108,9 +103,7 @@ selection_statement:
 selection_rest_statement:
 	statement ELSE statement
 	statement
-condition:
-	expression
-	fully_specified_type IDENTIFIER EQUAL initializer
+
 switch_statement:
 	SWITCH LEFT_PAREN expression RIGHT_PAREN LEFT_BRACE switch_statement_list RIGHT_BRACE
 switch_statement_list:
@@ -119,25 +112,12 @@ switch_statement_list:
 case_label:
 	CASE expression COLON
 	DEFAULT COLON
-iteration_statement:
-	WHILE LEFT_PAREN condition RIGHT_PAREN statement_no_new_scope
-	DO statement WHILE LEFT_PAREN expression RIGHT_PAREN SEMICOLON
-	FOR LEFT_PAREN for_init_statement for_rest_statement RIGHT_PAREN statement_no_new_scope
-for_init_statement:
-	expression_statement
-	declaration_statement
-conditionopt:
-	condition
+
+
+
 	/* empty */
-for_rest_statement:
-	conditionopt SEMICOLON
-	conditionopt SEMICOLON expression
-jump_statement:
-	CONTINUE SEMICOLON
-	BREAK SEMICOLON
-	RETURN SEMICOLON
-	RETURN expression SEMICOLON
-	DISCARD SEMICOLON // Fragment shader only.
+
+
 // Grammar Note: No 'goto'. Gotos are not supported.
 translation_unit:
 	external_declaration
