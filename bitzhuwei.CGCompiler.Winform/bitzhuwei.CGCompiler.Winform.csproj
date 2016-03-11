@@ -103,6 +103,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Content Include="GLSL4.3Grammar-expression-done.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="GLSL4.3Grammar.original2target.txt" />
     <Content Include="GLSL4.3Grammar.original.txt" />
     <Content Include="GLSL4.3Grammar.txt">

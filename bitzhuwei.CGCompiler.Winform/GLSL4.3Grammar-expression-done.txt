@@ -1,0 +1,162 @@
+﻿
+expression:
+	assignment_expression expression_2
+expression_2:
+	COMMA assignment_expression expression_2
+	null
+assignment_expression:
+	unary_expression assignment_expression_2
+unary_expression:
+	postfix_expression
+	INC_OP unary_expression
+	DEC_OP unary_expression
+	unary_operator unary_expression
+postfix_expression:
+	IDENTIFIER postfix_expression_3
+	// primary_expression postfix_expression_2
+	constant_primary_expression postfix_expression_2
+	// primary_expression postfix_expression_2
+	LEFT_PAREN expression RIGHT_PAREN postfix_expression_2
+postfix_expression_3:
+	LEFT_BRACKET integer_expression RIGHT_BRACKET postfix_expression_3_1
+	// primary_expression postfix_expression_2
+	DOT FIELD_SELECTION postfix_expression_2
+	// primary_expression postfix_expression_2
+	INC_OP postfix_expression_2
+	// primary_expression postfix_expression_2
+	DEC_OP postfix_expression_2
+	// primary_expression postfix_expression_2
+	null
+	// function call + postfix_expression_2
+	LEFT_PAREN expression_or_void_or_null RIGHT_PAREN postfix_expression_2
+postfix_expression_3_1:
+	// primary_expression postfix_expression_2
+	postfix_expression_2
+	// function call + postfix_expression_2
+	LEFT_PAREN expression_or_void_or_null RIGHT_PAREN postfix_expression_2 // TODO: shader只支持一维的函数指针数组吗？
+postfix_expression_2:
+	LEFT_BRACKET integer_expression RIGHT_BRACKET postfix_expression_2
+	DOT FIELD_SELECTION postfix_expression_2
+	INC_OP postfix_expression_2
+	DEC_OP postfix_expression_2
+	null
+FIELD_SELECTION: // PDF里没有，我猜测的
+	IDENTIFIER
+primary_expression:
+	//variable_identifier
+	IDENTIFIER
+	constant_primary_expression
+	LEFT_PAREN expression RIGHT_PAREN
+constant_primary_expression:
+	INTCONSTANT
+	UINTCONSTANT
+	FLOATCONSTANT
+	BOOLCONSTANT
+	DOUBLECONSTANT
+unary_operator: // 一元运算符
+	PLUS
+	DASH
+	BANG
+	TILDE
+///////////////////////////////////////////////////////////////////////////////////
+expression_or_void_or_null:
+	expression
+	VOID
+	null
+// Grammar Note: Constructors look like functions, but lexical analysis recognized most of them as
+// keywords. They are now recognized through “type_specifier”.
+// Methods (.length), subroutine array calls, and identifiers are recognized through postfix_expression.
+
+index_selector_nullable: // TODO: shader只支持一维的函数指针数组吗？
+	LEFT_BRACKET integer_expression RIGHT_BRACKET
+	null
+integer_expression:
+	expression
+//////////////////////////////////////////////////////////////////////////////////////
+assignment_expression_2:
+	multiplicative_expression_2 additive_expression_2 shift_expression_2 relational_expression_2 equality_expression_2 and_expression_2 exclusive_or_expression_2 inclusive_or_expression_2 logical_and_expression_2 logical_xor_expression_2 logical_or_expression_2 conditional_expression_2
+	assignment_operator assignment_expression
+assignment_operator:
+	EQUAL
+	MUL_ASSIGN
+	DIV_ASSIGN
+	MOD_ASSIGN
+	ADD_ASSIGN
+	SUB_ASSIGN
+	LEFT_ASSIGN
+	RIGHT_ASSIGN
+	AND_ASSIGN
+	XOR_ASSIGN
+	OR_ASSIGN
+/////////////////////////////////////////////////////////////////
+conditional_expression:
+	logical_or_expression conditional_expression_2
+conditional_expression_2:
+	QUESTION expression COLON assignment_expression
+	null
+logical_or_expression:
+	logical_xor_expression logical_or_expression_2
+logical_or_expression_2:
+	OR_OP logical_xor_expression logical_or_expression_2
+	null
+logical_xor_expression:
+	logical_and_expression logical_xor_expression_2
+logical_xor_expression_2:
+	XOR_OP logical_and_expression logical_xor_expression_2
+	null
+logical_and_expression:
+	inclusive_or_expression logical_and_expression_2
+logical_and_expression_2:
+	AND_OP inclusive_or_expression logical_and_expression_2
+	null
+inclusive_or_expression:
+	exclusive_or_expression inclusive_or_expression_2
+inclusive_or_expression_2:
+	VERTICAL_BAR exclusive_or_expression inclusive_or_expression_2
+	null
+exclusive_or_expression:
+	and_expression exclusive_or_expression_2
+exclusive_or_expression_2:
+	CARET and_expression exclusive_or_expression_2
+	null
+and_expression:
+	equality_expression and_expression_2
+and_expression_2:
+	AMPERSAND equality_expression and_expression_2
+	null
+equality_expression:
+	relational_expression equality_expression_2
+equality_expression_2:
+	EQ_OP relational_expression equality_expression_2
+	NE_OP relational_expression equality_expression_2
+	null
+relational_expression:
+	shift_expression relational_expression_2
+relational_expression_2:
+	LEFT_ANGLE shift_expression relational_expression_2
+	RIGHT_ANGLE shift_expression relational_expression_2
+	LE_OP shift_expression relational_expression_2
+	GE_OP shift_expression relational_expression_2
+	null
+shift_expression:
+	additive_expression shift_expression_2
+shift_expression_2:
+	LEFT_OP additive_expression shift_expression_2
+	RIGHT_OP additive_expression shift_expression_2
+	null
+additive_expression:
+	multiplicative_expression additive_expression_2
+additive_expression_2:
+	PLUS multiplicative_expression additive_expression_2
+	DASH multiplicative_expression additive_expression_2
+	null
+multiplicative_expression:
+	unary_expression multiplicative_expression_2
+multiplicative_expression_2:
+	STAR unary_expression multiplicative_expression_2
+	SLASH unary_expression multiplicative_expression_2
+	PERCENT unary_expression multiplicative_expression_2
+	null
+	
+	
+	
