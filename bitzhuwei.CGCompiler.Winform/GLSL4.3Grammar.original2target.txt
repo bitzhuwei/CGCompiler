@@ -92,30 +92,14 @@ initializer_list:
 	initializer_list COMMA initializer
 	declaration_statement:
 	declaration
-statement:
-	compound_statement
-	simple_statement
-// Grammar Note: labeled statements for SWITCH only; 'goto' is not supported.
-simple_statement:
-	declaration_statement
-	expression_statement
-	selection_statement
-	switch_statement
-	case_label
-	iteration_statement
-	jump_statement
-compound_statement:
-	LEFT_BRACE RIGHT_BRACE
-	LEFT_BRACE statement_list RIGHT_BRACE
+
 statement_no_new_scope:
 	compound_statement_no_new_scope
 	simple_statement
 compound_statement_no_new_scope:
 	LEFT_BRACE RIGHT_BRACE
 	LEFT_BRACE statement_list RIGHT_BRACE
-statement_list:
-	statement
-	statement_list statement
+
 expression_statement:
 	SEMICOLON
 	expression SEMICOLON
