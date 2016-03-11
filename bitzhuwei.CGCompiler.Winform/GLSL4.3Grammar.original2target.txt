@@ -1,13 +1,6 @@
 ﻿variable_identifier:
 	IDENTIFIER
-primary_expression:
-	variable_identifier
-	INTCONSTANT
-	UINTCONSTANT
-	FLOATCONSTANT
-	BOOLCONSTANT
-	DOUBLECONSTANT
-	LEFT_PAREN expression RIGHT_PAREN
+
 
 integer_expression:
 	expression

@@ -19,6 +19,15 @@ postfix_expression_2:
 	DOT FIELD_SELECTION postfix_expression_2
 	INC_OP postfix_expression_2
 	DEC_OP postfix_expression_2
+	null
+primary_expression:
+	variable_identifier
+	INTCONSTANT
+	UINTCONSTANT
+	FLOATCONSTANT
+	BOOLCONSTANT
+	DOUBLECONSTANT
+	LEFT_PAREN expression RIGHT_PAREN
 unary_operator: // 一元运算符
 	PLUS
 	DASH
