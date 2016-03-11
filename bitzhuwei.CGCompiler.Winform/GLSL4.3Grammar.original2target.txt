@@ -2,8 +2,7 @@
 	IDENTIFIER
 
 
-integer_expression:
-	expression
+
 
 
 
