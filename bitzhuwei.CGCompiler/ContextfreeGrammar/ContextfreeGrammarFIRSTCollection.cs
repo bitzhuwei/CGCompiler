@@ -175,7 +175,8 @@ namespace bitzhuwei.CGCompiler
         {
             foreach (var node in candidate)
             {
-                if (node.Position == EnumProductionNodePosition.Leave)
+                if (node.Position == EnumProductionNodePosition.Leave
+                    && node.NodeName != "null")
                 {
                     return false;
                 }
@@ -233,7 +234,7 @@ namespace bitzhuwei.CGCompiler
         //    }
         //    return false;
         //}
-        
-        
+
+
     }
 }
