@@ -39,6 +39,140 @@ iteration_statement:
 for_init_statement:
 	expression_statement
 	declaration_statement
+expression_statement:
+	SEMICOLON
+	expression SEMICOLON
+declaration_statement:
+	declaration
+declaration:
+	PRECISION precision_qualifier type_specifier SEMICOLON
+	type_specifier declaration_2
+	type_qualifier declaration_3
+declaration_3:
+	VOID array_specifier_nullable declaration_3_1
+	struct_specifier array_specifier_nullable declaration_3_2
+	// special qualifiered difinition
+	SEMICOLON
+	IDENTIFIER declaration_3_3
+declaration_3_3:
+	//// TYPE_NAME , identifierp[0] = 123 ... 
+	//COMMA IDENTIFIER array_specifier_nullable equal_initializer_nullable init_declarator_list_2
+	//// special qualifiered difinition
+	//COMMA IDENTIFIER identifier_list_2 SEMICOLON // , identifier ... ;
+	//// init_declarator_list SEMICOLON
+	//// TYPE_NAME
+	//null
+	//// special qualifiered difinition
+	//SEMICOLON
+	// 用下面的候选式代替上面4个候选式
+	init_declarator_list_2 semicolon_or_null
+	//
+	LEFT_BRACKET constant_expression_or_null RIGHT_BRACKET array_specifier_nullable declaration_3_3_1
+	IDENTIFIER declaration_3_3_2
+	// init_declarator_list SEMICOLON
+	// struct's definition and its variable
+	LEFT_BRACE struct_declaration_list RIGHT_BRACE variable_name_or_null SEMICOLON
+semicolon_or_null:
+	SEMICOLON
+	null
+declaration_3_3_2:
+	// function_prototype SEMICOLON
+	// TYPE_NAME
+	LEFT_PAREN function_parameters_or_null RIGHT_PAREN SEMICOLON
+	// init_declarator_list SEMICOLON
+	// TYPE_NAME
+	array_specifier_nullable equal_initializer_nullable init_declarator_list_2
+declaration_3_3_1:
+	IDENTIFIER declaration_3_3_1_1
+	// init_declarator_list SEMICOLON
+	// TYPE_NAME
+	init_declarator_list_2
+declaration_3_3_1_1:
+	// function_prototype SEMICOLON
+	// TYPE_NAME
+	LEFT_PAREN function_parameters_or_null RIGHT_PAREN SEMICOLON
+	// init_declarator_list SEMICOLON
+	// TYPE_NAME
+	array_specifier_nullable equal_initializer_nullable init_declarator_list_2
+declaration_3_2:
+	IDENTIFIER declaration_3_2_1
+	// init_declarator_list SEMICOLON
+	// 注：build_in_type 作为普通的 IDENTIFIER 存在，或者说没有内置类型
+	init_declarator_list_2
+declaration_3_2_1:
+	// function_prototype SEMICOLON
+	// 注：build_in_type 作为普通的 IDENTIFIER 存在，或者说没有内置类型
+	LEFT_PAREN function_parameters_or_null RIGHT_PAREN SEMICOLON
+	// init_declarator_list SEMICOLON
+	// 注：build_in_type 作为普通的 IDENTIFIER 存在，或者说没有内置类型
+	array_specifier_nullable equal_initializer_nullable init_declarator_list_2
+declaration_3_1:
+	IDENTIFIER declaration_3_1_1
+	// init_declarator_list SEMICOLON
+	init_declarator_list_2
+declaration_3_1_1:
+	// function_prototype SEMICOLON
+	LEFT_PAREN function_parameters_or_null RIGHT_PAREN SEMICOLON
+	// init_declarator_list SEMICOLON
+	array_specifier_nullable equal_initializer_nullable init_declarator_list_2
+declaration_2:
+	// init_declarator_list SEMICOLON
+	init_declarator_list_2
+	IDENTIFIER declaration_2_1
+declaration_2_1:
+	// function_prototype SEMICOLON
+	LEFT_PAREN function_parameters_or_null RIGHT_PAREN SEMICOLON
+	// init_declarator_list SEMICOLON
+	array_specifier_nullable equal_initializer_nullable init_declarator_list_2
+function_prototype:
+	type_specifier IDENTIFIER LEFT_PAREN function_parameters_or_null RIGHT_PAREN
+	type_qualifier type_specifier IDENTIFIER LEFT_PAREN function_parameters_or_null RIGHT_PAREN
+function_declarator:
+	function_header function_parameters_or_null
+function_parameters_or_null:
+	parameter_declaration function_header_with_parameters_2
+	null
+function_header_with_parameters:
+	function_header parameter_declaration function_header_with_parameters_2
+function_header_with_parameters_2:
+	COMMA parameter_declaration function_header_with_parameters_2
+	null
+function_header:
+	fully_specified_type IDENTIFIER LEFT_PAREN
+parameter_declaration:
+	type_qualifier parameter_declarator
+	parameter_declarator
+	type_qualifier parameter_type_specifier
+	parameter_type_specifier
+parameter_declarator:
+	type_specifier IDENTIFIER
+	type_specifier IDENTIFIER array_specifier
+parameter_type_specifier:
+	type_specifier
+init_declarator_list:
+	single_declaration init_declarator_list_2
+init_declarator_list_2:
+	COMMA IDENTIFIER array_specifier_nullable equal_initializer_nullable init_declarator_list_2
+	null
+equal_initializer_nullable:
+	EQUAL initializer
+	null
+single_declaration:
+	fully_specified_type variable_initializer_nullable
+variable_initializer_nullable:
+	IDENTIFIER array_specifier_nullable equal_initializer_nullable
+	null
+identifier_list_or_null:
+	identifier_list
+	null
+identifier_list:
+	IDENTIFIER identifier_list_2
+identifier_list_2:
+	COMMA IDENTIFIER identifier_list_2
+	null
+variable_name_or_null:
+	IDENTIFIER array_specifier_nullable
+	null
 for_rest_statement:
 	conditionopt SEMICOLON expression_or_null
 conditionopt:

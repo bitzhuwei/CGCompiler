@@ -26,51 +26,11 @@
 
 
 
-declaration:
-	function_prototype SEMICOLON
-	init_declarator_list SEMICOLON
-	PRECISION precision_qualifier type_specifier SEMICOLON
-	type_qualifier IDENTIFIER LEFT_BRACE struct_declaration_list RIGHT_BRACE SEMICOLON
-	type_qualifier IDENTIFIER LEFT_BRACE struct_declaration_list RIGHT_BRACE IDENTIFIER SEMICOLON
-	type_qualifier IDENTIFIER LEFT_BRACE struct_declaration_list RIGHT_BRACE IDENTIFIER array_specifier SEMICOLON
-	type_qualifier SEMICOLON
-	type_qualifier IDENTIFIER SEMICOLON
-	type_qualifier IDENTIFIER identifier_list SEMICOLON
-identifier_list:
-	COMMA IDENTIFIER
-	identifier_list COMMA IDENTIFIER
-function_prototype:
-	function_declarator RIGHT_PAREN
-function_declarator:
-	function_header
-	function_header_with_parameters
-function_header_with_parameters:
-	function_header parameter_declaration
-	function_header_with_parameters COMMA parameter_declaration
-function_header:
-	fully_specified_type IDENTIFIER LEFT_PAREN
-parameter_declarator:
-	type_specifier IDENTIFIER
-	type_specifier IDENTIFIER array_specifier
-parameter_declaration:
-	type_qualifier parameter_declarator
-	parameter_declarator
-	type_qualifier parameter_type_specifier
-	parameter_type_specifier
-parameter_type_specifier:
-	type_specifier
-init_declarator_list:
-	single_declaration
-	init_declarator_list COMMA IDENTIFIER
-	init_declarator_list COMMA IDENTIFIER array_specifier
-	init_declarator_list COMMA IDENTIFIER array_specifier EQUAL initializer
-	init_declarator_list COMMA IDENTIFIER EQUAL initializer
-single_declaration:
-	fully_specified_type
-	fully_specified_type IDENTIFIER
-	fully_specified_type IDENTIFIER array_specifier
-	fully_specified_type IDENTIFIER array_specifier EQUAL initializer
-	fully_specified_type IDENTIFIER EQUAL initializer
+
+
+
+
+
 // Grammar Note: No 'enum', or 'typedef'.
 
 
@@ -90,14 +50,11 @@ initializer:
 initializer_list:
 	initializer
 	initializer_list COMMA initializer
-declaration_statement:
-	declaration
 
 
 
-expression_statement:
-	SEMICOLON
-	expression SEMICOLON
+
+
 
 
 
