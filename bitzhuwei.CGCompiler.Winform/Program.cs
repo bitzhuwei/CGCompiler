@@ -97,8 +97,8 @@ namespace bitzhuwei.CGCompiler.Winform
                 line = Regex.Replace(line, "<MOD_ASSIGN>", "\"%=\"");
                 line = Regex.Replace(line, "<ADD_ASSIGN>", "\"+=\"");
                 line = Regex.Replace(line, "<SUB_ASSIGN>", "\"-=\"");
-                line = Regex.Replace(line, "<LEFT_ASSIGN>", "\"<=\"");
-                line = Regex.Replace(line, "<RIGHT_ASSIGN>", "\">=\"");
+                line = Regex.Replace(line, "<LEFT_ASSIGN>", "\"<<=\"");
+                line = Regex.Replace(line, "<RIGHT_ASSIGN>", "\">>=\"");
                 line = Regex.Replace(line, "<AND_ASSIGN>", "\"&=\"");
                 line = Regex.Replace(line, "<XOR_ASSIGN>", "\"^=\"");
                 line = Regex.Replace(line, "<OR_ASSIGN>", "\"|=\"");

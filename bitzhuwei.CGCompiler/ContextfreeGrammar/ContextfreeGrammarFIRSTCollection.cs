@@ -79,14 +79,23 @@ namespace bitzhuwei.CGCompiler
                 do
                 {
                     changed = false;
+                    int i = 0;
                     foreach (var firstCollectionItem in result)
                     {
+                        i++;
+                        //对每个候选式产生其FIRST集
+                        bool mayInferNull = true;
+                        //ProductionNode nullNode = null;
                         foreach (var node in firstCollectionItem.ObjectiveCandidate)
-                        {//对每个候选式产生其FIRST集
+                        {
                             if (node.Position == EnumProductionNodePosition.Leave)
                             {
-                                changed = firstCollectionItem.Add(node) || changed;
-                                break;
+                                if (node != ProductionNode.tail_null)
+                                {
+                                    changed = firstCollectionItem.Add(node) || changed;
+                                    mayInferNull = false;
+                                    break;
+                                }
                             }
                             else if (node.Position == EnumProductionNodePosition.NonLeave)
                             {
@@ -101,6 +110,7 @@ namespace bitzhuwei.CGCompiler
                                 }
                                 if (!this.CanInferNull(production))
                                 {
+                                    mayInferNull = false;
                                     break;
                                 }
                             }
@@ -115,8 +125,12 @@ namespace bitzhuwei.CGCompiler
                                 //Console.ReadKey();
                             }
                         }
+                        if (mayInferNull)
+                        {
+                            changed = firstCollectionItem.Add(ProductionNode.tail_null) || changed;
+                        }
                     }
-                    //Console.WriteLine("遍：{0}",i++);
+                    //Console.WriteLine("遍：{0}", i++);
                     //Console.WriteLine(this.ToString());
                     //Console.ReadKey(true);
                 } while (changed);
@@ -175,10 +189,12 @@ namespace bitzhuwei.CGCompiler
         {
             foreach (var node in candidate)
             {
-                if (node.Position == EnumProductionNodePosition.Leave
-                    && node.NodeName != "null")
+                if (node.Position == EnumProductionNodePosition.Leave)
                 {
-                    return false;
+                    if (node != ProductionNode.tail_null)
+                    {
+                        return false;
+                    }
                 }
                 else if (node.Position == EnumProductionNodePosition.Unknown)
                 {
@@ -188,6 +204,8 @@ namespace bitzhuwei.CGCompiler
 
             foreach (var node in candidate)
             {
+                if (node == ProductionNode.tail_null) { continue; }
+
                 var production = this.GetProduction(node);
                 //AppendSpaces(builder, prefixSpace);
                 //builder.AppendLine(string.Format("parse next production: {0}", production));
@@ -195,7 +213,7 @@ namespace bitzhuwei.CGCompiler
                     return false;
             }
 
-            return false;
+            return true;
         }
 
         ///// <summary>
