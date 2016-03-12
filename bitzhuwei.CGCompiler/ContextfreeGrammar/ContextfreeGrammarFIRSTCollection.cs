@@ -105,7 +105,10 @@ namespace bitzhuwei.CGCompiler
                                 {
                                     foreach (var n in fc.Value)
                                     {
-                                        changed = firstCollectionItem.Add(n) || changed;
+                                        if (n != ProductionNode.tail_null)
+                                        {
+                                            changed = firstCollectionItem.Add(n) || changed;
+                                        }
                                     }
                                 }
                                 if (!this.CanInferNull(production))
