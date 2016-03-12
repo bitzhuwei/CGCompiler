@@ -4,15 +4,16 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
-
+declaration_or_expression_statement:
+	declaration_statement
+	expression_statement
 ///////////////////////////////////////////////////////////////////////////////////////
 statement:
 	compound_statement
 	simple_statement
 // Grammar Note: labeled statements for SWITCH only; 'goto' is not supported.
 simple_statement:
-	declaration_statement
-	expression_statement
+	declaration_or_expression_statement
 	selection_statement
 	switch_statement
 	case_label
@@ -37,8 +38,7 @@ iteration_statement:
 	DO statement WHILE LEFT_PAREN expression RIGHT_PAREN SEMICOLON
 	FOR LEFT_PAREN for_init_statement for_rest_statement RIGHT_PAREN statement_no_new_scope
 for_init_statement:
-	expression_statement
-	declaration_statement
+	declaration_or_expression_statement
 expression_statement:
 	SEMICOLON
 	expression SEMICOLON
@@ -153,6 +153,17 @@ init_declarator_list_2:
 	null
 equal_initializer_nullable:
 	EQUAL initializer
+	null
+initializer:
+	assignment_expression
+	LEFT_BRACE initializer_list comma_or_null RIGHT_BRACE
+initializer_list:
+	initializer initializer_list_2
+initializer_list_2:
+	COMMA initializer initializer_list_2
+	null
+comma_or_null:
+	COMMA
 	null
 single_declaration:
 	fully_specified_type variable_initializer_nullable
@@ -583,4 +594,4 @@ invariant_qualifier:
 	INVARIANT
 precise_qualifier:
 	PRECISE
-	
+////////////////////////////////////////////////////////////////////////////////

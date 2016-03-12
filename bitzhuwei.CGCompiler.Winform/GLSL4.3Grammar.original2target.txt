@@ -43,13 +43,7 @@
 
 
 
-initializer:
-	assignment_expression
-	LEFT_BRACE initializer_list RIGHT_BRACE
-	LEFT_BRACE initializer_list COMMA RIGHT_BRACE
-initializer_list:
-	initializer
-	initializer_list COMMA initializer
+
 
 
 
