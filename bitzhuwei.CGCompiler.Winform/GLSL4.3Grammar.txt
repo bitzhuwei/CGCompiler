@@ -140,13 +140,10 @@ function_header_with_parameters_2:
 function_header:
 	fully_specified_type IDENTIFIER LEFT_PAREN
 parameter_declaration:
-	type_qualifier parameter_declarator
-	parameter_declarator
-	type_qualifier parameter_type_specifier
-	parameter_type_specifier
+	type_specifier variable_name_or_null
+	type_qualifier type_specifier variable_name_or_null
 parameter_declarator:
-	type_specifier IDENTIFIER
-	type_specifier IDENTIFIER array_specifier
+	type_specifier IDENTIFIER array_specifier_nullable
 parameter_type_specifier:
 	type_specifier
 init_declarator_list:
