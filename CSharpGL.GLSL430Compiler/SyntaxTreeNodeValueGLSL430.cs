@@ -29,7 +29,11 @@ namespace CSharpGL.GLSL430Compiler
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("{0}, {1}", m_NodeName, m_NodeType);
+            bool leave = this.NodeType.ToString().EndsWith("Leave");
+            if (NodeName != NodeType.ToString())
+            { return string.Format("{0}{1} <= {2}{3}", leave ? "" : "[", NodeName, NodeType, leave ? "" : "]"); }
+            else
+            { return string.Format("{0}{1}{2}", leave ? "" : "[", NodeName, leave ? "" : "]"); }
         }
         public object Clone()
         {
