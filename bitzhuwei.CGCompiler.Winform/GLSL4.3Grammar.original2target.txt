@@ -60,12 +60,4 @@
 
 
 // Grammar Note: No 'goto'. Gotos are not supported.
-translation_unit:
-	external_declaration
-	translation_unit external_declaration
-external_declaration:
-	function_definition
-	declaration
 
-function_definition:
-	function_prototype compound_statement_no_new_scope

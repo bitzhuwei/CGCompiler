@@ -3,6 +3,84 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
+translation_unit_nullable:
+	external_declaration translation_unit_nullable
+	null
+external_declaration:
+	// declaration
+	PRECISION precision_qualifier type_specifier SEMICOLON
+	type_specifier external_declaration_1
+	type_qualifier external_declaration_2
+external_declaration_2:
+	VOID array_specifier_nullable external_declaration_2_1
+	struct_specifier array_specifier_nullable external_declaration_2_2
+	IDENTIFIER external_declaration_2_3
+	// special qualifiered difinition
+	SEMICOLON
+external_declaration_2_3:
+	IDENTIFIER external_declaration_2_3_1
+external_declaration_2_3_1:
+	LEFT_BRACKET constant_expression_or_null RIGHT_BRACKET array_specifier_nullable external_declaration_2_3_1_1
+	IDENTIFIER external_declaration_2_3_1_2
+	init_declarator_list_2 semicolon_or_null
+	// init_declarator_list SEMICOLON
+	// struct's definition and its variable
+	LEFT_BRACE struct_declaration_list RIGHT_BRACE variable_name_or_null SEMICOLON
+external_declaration_2_3_1_2:
+	// TYPE_NAME
+	LEFT_PAREN function_parameters_or_null RIGHT_PAREN compound_statement_no_new_scope_or_semicolon
+	// init_declarator_list SEMICOLON
+	// TYPE_NAME
+	array_specifier_nullable equal_initializer_nullable init_declarator_list_2
+external_declaration_2_3_1_1:
+	IDENTIFIER external_declaration_2_3_1_1_1
+	// init_declarator_list SEMICOLON
+	// TYPE_NAME
+	init_declarator_list_2
+external_declaration_2_3_1_1_1:
+	// function_definition
+	// TYPE_NAME
+	LEFT_PAREN function_parameters_or_null RIGHT_PAREN compound_statement_no_new_scope_or_semicolon
+	// init_declarator_list SEMICOLON
+	// TYPE_NAME
+	array_specifier_nullable equal_initializer_nullable init_declarator_list_2
+external_declaration_2_2:
+	IDENTIFIER external_declaration_2_2_1
+	// init_declarator_list SEMICOLON
+	// 注：build_in_type 作为普通的 IDENTIFIER 存在，或者说没有内置类型
+	init_declarator_list_2
+external_declaration_2_2_1:
+	// function_definition
+	// 注：build_in_type 作为普通的 IDENTIFIER 存在，或者说没有内置类型
+	LEFT_PAREN function_parameters_or_null RIGHT_PAREN compound_statement_no_new_scope_or_semicolon
+	// init_declarator_list SEMICOLON
+	// 注：build_in_type 作为普通的 IDENTIFIER 存在，或者说没有内置类型
+	array_specifier_nullable equal_initializer_nullable init_declarator_list_2
+external_declaration_2_1:
+	IDENTIFIER external_declaration_2_1_1
+	// declaration
+	// init_declarator_list SEMICOLON
+	init_declarator_list_2
+external_declaration_2_1_1:
+	// function_definition
+	LEFT_PAREN function_parameters_or_null RIGHT_PAREN compound_statement_no_new_scope_or_semicolon
+	// declaration
+	// init_declarator_list SEMICOLON
+	array_specifier_nullable equal_initializer_nullable init_declarator_list_2
+external_declaration_1:
+	// declaration
+	// init_declarator_list SEMICOLON
+	init_declarator_list_2
+	IDENTIFIER external_declaration_1_1
+external_declaration_1_1:
+	// function_definition or declaration
+	LEFT_PAREN function_parameters_or_null RIGHT_PAREN compound_statement_no_new_scope_or_semicolon
+	// declaration
+	// init_declarator_list SEMICOLON
+	array_specifier_nullable equal_initializer_nullable init_declarator_list_2
+compound_statement_no_new_scope_or_semicolon:
+	compound_statement_no_new_scope
+	SEMICOLON
 ///////////////////////////////////////////////////////////////////////////////////////
 declaration_or_expression_statement:
 	IDENTIFIER declaration_or_expression_statement_1
