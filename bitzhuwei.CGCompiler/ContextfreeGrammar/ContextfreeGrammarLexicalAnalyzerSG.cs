@@ -331,6 +331,8 @@ namespace bitzhuwei.CGCompiler
                         if (key == 2 && sign.NodeName[1] == '/')
                         {
                             Debug.WriteLine(
+                                "if (\"/*\" == str) { SkipSingleLineNote(); return false; }");
+                            Debug.WriteLine(
                                 "if (\"//\" == str) { SkipSingleLineNote(); return false; }");
                         }
                         //var start = sign.NodeName[0] == '"' ? 1 : 0;
