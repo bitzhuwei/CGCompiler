@@ -1,8 +1,4 @@
 ﻿
-///////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////
 translation_unit_nullable:
 	external_declaration translation_unit_nullable
 	null
@@ -342,11 +338,11 @@ primary_expression:
 	constant_primary_expression
 	LEFT_PAREN expression RIGHT_PAREN
 constant_primary_expression:
-	INTCONSTANT
-	UINTCONSTANT
-	FLOATCONSTANT
-	BOOLCONSTANT
-	DOUBLECONSTANT
+	number
+	bool_constant
+bool_constant:
+	TRUE
+	FALSE
 unary_operator: // 一元运算符
 	PLUS
 	DASH
@@ -662,7 +658,7 @@ layout_qualifier_id_list_2:
 layout_qualifier_id:
 	IDENTIFIER layout_qualifier_id_2
 layout_qualifier_id_2:
-	EQUAL INTCONSTANT
+	EQUAL number
 	null
 precision_qualifier:
 	HIGH_PRECISION
