@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bitzhuwei.CompilerBase", "bitzhuwei.CompilerBase\bitzhuwei.CompilerBase.csproj", "{B7205829-1611-487C-9E16-6BF43F98C547}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bitzhuwei.LevelCompiler", "bitzhuwei.LevelCompiler\bitzhuwei.LevelCompiler.csproj", "{47963D86-3784-44B8-8D5F-9A46C7F58D4E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bitzhuwei.LevelCompiler.Test", "bitzhuwei.LevelCompiler.Test\bitzhuwei.LevelCompiler.Test.csproj", "{247BCDA3-57F0-461D-A76D-E257EE39919B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpGL.GLSL430Compiler", "CSharpGL.GLSL430Compiler\CSharpGL.GLSL430Compiler.csproj", "{ECF61B07-38E0-4076-9CB2-1B0F14BEDC78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,6 +111,16 @@ Global
 		{247BCDA3-57F0-461D-A76D-E257EE39919B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{247BCDA3-57F0-461D-A76D-E257EE39919B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{247BCDA3-57F0-461D-A76D-E257EE39919B}.Release|x86.ActiveCfg = Release|Any CPU
+		{ECF61B07-38E0-4076-9CB2-1B0F14BEDC78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECF61B07-38E0-4076-9CB2-1B0F14BEDC78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECF61B07-38E0-4076-9CB2-1B0F14BEDC78}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{ECF61B07-38E0-4076-9CB2-1B0F14BEDC78}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{ECF61B07-38E0-4076-9CB2-1B0F14BEDC78}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ECF61B07-38E0-4076-9CB2-1B0F14BEDC78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECF61B07-38E0-4076-9CB2-1B0F14BEDC78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECF61B07-38E0-4076-9CB2-1B0F14BEDC78}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{ECF61B07-38E0-4076-9CB2-1B0F14BEDC78}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{ECF61B07-38E0-4076-9CB2-1B0F14BEDC78}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

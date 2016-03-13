@@ -1,0 +1,2510 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContextfreeGrammar GrammarName="GLSL430" Namespace="CSharpGL.GLSL430Compiler">
+  <source_code_of_CGCompiler>Name:GLSL430
+&lt;translation_unit_nullable&gt; ::= &lt;external_declaration&gt; &lt;translation_unit_nullable&gt; | null;
+&lt;external_declaration&gt; ::= "precision" &lt;precision_qualifier&gt; &lt;type_specifier&gt; ";" | &lt;type_specifier&gt; &lt;external_declaration_1&gt; | &lt;type_qualifier&gt; &lt;external_declaration_2&gt;;
+&lt;external_declaration_2&gt; ::= "void" &lt;array_specifier_nullable&gt; &lt;external_declaration_2_1&gt; | &lt;struct_specifier&gt; &lt;array_specifier_nullable&gt; &lt;external_declaration_2_2&gt; | identifier &lt;external_declaration_2_3&gt; | ";";
+&lt;external_declaration_2_3&gt; ::= identifier &lt;external_declaration_2_3_1&gt;;
+&lt;external_declaration_2_3_1&gt; ::= "[" &lt;constant_expression_or_null&gt; "]" &lt;array_specifier_nullable&gt; &lt;external_declaration_2_3_1_1&gt; | identifier &lt;external_declaration_2_3_1_2&gt; | &lt;init_declarator_list_2&gt; &lt;semicolon_or_null&gt; | "{" &lt;struct_declaration_list&gt; "}" &lt;variable_name_or_null&gt; ";";
+&lt;external_declaration_2_3_1_2&gt; ::= "(" &lt;function_parameters_or_null&gt; ")" &lt;compound_statement_no_new_scope_or_semicolon&gt; | &lt;array_specifier_nullable&gt; &lt;equal_initializer_nullable&gt; &lt;init_declarator_list_2&gt;;
+&lt;external_declaration_2_3_1_1&gt; ::= identifier &lt;external_declaration_2_3_1_1_1&gt; | &lt;init_declarator_list_2&gt;;
+&lt;external_declaration_2_3_1_1_1&gt; ::= "(" &lt;function_parameters_or_null&gt; ")" &lt;compound_statement_no_new_scope_or_semicolon&gt; | &lt;array_specifier_nullable&gt; &lt;equal_initializer_nullable&gt; &lt;init_declarator_list_2&gt;;
+&lt;external_declaration_2_2&gt; ::= identifier &lt;external_declaration_2_2_1&gt; | &lt;init_declarator_list_2&gt;;
+&lt;external_declaration_2_2_1&gt; ::= "(" &lt;function_parameters_or_null&gt; ")" &lt;compound_statement_no_new_scope_or_semicolon&gt; | &lt;array_specifier_nullable&gt; &lt;equal_initializer_nullable&gt; &lt;init_declarator_list_2&gt;;
+&lt;external_declaration_2_1&gt; ::= identifier &lt;external_declaration_2_1_1&gt; | &lt;init_declarator_list_2&gt;;
+&lt;external_declaration_2_1_1&gt; ::= "(" &lt;function_parameters_or_null&gt; ")" &lt;compound_statement_no_new_scope_or_semicolon&gt; | &lt;array_specifier_nullable&gt; &lt;equal_initializer_nullable&gt; &lt;init_declarator_list_2&gt;;
+&lt;external_declaration_1&gt; ::= &lt;init_declarator_list_2&gt; | identifier &lt;external_declaration_1_1&gt;;
+&lt;external_declaration_1_1&gt; ::= "(" &lt;function_parameters_or_null&gt; ")" &lt;compound_statement_no_new_scope_or_semicolon&gt; | &lt;array_specifier_nullable&gt; &lt;equal_initializer_nullable&gt; &lt;init_declarator_list_2&gt;;
+&lt;compound_statement_no_new_scope_or_semicolon&gt; ::= &lt;compound_statement_no_new_scope&gt; | ";";
+&lt;declaration_or_expression_statement&gt; ::= identifier &lt;declaration_or_expression_statement_1&gt;;
+&lt;declaration_or_expression_statement_1&gt; ::= identifier &lt;array_specifier_nullable&gt; &lt;equal_initializer_nullable&gt; &lt;init_declarator_list_2&gt; | &lt;array_specifier_nullable&gt; &lt;equal_initializer_nullable&gt; &lt;init_declarator_list_2&gt;;
+&lt;statement&gt; ::= &lt;compound_statement&gt; | &lt;simple_statement&gt;;
+&lt;simple_statement&gt; ::= &lt;declaration_or_expression_statement&gt; | &lt;selection_statement&gt; | &lt;switch_statement&gt; | &lt;case_label&gt; | &lt;iteration_statement&gt; | &lt;jump_statement&gt;;
+&lt;selection_statement&gt; ::= "if" "(" &lt;expression&gt; ")" &lt;selection_rest_statement&gt;;
+&lt;selection_rest_statement&gt; ::= &lt;statement&gt; &lt;selection_rest_statement_2&gt;;
+&lt;selection_rest_statement_2&gt; ::= "else" &lt;statement&gt; | null;
+&lt;switch_statement&gt; ::= "switch" "(" &lt;expression&gt; ")" "{" &lt;switch_statement_list&gt; "}";
+&lt;switch_statement_list&gt; ::= &lt;statement_list_nullable&gt;;
+&lt;case_label&gt; ::= "case" &lt;expression&gt; ":" | "default" ":";
+&lt;iteration_statement&gt; ::= "while" "(" &lt;condition&gt; ")" &lt;statement_no_new_scope&gt; | "do" &lt;statement&gt; "while" "(" &lt;expression&gt; ")" ";" | "for" "(" &lt;for_init_statement&gt; &lt;for_rest_statement&gt; ")" &lt;statement_no_new_scope&gt;;
+&lt;for_init_statement&gt; ::= &lt;declaration_or_expression_statement&gt;;
+&lt;expression_statement&gt; ::= ";" | &lt;expression&gt; ";";
+&lt;declaration_statement&gt; ::= &lt;declaration&gt;;
+&lt;declaration&gt; ::= "precision" &lt;precision_qualifier&gt; &lt;type_specifier&gt; ";" | &lt;type_specifier&gt; &lt;declaration_2&gt; | &lt;type_qualifier&gt; &lt;declaration_3&gt;;
+&lt;declaration_3&gt; ::= "void" &lt;array_specifier_nullable&gt; &lt;declaration_3_1&gt; | &lt;struct_specifier&gt; &lt;array_specifier_nullable&gt; &lt;declaration_3_2&gt; | ";" | identifier &lt;declaration_3_3&gt;;
+&lt;declaration_3_3&gt; ::= &lt;init_declarator_list_2&gt; &lt;semicolon_or_null&gt; | "[" &lt;constant_expression_or_null&gt; "]" &lt;array_specifier_nullable&gt; &lt;declaration_3_3_1&gt; | identifier &lt;declaration_3_3_2&gt; | "{" &lt;struct_declaration_list&gt; "}" &lt;variable_name_or_null&gt; ";";
+&lt;semicolon_or_null&gt; ::= ";" | null;
+&lt;declaration_3_3_2&gt; ::= "(" &lt;function_parameters_or_null&gt; ")" ";" | &lt;array_specifier_nullable&gt; &lt;equal_initializer_nullable&gt; &lt;init_declarator_list_2&gt;;
+&lt;declaration_3_3_1&gt; ::= identifier &lt;declaration_3_3_1_1&gt; | &lt;init_declarator_list_2&gt;;
+&lt;declaration_3_3_1_1&gt; ::= "(" &lt;function_parameters_or_null&gt; ")" ";" | &lt;array_specifier_nullable&gt; &lt;equal_initializer_nullable&gt; &lt;init_declarator_list_2&gt;;
+&lt;declaration_3_2&gt; ::= identifier &lt;declaration_3_2_1&gt; | &lt;init_declarator_list_2&gt;;
+&lt;declaration_3_2_1&gt; ::= "(" &lt;function_parameters_or_null&gt; ")" ";" | &lt;array_specifier_nullable&gt; &lt;equal_initializer_nullable&gt; &lt;init_declarator_list_2&gt;;
+&lt;declaration_3_1&gt; ::= identifier &lt;declaration_3_1_1&gt; | &lt;init_declarator_list_2&gt;;
+&lt;declaration_3_1_1&gt; ::= "(" &lt;function_parameters_or_null&gt; ")" ";" | &lt;array_specifier_nullable&gt; &lt;equal_initializer_nullable&gt; &lt;init_declarator_list_2&gt;;
+&lt;declaration_2&gt; ::= &lt;init_declarator_list_2&gt; | identifier &lt;declaration_2_1&gt;;
+&lt;declaration_2_1&gt; ::= "(" &lt;function_parameters_or_null&gt; ")" ";" | &lt;array_specifier_nullable&gt; &lt;equal_initializer_nullable&gt; &lt;init_declarator_list_2&gt;;
+&lt;function_prototype&gt; ::= &lt;type_specifier&gt; identifier "(" &lt;function_parameters_or_null&gt; ")" | &lt;type_qualifier&gt; &lt;type_specifier&gt; identifier "(" &lt;function_parameters_or_null&gt; ")";
+&lt;function_declarator&gt; ::= &lt;function_header&gt; &lt;function_parameters_or_null&gt;;
+&lt;function_parameters_or_null&gt; ::= &lt;parameter_declaration&gt; &lt;function_header_with_parameters_2&gt; | null;
+&lt;function_header_with_parameters&gt; ::= &lt;function_header&gt; &lt;parameter_declaration&gt; &lt;function_header_with_parameters_2&gt;;
+&lt;function_header_with_parameters_2&gt; ::= "," &lt;parameter_declaration&gt; &lt;function_header_with_parameters_2&gt; | null;
+&lt;function_header&gt; ::= &lt;fully_specified_type&gt; identifier "(";
+&lt;parameter_declaration&gt; ::= &lt;type_specifier&gt; &lt;variable_name_or_null&gt; | &lt;type_qualifier&gt; &lt;type_specifier&gt; &lt;variable_name_or_null&gt;;
+&lt;parameter_declarator&gt; ::= &lt;type_specifier&gt; identifier &lt;array_specifier_nullable&gt;;
+&lt;parameter_type_specifier&gt; ::= &lt;type_specifier&gt;;
+&lt;init_declarator_list&gt; ::= &lt;single_declaration&gt; &lt;init_declarator_list_2&gt;;
+&lt;init_declarator_list_2&gt; ::= "," identifier &lt;array_specifier_nullable&gt; &lt;equal_initializer_nullable&gt; &lt;init_declarator_list_2&gt; | null;
+&lt;equal_initializer_nullable&gt; ::= "=" &lt;initializer&gt; | null;
+&lt;initializer&gt; ::= &lt;assignment_expression&gt; | "{" &lt;initializer_list&gt; &lt;comma_or_null&gt; "}";
+&lt;initializer_list&gt; ::= &lt;initializer&gt; &lt;initializer_list_2&gt;;
+&lt;initializer_list_2&gt; ::= "," &lt;initializer&gt; &lt;initializer_list_2&gt; | null;
+&lt;comma_or_null&gt; ::= "," | null;
+&lt;single_declaration&gt; ::= &lt;fully_specified_type&gt; &lt;variable_initializer_nullable&gt;;
+&lt;variable_initializer_nullable&gt; ::= identifier &lt;array_specifier_nullable&gt; &lt;equal_initializer_nullable&gt; | null;
+&lt;identifier_list_or_null&gt; ::= &lt;identifier_list&gt; | null;
+&lt;identifier_list&gt; ::= identifier &lt;identifier_list_2&gt;;
+&lt;identifier_list_2&gt; ::= "," identifier &lt;identifier_list_2&gt; | null;
+&lt;variable_name_or_null&gt; ::= identifier &lt;array_specifier_nullable&gt; | null;
+&lt;for_rest_statement&gt; ::= &lt;conditionopt&gt; ";" &lt;expression_or_null&gt;;
+&lt;conditionopt&gt; ::= &lt;condition&gt;;
+&lt;condition&gt; ::= &lt;expression&gt;;
+&lt;statement_no_new_scope&gt; ::= &lt;compound_statement_no_new_scope&gt; | &lt;simple_statement&gt;;
+&lt;compound_statement_no_new_scope&gt; ::= "{" &lt;statement_list_nullable&gt; "}";
+&lt;jump_statement&gt; ::= "continue" ";" | "break" ";" | "return" &lt;expression_or_null&gt; ";" | "discard" ";";
+&lt;expression_or_null&gt; ::= &lt;expression&gt; | null;
+&lt;compound_statement&gt; ::= "{" &lt;statement_list_nullable&gt; "}";
+&lt;statement_list&gt; ::= &lt;statement&gt; &lt;statement_list_nullable&gt;;
+&lt;statement_list_nullable&gt; ::= &lt;statement&gt; &lt;statement_list_nullable&gt; | null;
+&lt;expression&gt; ::= &lt;assignment_expression&gt; &lt;expression_2&gt;;
+&lt;expression_2&gt; ::= "," &lt;assignment_expression&gt; &lt;expression_2&gt; | null;
+&lt;assignment_expression&gt; ::= &lt;unary_expression&gt; &lt;assignment_expression_2&gt;;
+&lt;unary_expression&gt; ::= &lt;postfix_expression&gt; | "++" &lt;unary_expression&gt; | "--" &lt;unary_expression&gt; | &lt;unary_operator&gt; &lt;unary_expression&gt;;
+&lt;postfix_expression&gt; ::= identifier &lt;postfix_expression_3&gt; | &lt;constant_primary_expression&gt; &lt;postfix_expression_2&gt; | "(" &lt;expression&gt; ")" &lt;postfix_expression_2&gt;;
+&lt;postfix_expression_3&gt; ::= "[" &lt;integer_expression&gt; "]" &lt;postfix_expression_3_1&gt; | "." &lt;FIELD_SELECTION&gt; &lt;postfix_expression_2&gt; | "++" &lt;postfix_expression_2&gt; | "--" &lt;postfix_expression_2&gt; | null | "(" &lt;expression_or_void_or_null&gt; ")" &lt;postfix_expression_2&gt;;
+&lt;postfix_expression_3_1&gt; ::= &lt;postfix_expression_2&gt; | "(" &lt;expression_or_void_or_null&gt; ")" &lt;postfix_expression_2&gt;;
+&lt;postfix_expression_2&gt; ::= "[" &lt;integer_expression&gt; "]" &lt;postfix_expression_2&gt; | "." &lt;FIELD_SELECTION&gt; &lt;postfix_expression_2&gt; | "++" &lt;postfix_expression_2&gt; | "--" &lt;postfix_expression_2&gt; | null;
+&lt;FIELD_SELECTION&gt; ::= identifier;
+&lt;primary_expression&gt; ::= identifier | &lt;constant_primary_expression&gt; | "(" &lt;expression&gt; ")";
+&lt;constant_primary_expression&gt; ::= number | &lt;bool_constant&gt;;
+&lt;bool_constant&gt; ::= "true" | "false";
+&lt;unary_operator&gt; ::= "+" | "-" | "!" | "~";
+&lt;expression_or_void_or_null&gt; ::= &lt;expression&gt; | "void" | null;
+&lt;index_selector_nullable&gt; ::= "[" &lt;integer_expression&gt; "]" | null;
+&lt;integer_expression&gt; ::= &lt;expression&gt;;
+&lt;assignment_expression_2&gt; ::= &lt;multiplicative_expression_2&gt; &lt;additive_expression_2&gt; &lt;shift_expression_2&gt; &lt;relational_expression_2&gt; &lt;equality_expression_2&gt; &lt;and_expression_2&gt; &lt;exclusive_or_expression_2&gt; &lt;inclusive_or_expression_2&gt; &lt;logical_and_expression_2&gt; &lt;logical_xor_expression_2&gt; &lt;logical_or_expression_2&gt; &lt;conditional_expression_2&gt; | &lt;assignment_operator&gt; &lt;assignment_expression&gt;;
+&lt;assignment_operator&gt; ::= "=" | "*=" | "/=" | "%=" | "+=" | "-=" | "&lt;&lt;=" | "&gt;&gt;=" | "&amp;=" | "^=" | "|=";
+&lt;conditional_expression&gt; ::= &lt;logical_or_expression&gt; &lt;conditional_expression_2&gt;;
+&lt;conditional_expression_2&gt; ::= "?" &lt;expression&gt; ":" &lt;assignment_expression&gt; | null;
+&lt;logical_or_expression&gt; ::= &lt;logical_xor_expression&gt; &lt;logical_or_expression_2&gt;;
+&lt;logical_or_expression_2&gt; ::= "||" &lt;logical_xor_expression&gt; &lt;logical_or_expression_2&gt; | null;
+&lt;logical_xor_expression&gt; ::= &lt;logical_and_expression&gt; &lt;logical_xor_expression_2&gt;;
+&lt;logical_xor_expression_2&gt; ::= "^^" &lt;logical_and_expression&gt; &lt;logical_xor_expression_2&gt; | null;
+&lt;logical_and_expression&gt; ::= &lt;inclusive_or_expression&gt; &lt;logical_and_expression_2&gt;;
+&lt;logical_and_expression_2&gt; ::= "&amp;&amp;" &lt;inclusive_or_expression&gt; &lt;logical_and_expression_2&gt; | null;
+&lt;inclusive_or_expression&gt; ::= &lt;exclusive_or_expression&gt; &lt;inclusive_or_expression_2&gt;;
+&lt;inclusive_or_expression_2&gt; ::= "|" &lt;exclusive_or_expression&gt; &lt;inclusive_or_expression_2&gt; | null;
+&lt;exclusive_or_expression&gt; ::= &lt;and_expression&gt; &lt;exclusive_or_expression_2&gt;;
+&lt;exclusive_or_expression_2&gt; ::= "^" &lt;and_expression&gt; &lt;exclusive_or_expression_2&gt; | null;
+&lt;and_expression&gt; ::= &lt;equality_expression&gt; &lt;and_expression_2&gt;;
+&lt;and_expression_2&gt; ::= "&amp;" &lt;equality_expression&gt; &lt;and_expression_2&gt; | null;
+&lt;equality_expression&gt; ::= &lt;relational_expression&gt; &lt;equality_expression_2&gt;;
+&lt;equality_expression_2&gt; ::= "==" &lt;relational_expression&gt; &lt;equality_expression_2&gt; | "!=" &lt;relational_expression&gt; &lt;equality_expression_2&gt; | null;
+&lt;relational_expression&gt; ::= &lt;shift_expression&gt; &lt;relational_expression_2&gt;;
+&lt;relational_expression_2&gt; ::= "&lt;" &lt;shift_expression&gt; &lt;relational_expression_2&gt; | "&gt;" &lt;shift_expression&gt; &lt;relational_expression_2&gt; | "&lt;=" &lt;shift_expression&gt; &lt;relational_expression_2&gt; | "&gt;=" &lt;shift_expression&gt; &lt;relational_expression_2&gt; | null;
+&lt;shift_expression&gt; ::= &lt;additive_expression&gt; &lt;shift_expression_2&gt;;
+&lt;shift_expression_2&gt; ::= "&lt;&lt;" &lt;additive_expression&gt; &lt;shift_expression_2&gt; | "&gt;&gt;" &lt;additive_expression&gt; &lt;shift_expression_2&gt; | null;
+&lt;additive_expression&gt; ::= &lt;multiplicative_expression&gt; &lt;additive_expression_2&gt;;
+&lt;additive_expression_2&gt; ::= "+" &lt;multiplicative_expression&gt; &lt;additive_expression_2&gt; | "-" &lt;multiplicative_expression&gt; &lt;additive_expression_2&gt; | null;
+&lt;multiplicative_expression&gt; ::= &lt;unary_expression&gt; &lt;multiplicative_expression_2&gt;;
+&lt;multiplicative_expression_2&gt; ::= "*" &lt;unary_expression&gt; &lt;multiplicative_expression_2&gt; | "/" &lt;unary_expression&gt; &lt;multiplicative_expression_2&gt; | "%" &lt;unary_expression&gt; &lt;multiplicative_expression_2&gt; | null;
+&lt;fully_specified_type&gt; ::= &lt;type_specifier&gt; | &lt;type_qualifier&gt; &lt;type_specifier&gt;;
+&lt;type_specifier&gt; ::= &lt;type_specifier_nonarray&gt; &lt;array_specifier_nullable&gt;;
+&lt;array_specifier&gt; ::= "[" &lt;constant_expression_or_null&gt; "]" &lt;array_specifier_nullable&gt;;
+&lt;array_specifier_nullable&gt; ::= "[" &lt;constant_expression_or_null&gt; "]" &lt;array_specifier_nullable&gt; | null;
+&lt;constant_expression_or_null&gt; ::= &lt;conditional_expression&gt; | null;
+&lt;constant_expression&gt; ::= &lt;conditional_expression&gt;;
+&lt;type_specifier_nonarray&gt; ::= "void" | &lt;struct_specifier&gt; | identifier;
+&lt;build_in_type&gt; ::= "float" | "double" | "int" | "uint" | "bool" | "vec2" | "vec3" | "vec4" | "dvec2" | "dvec3" | "dvec4" | "bvec2" | "bvec3" | "bvec4" | "ivec2" | "ivec3" | "ivec4" | "uvec2" | "uvec3" | "uvec4" | "mat2" | "mat3" | "mat4" | "mat2x2" | "mat2x3" | "mat2x4" | "mat3x2" | "mat3x3" | "mat3x4" | "mat4x2" | "mat4x3" | "mat4x4" | "dmat2" | "dmat3" | "dmat4" | "dmat2x2" | "dmat2x3" | "dmat2x4" | "dmat3x2" | "dmat3x3" | "dmat3x4" | "dmat4x2" | "dmat4x3" | "dmat4x4" | "atomic_uint" | "sampler1D" | "sampler2D" | "sampler3D" | "samplerCube" | "sampler1DShadow" | "sampler2DShadow" | "samplerCubeShadow" | "sampler1DArray" | "sampler2DArray" | "sampler1DArrayShadow" | "sampler2DArrayShadow" | "samplerCubeArray" | "samplerCubeArrayShadow" | "isampler1D" | "isampler2D" | "isampler3D" | "isamplerCube" | "isampler1DArray" | "isampler2DArray" | "isamplerCubeArray" | "usampler1D" | "usampler2D" | "usampler3D" | "usamplerCube" | "usampler1DArray" | "usampler2DArray" | "usamplerCubeArray" | "sampler2DRect" | "sampler2DRectShadow" | "isampler2DRect" | "usampler2DRect" | "samplerBuffer" | "isamplerBuffer" | "usamplerBuffer" | "sampler2DMS" | "isampler2DMS" | "usampler2DMS" | "sampler2DMSArray" | "isampler2DMSArray" | "usampler2DMSArray" | "image1D" | "iimage1D" | "uimage1D" | "image2D" | "iimage2D" | "uimage2D" | "image3D" | "iimage3D" | "uimage3D" | "image2DRect" | "iimage2DRect" | "uimage2DRect" | "imageCube" | "iimageCube" | "uimageCube" | "imageBuffer" | "iimageBuffer" | "uimageBuffer" | "image1DArray" | "iimage1DArray" | "uimage1DArray" | "image2DArray" | "iimage2DArray" | "uimage2DArray" | "imageCubeArray" | "iimageCubeArray" | "uimageCubeArray" | "image2DMS" | "iimage2DMS" | "uimage2DMS" | "image2DMSArray" | "iimage2DMSArray" | "uimage2DMSArray";
+&lt;struct_specifier&gt; ::= "struct" &lt;identifier_or_null&gt; "{" &lt;struct_declaration_list&gt; "}";
+&lt;identifier_or_null&gt; ::= identifier | null;
+&lt;struct_declaration_list&gt; ::= &lt;struct_declaration&gt; &lt;struct_declaration_list_nullable&gt;;
+&lt;struct_declaration_list_nullable&gt; ::= &lt;struct_declaration&gt; &lt;struct_declaration_list_nullable&gt; | null;
+&lt;struct_declaration&gt; ::= &lt;type_specifier&gt; &lt;struct_declarator_list&gt; ";" | &lt;type_qualifier&gt; &lt;type_specifier&gt; &lt;struct_declarator_list&gt; ";";
+&lt;struct_declarator_list&gt; ::= &lt;struct_declarator&gt; &lt;struct_declarator_list_2&gt;;
+&lt;struct_declarator_list_2&gt; ::= "," &lt;struct_declarator&gt; &lt;struct_declarator_list_2&gt; | null;
+&lt;struct_declarator&gt; ::= identifier &lt;array_specifier_nullable&gt;;
+&lt;type_qualifier&gt; ::= &lt;single_type_qualifier&gt; &lt;type_qualifier_nullable&gt;;
+&lt;type_qualifier_nullable&gt; ::= &lt;single_type_qualifier&gt; &lt;type_qualifier_nullable&gt; | null;
+&lt;single_type_qualifier&gt; ::= &lt;storage_qualifier&gt; | &lt;layout_qualifier&gt; | &lt;precision_qualifier&gt; | &lt;interpolation_qualifier&gt; | &lt;invariant_qualifier&gt; | &lt;precise_qualifier&gt;;
+&lt;storage_qualifier&gt; ::= "const" | "inout" | "in" | "out" | "centroid" | "patch" | "sample" | "uniform" | "buffer" | "shared" | "coherent" | "volatile" | "restrict" | "readonly" | "writeonly" | "subroutine" &lt;subroutine_2&gt;;
+&lt;subroutine_2&gt; ::= "(" &lt;type_name_list&gt; ")" | null;
+&lt;type_name_list&gt; ::= identifier &lt;type_name_list_2&gt;;
+&lt;type_name_list_2&gt; ::= "," identifier &lt;type_name_list_2&gt; | null;
+&lt;layout_qualifier&gt; ::= "layout" "(" &lt;layout_qualifier_id_list&gt; ")";
+&lt;layout_qualifier_id_list&gt; ::= &lt;layout_qualifier_id&gt; &lt;layout_qualifier_id_list_2&gt;;
+&lt;layout_qualifier_id_list_2&gt; ::= "," &lt;layout_qualifier_id&gt; &lt;layout_qualifier_id_list_2&gt; | null;
+&lt;layout_qualifier_id&gt; ::= identifier &lt;layout_qualifier_id_2&gt;;
+&lt;layout_qualifier_id_2&gt; ::= "=" number | null;
+&lt;precision_qualifier&gt; ::= "high_precision" | "medium_precision" | "low_precision";
+&lt;interpolation_qualifier&gt; ::= "smooth" | "flat" | "noperspective";
+&lt;invariant_qualifier&gt; ::= "invariant";
+&lt;precise_qualifier&gt; ::= "precise";
+</source_code_of_CGCompiler>
+  <ContextfreeProductionList Count="148">
+    <ContextfreeProduction>
+      <ProductionNode NodeName="translation_unit_nullable" NodeNote="translation_unit_nullable" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="external_declaration" NodeNote="external_declaration" Position="NonLeave" />
+          <ProductionNode NodeName="translation_unit_nullable" NodeNote="translation_unit_nullable" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="external_declaration" NodeNote="external_declaration" Position="NonLeave" />
+      <RightSection CandidateCount="3">
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;precision&quot;" NodeNote="&quot;precision&quot;" Position="Leave" />
+          <ProductionNode NodeName="precision_qualifier" NodeNote="precision_qualifier" Position="NonLeave" />
+          <ProductionNode NodeName="type_specifier" NodeNote="type_specifier" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="type_specifier" NodeNote="type_specifier" Position="NonLeave" />
+          <ProductionNode NodeName="external_declaration_1" NodeNote="external_declaration_1" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="type_qualifier" NodeNote="type_qualifier" Position="NonLeave" />
+          <ProductionNode NodeName="external_declaration_2" NodeNote="external_declaration_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="external_declaration_2" NodeNote="external_declaration_2" Position="NonLeave" />
+      <RightSection CandidateCount="4">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;void&quot;" NodeNote="&quot;void&quot;" Position="Leave" />
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="external_declaration_2_1" NodeNote="external_declaration_2_1" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="struct_specifier" NodeNote="struct_specifier" Position="NonLeave" />
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="external_declaration_2_2" NodeNote="external_declaration_2_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="external_declaration_2_3" NodeNote="external_declaration_2_3" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="external_declaration_2_3" NodeNote="external_declaration_2_3" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="external_declaration_2_3_1" NodeNote="external_declaration_2_3_1" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="external_declaration_2_3_1" NodeNote="external_declaration_2_3_1" Position="NonLeave" />
+      <RightSection CandidateCount="4">
+        <ProductionNodeList NodeCount="5">
+          <ProductionNode NodeName="&quot;[&quot;" NodeNote="&quot;[&quot;" Position="Leave" />
+          <ProductionNode NodeName="constant_expression_or_null" NodeNote="constant_expression_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;]&quot;" NodeNote="&quot;]&quot;" Position="Leave" />
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="external_declaration_2_3_1_1" NodeNote="external_declaration_2_3_1_1" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="external_declaration_2_3_1_2" NodeNote="external_declaration_2_3_1_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+          <ProductionNode NodeName="semicolon_or_null" NodeNote="semicolon_or_null" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="5">
+          <ProductionNode NodeName="&quot;{&quot;" NodeNote="&quot;{&quot;" Position="Leave" />
+          <ProductionNode NodeName="struct_declaration_list" NodeNote="struct_declaration_list" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;}&quot;" NodeNote="&quot;}&quot;" Position="Leave" />
+          <ProductionNode NodeName="variable_name_or_null" NodeNote="variable_name_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="external_declaration_2_3_1_2" NodeNote="external_declaration_2_3_1_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="function_parameters_or_null" NodeNote="function_parameters_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+          <ProductionNode NodeName="compound_statement_no_new_scope_or_semicolon" NodeNote="compound_statement_no_new_scope_or_semicolon" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="equal_initializer_nullable" NodeNote="equal_initializer_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="external_declaration_2_3_1_1" NodeNote="external_declaration_2_3_1_1" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="external_declaration_2_3_1_1_1" NodeNote="external_declaration_2_3_1_1_1" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="external_declaration_2_3_1_1_1" NodeNote="external_declaration_2_3_1_1_1" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="function_parameters_or_null" NodeNote="function_parameters_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+          <ProductionNode NodeName="compound_statement_no_new_scope_or_semicolon" NodeNote="compound_statement_no_new_scope_or_semicolon" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="equal_initializer_nullable" NodeNote="equal_initializer_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="external_declaration_2_2" NodeNote="external_declaration_2_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="external_declaration_2_2_1" NodeNote="external_declaration_2_2_1" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="external_declaration_2_2_1" NodeNote="external_declaration_2_2_1" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="function_parameters_or_null" NodeNote="function_parameters_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+          <ProductionNode NodeName="compound_statement_no_new_scope_or_semicolon" NodeNote="compound_statement_no_new_scope_or_semicolon" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="equal_initializer_nullable" NodeNote="equal_initializer_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="external_declaration_2_1" NodeNote="external_declaration_2_1" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="external_declaration_2_1_1" NodeNote="external_declaration_2_1_1" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="external_declaration_2_1_1" NodeNote="external_declaration_2_1_1" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="function_parameters_or_null" NodeNote="function_parameters_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+          <ProductionNode NodeName="compound_statement_no_new_scope_or_semicolon" NodeNote="compound_statement_no_new_scope_or_semicolon" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="equal_initializer_nullable" NodeNote="equal_initializer_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="external_declaration_1" NodeNote="external_declaration_1" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="external_declaration_1_1" NodeNote="external_declaration_1_1" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="external_declaration_1_1" NodeNote="external_declaration_1_1" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="function_parameters_or_null" NodeNote="function_parameters_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+          <ProductionNode NodeName="compound_statement_no_new_scope_or_semicolon" NodeNote="compound_statement_no_new_scope_or_semicolon" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="equal_initializer_nullable" NodeNote="equal_initializer_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="compound_statement_no_new_scope_or_semicolon" NodeNote="compound_statement_no_new_scope_or_semicolon" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="compound_statement_no_new_scope" NodeNote="compound_statement_no_new_scope" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="declaration_or_expression_statement" NodeNote="declaration_or_expression_statement" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="declaration_or_expression_statement_1" NodeNote="declaration_or_expression_statement_1" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="declaration_or_expression_statement_1" NodeNote="declaration_or_expression_statement_1" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="equal_initializer_nullable" NodeNote="equal_initializer_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="equal_initializer_nullable" NodeNote="equal_initializer_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="statement" NodeNote="statement" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="compound_statement" NodeNote="compound_statement" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="simple_statement" NodeNote="simple_statement" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="simple_statement" NodeNote="simple_statement" Position="NonLeave" />
+      <RightSection CandidateCount="6">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="declaration_or_expression_statement" NodeNote="declaration_or_expression_statement" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="selection_statement" NodeNote="selection_statement" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="switch_statement" NodeNote="switch_statement" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="case_label" NodeNote="case_label" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="iteration_statement" NodeNote="iteration_statement" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="jump_statement" NodeNote="jump_statement" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="selection_statement" NodeNote="selection_statement" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="5">
+          <ProductionNode NodeName="&quot;if&quot;" NodeNote="&quot;if&quot;" Position="Leave" />
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="expression" NodeNote="expression" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+          <ProductionNode NodeName="selection_rest_statement" NodeNote="selection_rest_statement" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="selection_rest_statement" NodeNote="selection_rest_statement" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="statement" NodeNote="statement" Position="NonLeave" />
+          <ProductionNode NodeName="selection_rest_statement_2" NodeNote="selection_rest_statement_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="selection_rest_statement_2" NodeNote="selection_rest_statement_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="&quot;else&quot;" NodeNote="&quot;else&quot;" Position="Leave" />
+          <ProductionNode NodeName="statement" NodeNote="statement" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="switch_statement" NodeNote="switch_statement" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="7">
+          <ProductionNode NodeName="&quot;switch&quot;" NodeNote="&quot;switch&quot;" Position="Leave" />
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="expression" NodeNote="expression" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+          <ProductionNode NodeName="&quot;{&quot;" NodeNote="&quot;{&quot;" Position="Leave" />
+          <ProductionNode NodeName="switch_statement_list" NodeNote="switch_statement_list" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;}&quot;" NodeNote="&quot;}&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="switch_statement_list" NodeNote="switch_statement_list" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="statement_list_nullable" NodeNote="statement_list_nullable" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="case_label" NodeNote="case_label" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;case&quot;" NodeNote="&quot;case&quot;" Position="Leave" />
+          <ProductionNode NodeName="expression" NodeNote="expression" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;:&quot;" NodeNote="&quot;:&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="&quot;default&quot;" NodeNote="&quot;default&quot;" Position="Leave" />
+          <ProductionNode NodeName="&quot;:&quot;" NodeNote="&quot;:&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="iteration_statement" NodeNote="iteration_statement" Position="NonLeave" />
+      <RightSection CandidateCount="3">
+        <ProductionNodeList NodeCount="5">
+          <ProductionNode NodeName="&quot;while&quot;" NodeNote="&quot;while&quot;" Position="Leave" />
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="condition" NodeNote="condition" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+          <ProductionNode NodeName="statement_no_new_scope" NodeNote="statement_no_new_scope" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="7">
+          <ProductionNode NodeName="&quot;do&quot;" NodeNote="&quot;do&quot;" Position="Leave" />
+          <ProductionNode NodeName="statement" NodeNote="statement" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;while&quot;" NodeNote="&quot;while&quot;" Position="Leave" />
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="expression" NodeNote="expression" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="6">
+          <ProductionNode NodeName="&quot;for&quot;" NodeNote="&quot;for&quot;" Position="Leave" />
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="for_init_statement" NodeNote="for_init_statement" Position="NonLeave" />
+          <ProductionNode NodeName="for_rest_statement" NodeNote="for_rest_statement" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+          <ProductionNode NodeName="statement_no_new_scope" NodeNote="statement_no_new_scope" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="for_init_statement" NodeNote="for_init_statement" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="declaration_or_expression_statement" NodeNote="declaration_or_expression_statement" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="expression_statement" NodeNote="expression_statement" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="expression" NodeNote="expression" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="declaration_statement" NodeNote="declaration_statement" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="declaration" NodeNote="declaration" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="declaration" NodeNote="declaration" Position="NonLeave" />
+      <RightSection CandidateCount="3">
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;precision&quot;" NodeNote="&quot;precision&quot;" Position="Leave" />
+          <ProductionNode NodeName="precision_qualifier" NodeNote="precision_qualifier" Position="NonLeave" />
+          <ProductionNode NodeName="type_specifier" NodeNote="type_specifier" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="type_specifier" NodeNote="type_specifier" Position="NonLeave" />
+          <ProductionNode NodeName="declaration_2" NodeNote="declaration_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="type_qualifier" NodeNote="type_qualifier" Position="NonLeave" />
+          <ProductionNode NodeName="declaration_3" NodeNote="declaration_3" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="declaration_3" NodeNote="declaration_3" Position="NonLeave" />
+      <RightSection CandidateCount="4">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;void&quot;" NodeNote="&quot;void&quot;" Position="Leave" />
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="declaration_3_1" NodeNote="declaration_3_1" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="struct_specifier" NodeNote="struct_specifier" Position="NonLeave" />
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="declaration_3_2" NodeNote="declaration_3_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="declaration_3_3" NodeNote="declaration_3_3" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="declaration_3_3" NodeNote="declaration_3_3" Position="NonLeave" />
+      <RightSection CandidateCount="4">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+          <ProductionNode NodeName="semicolon_or_null" NodeNote="semicolon_or_null" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="5">
+          <ProductionNode NodeName="&quot;[&quot;" NodeNote="&quot;[&quot;" Position="Leave" />
+          <ProductionNode NodeName="constant_expression_or_null" NodeNote="constant_expression_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;]&quot;" NodeNote="&quot;]&quot;" Position="Leave" />
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="declaration_3_3_1" NodeNote="declaration_3_3_1" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="declaration_3_3_2" NodeNote="declaration_3_3_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="5">
+          <ProductionNode NodeName="&quot;{&quot;" NodeNote="&quot;{&quot;" Position="Leave" />
+          <ProductionNode NodeName="struct_declaration_list" NodeNote="struct_declaration_list" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;}&quot;" NodeNote="&quot;}&quot;" Position="Leave" />
+          <ProductionNode NodeName="variable_name_or_null" NodeNote="variable_name_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="semicolon_or_null" NodeNote="semicolon_or_null" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="declaration_3_3_2" NodeNote="declaration_3_3_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="function_parameters_or_null" NodeNote="function_parameters_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="equal_initializer_nullable" NodeNote="equal_initializer_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="declaration_3_3_1" NodeNote="declaration_3_3_1" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="declaration_3_3_1_1" NodeNote="declaration_3_3_1_1" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="declaration_3_3_1_1" NodeNote="declaration_3_3_1_1" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="function_parameters_or_null" NodeNote="function_parameters_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="equal_initializer_nullable" NodeNote="equal_initializer_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="declaration_3_2" NodeNote="declaration_3_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="declaration_3_2_1" NodeNote="declaration_3_2_1" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="declaration_3_2_1" NodeNote="declaration_3_2_1" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="function_parameters_or_null" NodeNote="function_parameters_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="equal_initializer_nullable" NodeNote="equal_initializer_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="declaration_3_1" NodeNote="declaration_3_1" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="declaration_3_1_1" NodeNote="declaration_3_1_1" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="declaration_3_1_1" NodeNote="declaration_3_1_1" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="function_parameters_or_null" NodeNote="function_parameters_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="equal_initializer_nullable" NodeNote="equal_initializer_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="declaration_2" NodeNote="declaration_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="declaration_2_1" NodeNote="declaration_2_1" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="declaration_2_1" NodeNote="declaration_2_1" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="function_parameters_or_null" NodeNote="function_parameters_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="equal_initializer_nullable" NodeNote="equal_initializer_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="function_prototype" NodeNote="function_prototype" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="5">
+          <ProductionNode NodeName="type_specifier" NodeNote="type_specifier" Position="NonLeave" />
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="function_parameters_or_null" NodeNote="function_parameters_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="6">
+          <ProductionNode NodeName="type_qualifier" NodeNote="type_qualifier" Position="NonLeave" />
+          <ProductionNode NodeName="type_specifier" NodeNote="type_specifier" Position="NonLeave" />
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="function_parameters_or_null" NodeNote="function_parameters_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="function_declarator" NodeNote="function_declarator" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="function_header" NodeNote="function_header" Position="NonLeave" />
+          <ProductionNode NodeName="function_parameters_or_null" NodeNote="function_parameters_or_null" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="function_parameters_or_null" NodeNote="function_parameters_or_null" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="parameter_declaration" NodeNote="parameter_declaration" Position="NonLeave" />
+          <ProductionNode NodeName="function_header_with_parameters_2" NodeNote="function_header_with_parameters_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="function_header_with_parameters" NodeNote="function_header_with_parameters" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="function_header" NodeNote="function_header" Position="NonLeave" />
+          <ProductionNode NodeName="parameter_declaration" NodeNote="parameter_declaration" Position="NonLeave" />
+          <ProductionNode NodeName="function_header_with_parameters_2" NodeNote="function_header_with_parameters_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="function_header_with_parameters_2" NodeNote="function_header_with_parameters_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;,&quot;" NodeNote="&quot;,&quot;" Position="Leave" />
+          <ProductionNode NodeName="parameter_declaration" NodeNote="parameter_declaration" Position="NonLeave" />
+          <ProductionNode NodeName="function_header_with_parameters_2" NodeNote="function_header_with_parameters_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="function_header" NodeNote="function_header" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="fully_specified_type" NodeNote="fully_specified_type" Position="NonLeave" />
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="parameter_declaration" NodeNote="parameter_declaration" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="type_specifier" NodeNote="type_specifier" Position="NonLeave" />
+          <ProductionNode NodeName="variable_name_or_null" NodeNote="variable_name_or_null" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="type_qualifier" NodeNote="type_qualifier" Position="NonLeave" />
+          <ProductionNode NodeName="type_specifier" NodeNote="type_specifier" Position="NonLeave" />
+          <ProductionNode NodeName="variable_name_or_null" NodeNote="variable_name_or_null" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="parameter_declarator" NodeNote="parameter_declarator" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="type_specifier" NodeNote="type_specifier" Position="NonLeave" />
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="parameter_type_specifier" NodeNote="parameter_type_specifier" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="type_specifier" NodeNote="type_specifier" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="init_declarator_list" NodeNote="init_declarator_list" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="single_declaration" NodeNote="single_declaration" Position="NonLeave" />
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="5">
+          <ProductionNode NodeName="&quot;,&quot;" NodeNote="&quot;,&quot;" Position="Leave" />
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="equal_initializer_nullable" NodeNote="equal_initializer_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="init_declarator_list_2" NodeNote="init_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="equal_initializer_nullable" NodeNote="equal_initializer_nullable" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="&quot;=&quot;" NodeNote="&quot;=&quot;" Position="Leave" />
+          <ProductionNode NodeName="initializer" NodeNote="initializer" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="initializer" NodeNote="initializer" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="assignment_expression" NodeNote="assignment_expression" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;{&quot;" NodeNote="&quot;{&quot;" Position="Leave" />
+          <ProductionNode NodeName="initializer_list" NodeNote="initializer_list" Position="NonLeave" />
+          <ProductionNode NodeName="comma_or_null" NodeNote="comma_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;}&quot;" NodeNote="&quot;}&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="initializer_list" NodeNote="initializer_list" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="initializer" NodeNote="initializer" Position="NonLeave" />
+          <ProductionNode NodeName="initializer_list_2" NodeNote="initializer_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="initializer_list_2" NodeNote="initializer_list_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;,&quot;" NodeNote="&quot;,&quot;" Position="Leave" />
+          <ProductionNode NodeName="initializer" NodeNote="initializer" Position="NonLeave" />
+          <ProductionNode NodeName="initializer_list_2" NodeNote="initializer_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="comma_or_null" NodeNote="comma_or_null" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;,&quot;" NodeNote="&quot;,&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="single_declaration" NodeNote="single_declaration" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="fully_specified_type" NodeNote="fully_specified_type" Position="NonLeave" />
+          <ProductionNode NodeName="variable_initializer_nullable" NodeNote="variable_initializer_nullable" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="variable_initializer_nullable" NodeNote="variable_initializer_nullable" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="equal_initializer_nullable" NodeNote="equal_initializer_nullable" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="identifier_list_or_null" NodeNote="identifier_list_or_null" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="identifier_list" NodeNote="identifier_list" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="identifier_list" NodeNote="identifier_list" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="identifier_list_2" NodeNote="identifier_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="identifier_list_2" NodeNote="identifier_list_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;,&quot;" NodeNote="&quot;,&quot;" Position="Leave" />
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="identifier_list_2" NodeNote="identifier_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="variable_name_or_null" NodeNote="variable_name_or_null" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="for_rest_statement" NodeNote="for_rest_statement" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="conditionopt" NodeNote="conditionopt" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+          <ProductionNode NodeName="expression_or_null" NodeNote="expression_or_null" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="conditionopt" NodeNote="conditionopt" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="condition" NodeNote="condition" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="condition" NodeNote="condition" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="expression" NodeNote="expression" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="statement_no_new_scope" NodeNote="statement_no_new_scope" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="compound_statement_no_new_scope" NodeNote="compound_statement_no_new_scope" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="simple_statement" NodeNote="simple_statement" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="compound_statement_no_new_scope" NodeNote="compound_statement_no_new_scope" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;{&quot;" NodeNote="&quot;{&quot;" Position="Leave" />
+          <ProductionNode NodeName="statement_list_nullable" NodeNote="statement_list_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;}&quot;" NodeNote="&quot;}&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="jump_statement" NodeNote="jump_statement" Position="NonLeave" />
+      <RightSection CandidateCount="4">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="&quot;continue&quot;" NodeNote="&quot;continue&quot;" Position="Leave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="&quot;break&quot;" NodeNote="&quot;break&quot;" Position="Leave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;return&quot;" NodeNote="&quot;return&quot;" Position="Leave" />
+          <ProductionNode NodeName="expression_or_null" NodeNote="expression_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="&quot;discard&quot;" NodeNote="&quot;discard&quot;" Position="Leave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="expression_or_null" NodeNote="expression_or_null" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="expression" NodeNote="expression" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="compound_statement" NodeNote="compound_statement" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;{&quot;" NodeNote="&quot;{&quot;" Position="Leave" />
+          <ProductionNode NodeName="statement_list_nullable" NodeNote="statement_list_nullable" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;}&quot;" NodeNote="&quot;}&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="statement_list" NodeNote="statement_list" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="statement" NodeNote="statement" Position="NonLeave" />
+          <ProductionNode NodeName="statement_list_nullable" NodeNote="statement_list_nullable" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="statement_list_nullable" NodeNote="statement_list_nullable" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="statement" NodeNote="statement" Position="NonLeave" />
+          <ProductionNode NodeName="statement_list_nullable" NodeNote="statement_list_nullable" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="expression" NodeNote="expression" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="assignment_expression" NodeNote="assignment_expression" Position="NonLeave" />
+          <ProductionNode NodeName="expression_2" NodeNote="expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="expression_2" NodeNote="expression_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;,&quot;" NodeNote="&quot;,&quot;" Position="Leave" />
+          <ProductionNode NodeName="assignment_expression" NodeNote="assignment_expression" Position="NonLeave" />
+          <ProductionNode NodeName="expression_2" NodeNote="expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="assignment_expression" NodeNote="assignment_expression" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="unary_expression" NodeNote="unary_expression" Position="NonLeave" />
+          <ProductionNode NodeName="assignment_expression_2" NodeNote="assignment_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="unary_expression" NodeNote="unary_expression" Position="NonLeave" />
+      <RightSection CandidateCount="4">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="postfix_expression" NodeNote="postfix_expression" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="&quot;++&quot;" NodeNote="&quot;++&quot;" Position="Leave" />
+          <ProductionNode NodeName="unary_expression" NodeNote="unary_expression" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="&quot;--&quot;" NodeNote="&quot;--&quot;" Position="Leave" />
+          <ProductionNode NodeName="unary_expression" NodeNote="unary_expression" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="unary_operator" NodeNote="unary_operator" Position="NonLeave" />
+          <ProductionNode NodeName="unary_expression" NodeNote="unary_expression" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="postfix_expression" NodeNote="postfix_expression" Position="NonLeave" />
+      <RightSection CandidateCount="3">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="postfix_expression_3" NodeNote="postfix_expression_3" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="constant_primary_expression" NodeNote="constant_primary_expression" Position="NonLeave" />
+          <ProductionNode NodeName="postfix_expression_2" NodeNote="postfix_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="expression" NodeNote="expression" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+          <ProductionNode NodeName="postfix_expression_2" NodeNote="postfix_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="postfix_expression_3" NodeNote="postfix_expression_3" Position="NonLeave" />
+      <RightSection CandidateCount="6">
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;[&quot;" NodeNote="&quot;[&quot;" Position="Leave" />
+          <ProductionNode NodeName="integer_expression" NodeNote="integer_expression" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;]&quot;" NodeNote="&quot;]&quot;" Position="Leave" />
+          <ProductionNode NodeName="postfix_expression_3_1" NodeNote="postfix_expression_3_1" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;.&quot;" NodeNote="&quot;.&quot;" Position="Leave" />
+          <ProductionNode NodeName="FIELD_SELECTION" NodeNote="FIELD_SELECTION" Position="NonLeave" />
+          <ProductionNode NodeName="postfix_expression_2" NodeNote="postfix_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="&quot;++&quot;" NodeNote="&quot;++&quot;" Position="Leave" />
+          <ProductionNode NodeName="postfix_expression_2" NodeNote="postfix_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="&quot;--&quot;" NodeNote="&quot;--&quot;" Position="Leave" />
+          <ProductionNode NodeName="postfix_expression_2" NodeNote="postfix_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="expression_or_void_or_null" NodeNote="expression_or_void_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+          <ProductionNode NodeName="postfix_expression_2" NodeNote="postfix_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="postfix_expression_3_1" NodeNote="postfix_expression_3_1" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="postfix_expression_2" NodeNote="postfix_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="expression_or_void_or_null" NodeNote="expression_or_void_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+          <ProductionNode NodeName="postfix_expression_2" NodeNote="postfix_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="postfix_expression_2" NodeNote="postfix_expression_2" Position="NonLeave" />
+      <RightSection CandidateCount="5">
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;[&quot;" NodeNote="&quot;[&quot;" Position="Leave" />
+          <ProductionNode NodeName="integer_expression" NodeNote="integer_expression" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;]&quot;" NodeNote="&quot;]&quot;" Position="Leave" />
+          <ProductionNode NodeName="postfix_expression_2" NodeNote="postfix_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;.&quot;" NodeNote="&quot;.&quot;" Position="Leave" />
+          <ProductionNode NodeName="FIELD_SELECTION" NodeNote="FIELD_SELECTION" Position="NonLeave" />
+          <ProductionNode NodeName="postfix_expression_2" NodeNote="postfix_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="&quot;++&quot;" NodeNote="&quot;++&quot;" Position="Leave" />
+          <ProductionNode NodeName="postfix_expression_2" NodeNote="postfix_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="&quot;--&quot;" NodeNote="&quot;--&quot;" Position="Leave" />
+          <ProductionNode NodeName="postfix_expression_2" NodeNote="postfix_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="FIELD_SELECTION" NodeNote="FIELD_SELECTION" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="primary_expression" NodeNote="primary_expression" Position="NonLeave" />
+      <RightSection CandidateCount="3">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="constant_primary_expression" NodeNote="constant_primary_expression" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="expression" NodeNote="expression" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="constant_primary_expression" NodeNote="constant_primary_expression" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="number" NodeNote="number" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="bool_constant" NodeNote="bool_constant" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="bool_constant" NodeNote="bool_constant" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;true&quot;" NodeNote="&quot;true&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;false&quot;" NodeNote="&quot;false&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="unary_operator" NodeNote="unary_operator" Position="NonLeave" />
+      <RightSection CandidateCount="4">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;+&quot;" NodeNote="&quot;+&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;-&quot;" NodeNote="&quot;-&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;!&quot;" NodeNote="&quot;!&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;~&quot;" NodeNote="&quot;~&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="expression_or_void_or_null" NodeNote="expression_or_void_or_null" Position="NonLeave" />
+      <RightSection CandidateCount="3">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="expression" NodeNote="expression" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;void&quot;" NodeNote="&quot;void&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="index_selector_nullable" NodeNote="index_selector_nullable" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;[&quot;" NodeNote="&quot;[&quot;" Position="Leave" />
+          <ProductionNode NodeName="integer_expression" NodeNote="integer_expression" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;]&quot;" NodeNote="&quot;]&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="integer_expression" NodeNote="integer_expression" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="expression" NodeNote="expression" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="assignment_expression_2" NodeNote="assignment_expression_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="12">
+          <ProductionNode NodeName="multiplicative_expression_2" NodeNote="multiplicative_expression_2" Position="NonLeave" />
+          <ProductionNode NodeName="additive_expression_2" NodeNote="additive_expression_2" Position="NonLeave" />
+          <ProductionNode NodeName="shift_expression_2" NodeNote="shift_expression_2" Position="NonLeave" />
+          <ProductionNode NodeName="relational_expression_2" NodeNote="relational_expression_2" Position="NonLeave" />
+          <ProductionNode NodeName="equality_expression_2" NodeNote="equality_expression_2" Position="NonLeave" />
+          <ProductionNode NodeName="and_expression_2" NodeNote="and_expression_2" Position="NonLeave" />
+          <ProductionNode NodeName="exclusive_or_expression_2" NodeNote="exclusive_or_expression_2" Position="NonLeave" />
+          <ProductionNode NodeName="inclusive_or_expression_2" NodeNote="inclusive_or_expression_2" Position="NonLeave" />
+          <ProductionNode NodeName="logical_and_expression_2" NodeNote="logical_and_expression_2" Position="NonLeave" />
+          <ProductionNode NodeName="logical_xor_expression_2" NodeNote="logical_xor_expression_2" Position="NonLeave" />
+          <ProductionNode NodeName="logical_or_expression_2" NodeNote="logical_or_expression_2" Position="NonLeave" />
+          <ProductionNode NodeName="conditional_expression_2" NodeNote="conditional_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="assignment_operator" NodeNote="assignment_operator" Position="NonLeave" />
+          <ProductionNode NodeName="assignment_expression" NodeNote="assignment_expression" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="assignment_operator" NodeNote="assignment_operator" Position="NonLeave" />
+      <RightSection CandidateCount="11">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;=&quot;" NodeNote="&quot;=&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;*=&quot;" NodeNote="&quot;*=&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;/=&quot;" NodeNote="&quot;/=&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;%=&quot;" NodeNote="&quot;%=&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;+=&quot;" NodeNote="&quot;+=&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;-=&quot;" NodeNote="&quot;-=&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;&lt;&lt;=&quot;" NodeNote="&quot;&lt;&lt;=&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;&gt;&gt;=&quot;" NodeNote="&quot;&gt;&gt;=&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;&amp;=&quot;" NodeNote="&quot;&amp;=&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;^=&quot;" NodeNote="&quot;^=&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;|=&quot;" NodeNote="&quot;|=&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="conditional_expression" NodeNote="conditional_expression" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="logical_or_expression" NodeNote="logical_or_expression" Position="NonLeave" />
+          <ProductionNode NodeName="conditional_expression_2" NodeNote="conditional_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="conditional_expression_2" NodeNote="conditional_expression_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;?&quot;" NodeNote="&quot;?&quot;" Position="Leave" />
+          <ProductionNode NodeName="expression" NodeNote="expression" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;:&quot;" NodeNote="&quot;:&quot;" Position="Leave" />
+          <ProductionNode NodeName="assignment_expression" NodeNote="assignment_expression" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="logical_or_expression" NodeNote="logical_or_expression" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="logical_xor_expression" NodeNote="logical_xor_expression" Position="NonLeave" />
+          <ProductionNode NodeName="logical_or_expression_2" NodeNote="logical_or_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="logical_or_expression_2" NodeNote="logical_or_expression_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;||&quot;" NodeNote="&quot;||&quot;" Position="Leave" />
+          <ProductionNode NodeName="logical_xor_expression" NodeNote="logical_xor_expression" Position="NonLeave" />
+          <ProductionNode NodeName="logical_or_expression_2" NodeNote="logical_or_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="logical_xor_expression" NodeNote="logical_xor_expression" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="logical_and_expression" NodeNote="logical_and_expression" Position="NonLeave" />
+          <ProductionNode NodeName="logical_xor_expression_2" NodeNote="logical_xor_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="logical_xor_expression_2" NodeNote="logical_xor_expression_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;^^&quot;" NodeNote="&quot;^^&quot;" Position="Leave" />
+          <ProductionNode NodeName="logical_and_expression" NodeNote="logical_and_expression" Position="NonLeave" />
+          <ProductionNode NodeName="logical_xor_expression_2" NodeNote="logical_xor_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="logical_and_expression" NodeNote="logical_and_expression" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="inclusive_or_expression" NodeNote="inclusive_or_expression" Position="NonLeave" />
+          <ProductionNode NodeName="logical_and_expression_2" NodeNote="logical_and_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="logical_and_expression_2" NodeNote="logical_and_expression_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;&amp;&amp;&quot;" NodeNote="&quot;&amp;&amp;&quot;" Position="Leave" />
+          <ProductionNode NodeName="inclusive_or_expression" NodeNote="inclusive_or_expression" Position="NonLeave" />
+          <ProductionNode NodeName="logical_and_expression_2" NodeNote="logical_and_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="inclusive_or_expression" NodeNote="inclusive_or_expression" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="exclusive_or_expression" NodeNote="exclusive_or_expression" Position="NonLeave" />
+          <ProductionNode NodeName="inclusive_or_expression_2" NodeNote="inclusive_or_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="inclusive_or_expression_2" NodeNote="inclusive_or_expression_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;|&quot;" NodeNote="&quot;|&quot;" Position="Leave" />
+          <ProductionNode NodeName="exclusive_or_expression" NodeNote="exclusive_or_expression" Position="NonLeave" />
+          <ProductionNode NodeName="inclusive_or_expression_2" NodeNote="inclusive_or_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="exclusive_or_expression" NodeNote="exclusive_or_expression" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="and_expression" NodeNote="and_expression" Position="NonLeave" />
+          <ProductionNode NodeName="exclusive_or_expression_2" NodeNote="exclusive_or_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="exclusive_or_expression_2" NodeNote="exclusive_or_expression_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;^&quot;" NodeNote="&quot;^&quot;" Position="Leave" />
+          <ProductionNode NodeName="and_expression" NodeNote="and_expression" Position="NonLeave" />
+          <ProductionNode NodeName="exclusive_or_expression_2" NodeNote="exclusive_or_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="and_expression" NodeNote="and_expression" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="equality_expression" NodeNote="equality_expression" Position="NonLeave" />
+          <ProductionNode NodeName="and_expression_2" NodeNote="and_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="and_expression_2" NodeNote="and_expression_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;&amp;&quot;" NodeNote="&quot;&amp;&quot;" Position="Leave" />
+          <ProductionNode NodeName="equality_expression" NodeNote="equality_expression" Position="NonLeave" />
+          <ProductionNode NodeName="and_expression_2" NodeNote="and_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="equality_expression" NodeNote="equality_expression" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="relational_expression" NodeNote="relational_expression" Position="NonLeave" />
+          <ProductionNode NodeName="equality_expression_2" NodeNote="equality_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="equality_expression_2" NodeNote="equality_expression_2" Position="NonLeave" />
+      <RightSection CandidateCount="3">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;==&quot;" NodeNote="&quot;==&quot;" Position="Leave" />
+          <ProductionNode NodeName="relational_expression" NodeNote="relational_expression" Position="NonLeave" />
+          <ProductionNode NodeName="equality_expression_2" NodeNote="equality_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;!=&quot;" NodeNote="&quot;!=&quot;" Position="Leave" />
+          <ProductionNode NodeName="relational_expression" NodeNote="relational_expression" Position="NonLeave" />
+          <ProductionNode NodeName="equality_expression_2" NodeNote="equality_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="relational_expression" NodeNote="relational_expression" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="shift_expression" NodeNote="shift_expression" Position="NonLeave" />
+          <ProductionNode NodeName="relational_expression_2" NodeNote="relational_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="relational_expression_2" NodeNote="relational_expression_2" Position="NonLeave" />
+      <RightSection CandidateCount="5">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;&lt;&quot;" NodeNote="&quot;&lt;&quot;" Position="Leave" />
+          <ProductionNode NodeName="shift_expression" NodeNote="shift_expression" Position="NonLeave" />
+          <ProductionNode NodeName="relational_expression_2" NodeNote="relational_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;&gt;&quot;" NodeNote="&quot;&gt;&quot;" Position="Leave" />
+          <ProductionNode NodeName="shift_expression" NodeNote="shift_expression" Position="NonLeave" />
+          <ProductionNode NodeName="relational_expression_2" NodeNote="relational_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;&lt;=&quot;" NodeNote="&quot;&lt;=&quot;" Position="Leave" />
+          <ProductionNode NodeName="shift_expression" NodeNote="shift_expression" Position="NonLeave" />
+          <ProductionNode NodeName="relational_expression_2" NodeNote="relational_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;&gt;=&quot;" NodeNote="&quot;&gt;=&quot;" Position="Leave" />
+          <ProductionNode NodeName="shift_expression" NodeNote="shift_expression" Position="NonLeave" />
+          <ProductionNode NodeName="relational_expression_2" NodeNote="relational_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="shift_expression" NodeNote="shift_expression" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="additive_expression" NodeNote="additive_expression" Position="NonLeave" />
+          <ProductionNode NodeName="shift_expression_2" NodeNote="shift_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="shift_expression_2" NodeNote="shift_expression_2" Position="NonLeave" />
+      <RightSection CandidateCount="3">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;&lt;&lt;&quot;" NodeNote="&quot;&lt;&lt;&quot;" Position="Leave" />
+          <ProductionNode NodeName="additive_expression" NodeNote="additive_expression" Position="NonLeave" />
+          <ProductionNode NodeName="shift_expression_2" NodeNote="shift_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;&gt;&gt;&quot;" NodeNote="&quot;&gt;&gt;&quot;" Position="Leave" />
+          <ProductionNode NodeName="additive_expression" NodeNote="additive_expression" Position="NonLeave" />
+          <ProductionNode NodeName="shift_expression_2" NodeNote="shift_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="additive_expression" NodeNote="additive_expression" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="multiplicative_expression" NodeNote="multiplicative_expression" Position="NonLeave" />
+          <ProductionNode NodeName="additive_expression_2" NodeNote="additive_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="additive_expression_2" NodeNote="additive_expression_2" Position="NonLeave" />
+      <RightSection CandidateCount="3">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;+&quot;" NodeNote="&quot;+&quot;" Position="Leave" />
+          <ProductionNode NodeName="multiplicative_expression" NodeNote="multiplicative_expression" Position="NonLeave" />
+          <ProductionNode NodeName="additive_expression_2" NodeNote="additive_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;-&quot;" NodeNote="&quot;-&quot;" Position="Leave" />
+          <ProductionNode NodeName="multiplicative_expression" NodeNote="multiplicative_expression" Position="NonLeave" />
+          <ProductionNode NodeName="additive_expression_2" NodeNote="additive_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="multiplicative_expression" NodeNote="multiplicative_expression" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="unary_expression" NodeNote="unary_expression" Position="NonLeave" />
+          <ProductionNode NodeName="multiplicative_expression_2" NodeNote="multiplicative_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="multiplicative_expression_2" NodeNote="multiplicative_expression_2" Position="NonLeave" />
+      <RightSection CandidateCount="4">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;*&quot;" NodeNote="&quot;*&quot;" Position="Leave" />
+          <ProductionNode NodeName="unary_expression" NodeNote="unary_expression" Position="NonLeave" />
+          <ProductionNode NodeName="multiplicative_expression_2" NodeNote="multiplicative_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;/&quot;" NodeNote="&quot;/&quot;" Position="Leave" />
+          <ProductionNode NodeName="unary_expression" NodeNote="unary_expression" Position="NonLeave" />
+          <ProductionNode NodeName="multiplicative_expression_2" NodeNote="multiplicative_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;%&quot;" NodeNote="&quot;%&quot;" Position="Leave" />
+          <ProductionNode NodeName="unary_expression" NodeNote="unary_expression" Position="NonLeave" />
+          <ProductionNode NodeName="multiplicative_expression_2" NodeNote="multiplicative_expression_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="fully_specified_type" NodeNote="fully_specified_type" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="type_specifier" NodeNote="type_specifier" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="type_qualifier" NodeNote="type_qualifier" Position="NonLeave" />
+          <ProductionNode NodeName="type_specifier" NodeNote="type_specifier" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="type_specifier" NodeNote="type_specifier" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="type_specifier_nonarray" NodeNote="type_specifier_nonarray" Position="NonLeave" />
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="array_specifier" NodeNote="array_specifier" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;[&quot;" NodeNote="&quot;[&quot;" Position="Leave" />
+          <ProductionNode NodeName="constant_expression_or_null" NodeNote="constant_expression_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;]&quot;" NodeNote="&quot;]&quot;" Position="Leave" />
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;[&quot;" NodeNote="&quot;[&quot;" Position="Leave" />
+          <ProductionNode NodeName="constant_expression_or_null" NodeNote="constant_expression_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;]&quot;" NodeNote="&quot;]&quot;" Position="Leave" />
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="constant_expression_or_null" NodeNote="constant_expression_or_null" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="conditional_expression" NodeNote="conditional_expression" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="constant_expression" NodeNote="constant_expression" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="conditional_expression" NodeNote="conditional_expression" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="type_specifier_nonarray" NodeNote="type_specifier_nonarray" Position="NonLeave" />
+      <RightSection CandidateCount="3">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;void&quot;" NodeNote="&quot;void&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="struct_specifier" NodeNote="struct_specifier" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="build_in_type" NodeNote="build_in_type" Position="NonLeave" />
+      <RightSection CandidateCount="118">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;float&quot;" NodeNote="&quot;float&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;double&quot;" NodeNote="&quot;double&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;int&quot;" NodeNote="&quot;int&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;uint&quot;" NodeNote="&quot;uint&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;bool&quot;" NodeNote="&quot;bool&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;vec2&quot;" NodeNote="&quot;vec2&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;vec3&quot;" NodeNote="&quot;vec3&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;vec4&quot;" NodeNote="&quot;vec4&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;dvec2&quot;" NodeNote="&quot;dvec2&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;dvec3&quot;" NodeNote="&quot;dvec3&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;dvec4&quot;" NodeNote="&quot;dvec4&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;bvec2&quot;" NodeNote="&quot;bvec2&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;bvec3&quot;" NodeNote="&quot;bvec3&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;bvec4&quot;" NodeNote="&quot;bvec4&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;ivec2&quot;" NodeNote="&quot;ivec2&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;ivec3&quot;" NodeNote="&quot;ivec3&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;ivec4&quot;" NodeNote="&quot;ivec4&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;uvec2&quot;" NodeNote="&quot;uvec2&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;uvec3&quot;" NodeNote="&quot;uvec3&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;uvec4&quot;" NodeNote="&quot;uvec4&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;mat2&quot;" NodeNote="&quot;mat2&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;mat3&quot;" NodeNote="&quot;mat3&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;mat4&quot;" NodeNote="&quot;mat4&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;mat2x2&quot;" NodeNote="&quot;mat2x2&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;mat2x3&quot;" NodeNote="&quot;mat2x3&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;mat2x4&quot;" NodeNote="&quot;mat2x4&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;mat3x2&quot;" NodeNote="&quot;mat3x2&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;mat3x3&quot;" NodeNote="&quot;mat3x3&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;mat3x4&quot;" NodeNote="&quot;mat3x4&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;mat4x2&quot;" NodeNote="&quot;mat4x2&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;mat4x3&quot;" NodeNote="&quot;mat4x3&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;mat4x4&quot;" NodeNote="&quot;mat4x4&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;dmat2&quot;" NodeNote="&quot;dmat2&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;dmat3&quot;" NodeNote="&quot;dmat3&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;dmat4&quot;" NodeNote="&quot;dmat4&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;dmat2x2&quot;" NodeNote="&quot;dmat2x2&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;dmat2x3&quot;" NodeNote="&quot;dmat2x3&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;dmat2x4&quot;" NodeNote="&quot;dmat2x4&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;dmat3x2&quot;" NodeNote="&quot;dmat3x2&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;dmat3x3&quot;" NodeNote="&quot;dmat3x3&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;dmat3x4&quot;" NodeNote="&quot;dmat3x4&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;dmat4x2&quot;" NodeNote="&quot;dmat4x2&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;dmat4x3&quot;" NodeNote="&quot;dmat4x3&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;dmat4x4&quot;" NodeNote="&quot;dmat4x4&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;atomic_uint&quot;" NodeNote="&quot;atomic_uint&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;sampler1D&quot;" NodeNote="&quot;sampler1D&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;sampler2D&quot;" NodeNote="&quot;sampler2D&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;sampler3D&quot;" NodeNote="&quot;sampler3D&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;samplerCube&quot;" NodeNote="&quot;samplerCube&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;sampler1DShadow&quot;" NodeNote="&quot;sampler1DShadow&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;sampler2DShadow&quot;" NodeNote="&quot;sampler2DShadow&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;samplerCubeShadow&quot;" NodeNote="&quot;samplerCubeShadow&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;sampler1DArray&quot;" NodeNote="&quot;sampler1DArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;sampler2DArray&quot;" NodeNote="&quot;sampler2DArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;sampler1DArrayShadow&quot;" NodeNote="&quot;sampler1DArrayShadow&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;sampler2DArrayShadow&quot;" NodeNote="&quot;sampler2DArrayShadow&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;samplerCubeArray&quot;" NodeNote="&quot;samplerCubeArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;samplerCubeArrayShadow&quot;" NodeNote="&quot;samplerCubeArrayShadow&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;isampler1D&quot;" NodeNote="&quot;isampler1D&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;isampler2D&quot;" NodeNote="&quot;isampler2D&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;isampler3D&quot;" NodeNote="&quot;isampler3D&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;isamplerCube&quot;" NodeNote="&quot;isamplerCube&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;isampler1DArray&quot;" NodeNote="&quot;isampler1DArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;isampler2DArray&quot;" NodeNote="&quot;isampler2DArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;isamplerCubeArray&quot;" NodeNote="&quot;isamplerCubeArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;usampler1D&quot;" NodeNote="&quot;usampler1D&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;usampler2D&quot;" NodeNote="&quot;usampler2D&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;usampler3D&quot;" NodeNote="&quot;usampler3D&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;usamplerCube&quot;" NodeNote="&quot;usamplerCube&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;usampler1DArray&quot;" NodeNote="&quot;usampler1DArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;usampler2DArray&quot;" NodeNote="&quot;usampler2DArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;usamplerCubeArray&quot;" NodeNote="&quot;usamplerCubeArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;sampler2DRect&quot;" NodeNote="&quot;sampler2DRect&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;sampler2DRectShadow&quot;" NodeNote="&quot;sampler2DRectShadow&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;isampler2DRect&quot;" NodeNote="&quot;isampler2DRect&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;usampler2DRect&quot;" NodeNote="&quot;usampler2DRect&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;samplerBuffer&quot;" NodeNote="&quot;samplerBuffer&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;isamplerBuffer&quot;" NodeNote="&quot;isamplerBuffer&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;usamplerBuffer&quot;" NodeNote="&quot;usamplerBuffer&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;sampler2DMS&quot;" NodeNote="&quot;sampler2DMS&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;isampler2DMS&quot;" NodeNote="&quot;isampler2DMS&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;usampler2DMS&quot;" NodeNote="&quot;usampler2DMS&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;sampler2DMSArray&quot;" NodeNote="&quot;sampler2DMSArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;isampler2DMSArray&quot;" NodeNote="&quot;isampler2DMSArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;usampler2DMSArray&quot;" NodeNote="&quot;usampler2DMSArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;image1D&quot;" NodeNote="&quot;image1D&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;iimage1D&quot;" NodeNote="&quot;iimage1D&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;uimage1D&quot;" NodeNote="&quot;uimage1D&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;image2D&quot;" NodeNote="&quot;image2D&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;iimage2D&quot;" NodeNote="&quot;iimage2D&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;uimage2D&quot;" NodeNote="&quot;uimage2D&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;image3D&quot;" NodeNote="&quot;image3D&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;iimage3D&quot;" NodeNote="&quot;iimage3D&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;uimage3D&quot;" NodeNote="&quot;uimage3D&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;image2DRect&quot;" NodeNote="&quot;image2DRect&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;iimage2DRect&quot;" NodeNote="&quot;iimage2DRect&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;uimage2DRect&quot;" NodeNote="&quot;uimage2DRect&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;imageCube&quot;" NodeNote="&quot;imageCube&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;iimageCube&quot;" NodeNote="&quot;iimageCube&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;uimageCube&quot;" NodeNote="&quot;uimageCube&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;imageBuffer&quot;" NodeNote="&quot;imageBuffer&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;iimageBuffer&quot;" NodeNote="&quot;iimageBuffer&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;uimageBuffer&quot;" NodeNote="&quot;uimageBuffer&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;image1DArray&quot;" NodeNote="&quot;image1DArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;iimage1DArray&quot;" NodeNote="&quot;iimage1DArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;uimage1DArray&quot;" NodeNote="&quot;uimage1DArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;image2DArray&quot;" NodeNote="&quot;image2DArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;iimage2DArray&quot;" NodeNote="&quot;iimage2DArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;uimage2DArray&quot;" NodeNote="&quot;uimage2DArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;imageCubeArray&quot;" NodeNote="&quot;imageCubeArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;iimageCubeArray&quot;" NodeNote="&quot;iimageCubeArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;uimageCubeArray&quot;" NodeNote="&quot;uimageCubeArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;image2DMS&quot;" NodeNote="&quot;image2DMS&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;iimage2DMS&quot;" NodeNote="&quot;iimage2DMS&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;uimage2DMS&quot;" NodeNote="&quot;uimage2DMS&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;image2DMSArray&quot;" NodeNote="&quot;image2DMSArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;iimage2DMSArray&quot;" NodeNote="&quot;iimage2DMSArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;uimage2DMSArray&quot;" NodeNote="&quot;uimage2DMSArray&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="struct_specifier" NodeNote="struct_specifier" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="5">
+          <ProductionNode NodeName="&quot;struct&quot;" NodeNote="&quot;struct&quot;" Position="Leave" />
+          <ProductionNode NodeName="identifier_or_null" NodeNote="identifier_or_null" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;{&quot;" NodeNote="&quot;{&quot;" Position="Leave" />
+          <ProductionNode NodeName="struct_declaration_list" NodeNote="struct_declaration_list" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;}&quot;" NodeNote="&quot;}&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="identifier_or_null" NodeNote="identifier_or_null" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="struct_declaration_list" NodeNote="struct_declaration_list" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="struct_declaration" NodeNote="struct_declaration" Position="NonLeave" />
+          <ProductionNode NodeName="struct_declaration_list_nullable" NodeNote="struct_declaration_list_nullable" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="struct_declaration_list_nullable" NodeNote="struct_declaration_list_nullable" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="struct_declaration" NodeNote="struct_declaration" Position="NonLeave" />
+          <ProductionNode NodeName="struct_declaration_list_nullable" NodeNote="struct_declaration_list_nullable" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="struct_declaration" NodeNote="struct_declaration" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="type_specifier" NodeNote="type_specifier" Position="NonLeave" />
+          <ProductionNode NodeName="struct_declarator_list" NodeNote="struct_declarator_list" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="type_qualifier" NodeNote="type_qualifier" Position="NonLeave" />
+          <ProductionNode NodeName="type_specifier" NodeNote="type_specifier" Position="NonLeave" />
+          <ProductionNode NodeName="struct_declarator_list" NodeNote="struct_declarator_list" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="struct_declarator_list" NodeNote="struct_declarator_list" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="struct_declarator" NodeNote="struct_declarator" Position="NonLeave" />
+          <ProductionNode NodeName="struct_declarator_list_2" NodeNote="struct_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="struct_declarator_list_2" NodeNote="struct_declarator_list_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;,&quot;" NodeNote="&quot;,&quot;" Position="Leave" />
+          <ProductionNode NodeName="struct_declarator" NodeNote="struct_declarator" Position="NonLeave" />
+          <ProductionNode NodeName="struct_declarator_list_2" NodeNote="struct_declarator_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="struct_declarator" NodeNote="struct_declarator" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="array_specifier_nullable" NodeNote="array_specifier_nullable" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="type_qualifier" NodeNote="type_qualifier" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="single_type_qualifier" NodeNote="single_type_qualifier" Position="NonLeave" />
+          <ProductionNode NodeName="type_qualifier_nullable" NodeNote="type_qualifier_nullable" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="type_qualifier_nullable" NodeNote="type_qualifier_nullable" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="single_type_qualifier" NodeNote="single_type_qualifier" Position="NonLeave" />
+          <ProductionNode NodeName="type_qualifier_nullable" NodeNote="type_qualifier_nullable" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="single_type_qualifier" NodeNote="single_type_qualifier" Position="NonLeave" />
+      <RightSection CandidateCount="6">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="storage_qualifier" NodeNote="storage_qualifier" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="layout_qualifier" NodeNote="layout_qualifier" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="precision_qualifier" NodeNote="precision_qualifier" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="interpolation_qualifier" NodeNote="interpolation_qualifier" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="invariant_qualifier" NodeNote="invariant_qualifier" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="precise_qualifier" NodeNote="precise_qualifier" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="storage_qualifier" NodeNote="storage_qualifier" Position="NonLeave" />
+      <RightSection CandidateCount="16">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;const&quot;" NodeNote="&quot;const&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;inout&quot;" NodeNote="&quot;inout&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;in&quot;" NodeNote="&quot;in&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;out&quot;" NodeNote="&quot;out&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;centroid&quot;" NodeNote="&quot;centroid&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;patch&quot;" NodeNote="&quot;patch&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;sample&quot;" NodeNote="&quot;sample&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;uniform&quot;" NodeNote="&quot;uniform&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;buffer&quot;" NodeNote="&quot;buffer&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;shared&quot;" NodeNote="&quot;shared&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;coherent&quot;" NodeNote="&quot;coherent&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;volatile&quot;" NodeNote="&quot;volatile&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;restrict&quot;" NodeNote="&quot;restrict&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;readonly&quot;" NodeNote="&quot;readonly&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;writeonly&quot;" NodeNote="&quot;writeonly&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="&quot;subroutine&quot;" NodeNote="&quot;subroutine&quot;" Position="Leave" />
+          <ProductionNode NodeName="subroutine_2" NodeNote="subroutine_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="subroutine_2" NodeNote="subroutine_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="type_name_list" NodeNote="type_name_list" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="type_name_list" NodeNote="type_name_list" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="type_name_list_2" NodeNote="type_name_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="type_name_list_2" NodeNote="type_name_list_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;,&quot;" NodeNote="&quot;,&quot;" Position="Leave" />
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="type_name_list_2" NodeNote="type_name_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="layout_qualifier" NodeNote="layout_qualifier" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;layout&quot;" NodeNote="&quot;layout&quot;" Position="Leave" />
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="layout_qualifier_id_list" NodeNote="layout_qualifier_id_list" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="layout_qualifier_id_list" NodeNote="layout_qualifier_id_list" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="layout_qualifier_id" NodeNote="layout_qualifier_id" Position="NonLeave" />
+          <ProductionNode NodeName="layout_qualifier_id_list_2" NodeNote="layout_qualifier_id_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="layout_qualifier_id_list_2" NodeNote="layout_qualifier_id_list_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="&quot;,&quot;" NodeNote="&quot;,&quot;" Position="Leave" />
+          <ProductionNode NodeName="layout_qualifier_id" NodeNote="layout_qualifier_id" Position="NonLeave" />
+          <ProductionNode NodeName="layout_qualifier_id_list_2" NodeNote="layout_qualifier_id_list_2" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="layout_qualifier_id" NodeNote="layout_qualifier_id" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="layout_qualifier_id_2" NodeNote="layout_qualifier_id_2" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="layout_qualifier_id_2" NodeNote="layout_qualifier_id_2" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="2">
+          <ProductionNode NodeName="&quot;=&quot;" NodeNote="&quot;=&quot;" Position="Leave" />
+          <ProductionNode NodeName="number" NodeNote="number" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="null" NodeNote="null" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="precision_qualifier" NodeNote="precision_qualifier" Position="NonLeave" />
+      <RightSection CandidateCount="3">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;high_precision&quot;" NodeNote="&quot;high_precision&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;medium_precision&quot;" NodeNote="&quot;medium_precision&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;low_precision&quot;" NodeNote="&quot;low_precision&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="interpolation_qualifier" NodeNote="interpolation_qualifier" Position="NonLeave" />
+      <RightSection CandidateCount="3">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;smooth&quot;" NodeNote="&quot;smooth&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;flat&quot;" NodeNote="&quot;flat&quot;" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;noperspective&quot;" NodeNote="&quot;noperspective&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="invariant_qualifier" NodeNote="invariant_qualifier" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;invariant&quot;" NodeNote="&quot;invariant&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="precise_qualifier" NodeNote="precise_qualifier" Position="NonLeave" />
+      <RightSection CandidateCount="1">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="&quot;precise&quot;" NodeNote="&quot;precise&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+  </ContextfreeProductionList>
+</ContextfreeGrammar>
