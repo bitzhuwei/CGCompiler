@@ -121,12 +121,12 @@ namespace bitzhuwei.CGCompiler
             builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) +
                 string.Format("if (NodeName != NodeType.ToString())"));
             builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) +
-                string.Format("{ return string.Format(\"{0}\", leave ? \"\" : \"[\", NodeName, NodeType, leave ? \"\" : \"]\"); }",
+                string.Format("{{ return string.Format(\"{0}\", leave ? \"\" : \"[\", NodeName, NodeType, leave ? \"\" : \"]\"); }}",
                     "{0}{1} <= {2}{3}"));
             builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) +
                 string.Format("else"));
             builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) +
-                string.Format("{ return string.Format(\"{0}\", leave ? \"\" : \"[\", NodeName, leave ? \"\" : \"]\"); }",
+                string.Format("{{ return string.Format(\"{0}\", leave ? \"\" : \"[\", NodeName, leave ? \"\" : \"]\"); }}",
                     "{0}{1}{2}"));
             builder.AppendLine(GetSpaces(preSpace) + "}");
         }
