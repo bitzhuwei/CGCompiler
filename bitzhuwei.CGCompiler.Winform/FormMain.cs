@@ -43,14 +43,6 @@ namespace bitzhuwei.CGCompiler.Winform
         public FormMain(string sourceCode)
         {
             InitializeComponent();
-            this.txtSourceCode.Text = sourceCode;
-
-            List<ProductionNode> notImplementedNodeList = GetNotImplementedNodeList(sourceCode);
-
-            var form = new FormNotImplementedNodes(notImplementedNodeList);
-            this.txtSourceCode.AppendText(Environment.NewLine);
-            this.txtSourceCode.AppendText(form.NotimplementedNodeListCode);
-
         }
 
         private void btnBrowseFolder_Click(object sender, EventArgs e)
