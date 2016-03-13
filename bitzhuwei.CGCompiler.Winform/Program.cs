@@ -27,10 +27,11 @@ namespace bitzhuwei.CGCompiler.Winform
         [STAThread]
         static void Main()
         {
-            string sourceCode = 预处理originalGrammar();
+            //string sourceCode = 预处理originalGrammar();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMain4BuildingGrammar(sourceCode));
+            //Application.Run(new FormMain4BuildingGrammar(sourceCode));
+            Application.Run(new FormMain());
         }
 
         private static string 预处理originalGrammar()
