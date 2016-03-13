@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ECF61B07-38E0-4076-9CB2-1B0F14BEDC78}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{C402B9F9-91F0-41A9-BBB7-619268C6D68E}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CSharpGL.GLSL430Compiler</RootNamespace>
-    <AssemblyName>CSharpGL.GLSL430Compiler</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <RootNamespace>CSharpGL.GLSL430Compiler.Test</RootNamespace>
+    <AssemblyName>CSharpGL.GLSL430Compiler.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,28 +41,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EnumCharTypeGLSL430.cs" />
-    <Compile Include="EnumTokenTypeGLSL430.cs" />
-    <Compile Include="EnumVTypeGLSL430.cs" />
-    <Compile Include="LexicalAnalyzerGLSL430.cs" />
-    <Compile Include="LL1SyntaxParserGLSL430.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SyntaxTreeNodeValueGLSL430.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bitzhuwei.CompilerBase.dll" />
-    <Content Include="FirstCollectionErrorGLSL430.txt" />
-    <Content Include="FirstCollectionGLSL430.txt" />
-    <Content Include="FollowCollectionGLSL430.txt" />
-    <Content Include="GLSL430.txt" />
-    <Content Include="GLSL430.xml" />
-    <Content Include="LL1ParserMapGLSL430.txt" />
-    <Content Include="使用说明.txt" />
+    <None Include="App.config" />
+    <None Include="TestCases\01empty.vert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\02uniform.vert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\03flat-in.vert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bitzhuwei.CompilerBase\bitzhuwei.CompilerBase.csproj">
       <Project>{b7205829-1611-487c-9e16-6bf43f98c547}</Project>
       <Name>bitzhuwei.CompilerBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSharpGL.GLSL430Compiler\CSharpGL.GLSL430Compiler.csproj">
+      <Project>{ecf61b07-38e0-4076-9cb2-1b0f14bedc78}</Project>
+      <Name>CSharpGL.GLSL430Compiler</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

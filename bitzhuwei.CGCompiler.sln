@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bitzhuwei.LevelCompiler.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpGL.GLSL430Compiler", "CSharpGL.GLSL430Compiler\CSharpGL.GLSL430Compiler.csproj", "{ECF61B07-38E0-4076-9CB2-1B0F14BEDC78}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpGL.GLSL430Compiler.Test", "CSharpGL.GLSL430Compiler.Test\CSharpGL.GLSL430Compiler.Test.csproj", "{C402B9F9-91F0-41A9-BBB7-619268C6D68E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,6 +123,16 @@ Global
 		{ECF61B07-38E0-4076-9CB2-1B0F14BEDC78}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{ECF61B07-38E0-4076-9CB2-1B0F14BEDC78}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{ECF61B07-38E0-4076-9CB2-1B0F14BEDC78}.Release|x86.ActiveCfg = Release|Any CPU
+		{C402B9F9-91F0-41A9-BBB7-619268C6D68E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C402B9F9-91F0-41A9-BBB7-619268C6D68E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C402B9F9-91F0-41A9-BBB7-619268C6D68E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C402B9F9-91F0-41A9-BBB7-619268C6D68E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C402B9F9-91F0-41A9-BBB7-619268C6D68E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C402B9F9-91F0-41A9-BBB7-619268C6D68E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C402B9F9-91F0-41A9-BBB7-619268C6D68E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C402B9F9-91F0-41A9-BBB7-619268C6D68E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C402B9F9-91F0-41A9-BBB7-619268C6D68E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C402B9F9-91F0-41A9-BBB7-619268C6D68E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
