@@ -117,8 +117,17 @@ namespace bitzhuwei.CGCompiler
             builder.AppendLine(GetSpaces(preSpace) + "public override string ToString()");
             builder.AppendLine(GetSpaces(preSpace) + "{");
             builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) +
-                string.Format("return string.Format(\"{0}\", m_NodeName, m_NodeType);"
-                , "{0}, {1}"));
+                string.Format("bool leave = this.NodeType.ToString().EndsWith(\"Leave\");"));
+            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) +
+                string.Format("if (NodeName != NodeType.ToString())"));
+            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) +
+                string.Format("{ return string.Format(\"{0}\", leave ? \"\" : \"[\", NodeName, NodeType, leave ? \"\" : \"]\"); }",
+                    "{0}{1} <= {2}{3}"));
+            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) +
+                string.Format("else"));
+            builder.AppendLine(GetSpaces(preSpace + m_preSpaceStep) +
+                string.Format("{ return string.Format(\"{0}\", leave ? \"\" : \"[\", NodeName, leave ? \"\" : \"]\"); }",
+                    "{0}{1}{2}"));
             builder.AppendLine(GetSpaces(preSpace) + "}");
         }
         /// <summary>
