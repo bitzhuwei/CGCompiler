@@ -451,7 +451,9 @@ namespace bitzhuwei.CGCompiler
                     var derivationList = parserMap.GetDerivationList(left, next);
                     if (derivationList.Count > 0)
                     {
-                        foreach (var derivation in derivationList)
+                        if(derivationList.Count>1)
+                        { Console.WriteLine("asf"); }
+                        //foreach (var derivation in derivationList)
                         {
                             builder.AppendLine(GetSpaces(preSpace) +
                                 string.Format("{0}.SetCell({1}.{2}, {3}.{4}, {5});"
