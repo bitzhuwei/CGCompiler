@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContextfreeGrammar GrammarName="LR1Demo" Namespace="bitzhuwei.LR1DemoCompiler">
+  <source_code_of_CGCompiler>Name:LR1Demo
+&lt;Start&gt; ::= &lt;Start&gt; ";" &lt;Start&gt; | identifier ":=" &lt;Expression&gt; | "print" "(" &lt;Line&gt; ")";
+&lt;Expression&gt; ::= identifier | number | &lt;Expression&gt; "+" &lt;Expression&gt; | "(" &lt;Start&gt; "," &lt;Expression&gt; ")";
+&lt;Line&gt; ::= &lt;Expression&gt; | &lt;Line&gt; "," &lt;Expression&gt;;
+</source_code_of_CGCompiler>
+  <ContextfreeProductionList Count="3">
+    <ContextfreeProduction>
+      <ProductionNode NodeName="Start" NodeNote="Start" Position="NonLeave" />
+      <RightSection CandidateCount="3">
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="Start" NodeNote="Start" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;;&quot;" NodeNote="&quot;;&quot;" Position="Leave" />
+          <ProductionNode NodeName="Start" NodeNote="Start" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+          <ProductionNode NodeName="&quot;:=&quot;" NodeNote="&quot;:=&quot;" Position="Leave" />
+          <ProductionNode NodeName="Expression" NodeNote="Expression" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="4">
+          <ProductionNode NodeName="&quot;print&quot;" NodeNote="&quot;print&quot;" Position="Leave" />
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="Line" NodeNote="Line" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="Expression" NodeNote="Expression" Position="NonLeave" />
+      <RightSection CandidateCount="4">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="number" NodeNote="number" Position="Leave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="Expression" NodeNote="Expression" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;+&quot;" NodeNote="&quot;+&quot;" Position="Leave" />
+          <ProductionNode NodeName="Expression" NodeNote="Expression" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="5">
+          <ProductionNode NodeName="&quot;(&quot;" NodeNote="&quot;(&quot;" Position="Leave" />
+          <ProductionNode NodeName="Start" NodeNote="Start" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;,&quot;" NodeNote="&quot;,&quot;" Position="Leave" />
+          <ProductionNode NodeName="Expression" NodeNote="Expression" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;)&quot;" NodeNote="&quot;)&quot;" Position="Leave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+    <ContextfreeProduction>
+      <ProductionNode NodeName="Line" NodeNote="Line" Position="NonLeave" />
+      <RightSection CandidateCount="2">
+        <ProductionNodeList NodeCount="1">
+          <ProductionNode NodeName="Expression" NodeNote="Expression" Position="NonLeave" />
+        </ProductionNodeList>
+        <ProductionNodeList NodeCount="3">
+          <ProductionNode NodeName="Line" NodeNote="Line" Position="NonLeave" />
+          <ProductionNode NodeName="&quot;,&quot;" NodeNote="&quot;,&quot;" Position="Leave" />
+          <ProductionNode NodeName="Expression" NodeNote="Expression" Position="NonLeave" />
+        </ProductionNodeList>
+      </RightSection>
+    </ContextfreeProduction>
+  </ContextfreeProductionList>
+</ContextfreeGrammar>

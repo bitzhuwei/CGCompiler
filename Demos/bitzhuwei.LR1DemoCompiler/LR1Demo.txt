@@ -1,0 +1,4 @@
+Name:LR1Demo
+<Start> ::= <Start> ";" <Start> | identifier ":=" <Expression> | "print" "(" <Line> ")";
+<Expression> ::= identifier | number | <Expression> "+" <Expression> | "(" <Start> "," <Expression> ")";
+<Line> ::= <Expression> | <Line> "," <Expression>;

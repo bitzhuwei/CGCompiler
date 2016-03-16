@@ -40,13 +40,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="EnumCharTypeLR1Demo.cs" />
+    <Compile Include="EnumTokenTypeLR1Demo.cs" />
+    <Compile Include="EnumVTypeLR1Demo.cs" />
+    <Compile Include="LexicalAnalyzerLR1Demo.cs" />
+    <Compile Include="LR1SyntaxParserLR1Demo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SyntaxTreeNodeValueLR1Demo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\bitzhuwei.CompilerBase\bitzhuwei.CompilerBase.csproj">
       <Project>{b7205829-1611-487c-9e16-6bf43f98c547}</Project>
       <Name>bitzhuwei.CompilerBase</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LR1Demo.txt" />
+    <Content Include="LR1Demo.xml" />
+    <Content Include="使用说明.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
