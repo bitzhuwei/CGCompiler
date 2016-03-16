@@ -100,8 +100,6 @@ namespace bitzhuwei.CGCompiler
             RightSection vlist = new RightSection();
 
             if (syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_VList___constStringLeave()
-                || syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_VList___identifierLeave()
-                || syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_VList___numberLeave()
                 || syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_VList___tail_constStringLeave()
                 || syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_VList___tail_identifierLeave()
                 || syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_VList___tail_lessThan_Leave()
@@ -134,8 +132,6 @@ namespace bitzhuwei.CGCompiler
                 || syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_VOpt___tail_identifierLeave()
                 || syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_VOpt___tail_numberLeave()
                 || syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_VOpt___tail_constStringLeave()
-                || syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_VOpt___identifierLeave()
-                || syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_VOpt___numberLeave()
                 || syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_VOpt___constStringLeave()
                 || syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_VOpt___tail_lessThan_Leave()
                 )
@@ -189,8 +185,6 @@ namespace bitzhuwei.CGCompiler
                 result = GetGrammarVn(syntaxTree.Children[0]);
             }
             else if (syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_V___constStringLeave()
-                || syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_V___identifierLeave()
-                || syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_V___numberLeave()
                 || syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_V___tail_constStringLeave()
                 || syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_V___tail_identifierLeave()
                 || syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_V___tail_nullLeave()
@@ -230,16 +224,6 @@ namespace bitzhuwei.CGCompiler
             else if (syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_Vt___tail_constStringLeave())
             {
                 result = ProductionNode.tail_constString;
-            }
-            else if (syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_Vt___identifierLeave())
-            {
-                var name = GetGrammaridentifierLeave(syntaxTree.Children[0]);
-                result = new ProductionNode(name, name, EnumProductionNodePosition.Leave);
-            }
-            else if (syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_Vt___numberLeave())
-            {
-                var name = GetGrammarnumberLeave(syntaxTree.Children[0]);
-                result = new ProductionNode(name, name, EnumProductionNodePosition.Leave);
             }
             else if (syntaxTree.CandidateFunc == LL1SyntaxParserCG.GetFuncParsecase_Vt___constStringLeave())
             {

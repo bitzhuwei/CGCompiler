@@ -34,7 +34,7 @@ namespace bitzhuwei.CGCompiler
         /// </summary>
         case_Vn,
         /// <summary>
-        /// &lt;Vt&gt; ::= &quot;null&quot; | &quot;identifier&quot; | &quot;number&quot; | &quot;constString&quot; | identifier | number | constString;
+        /// &lt;Vt&gt; ::= &quot;null&quot; | &quot;identifier&quot; | &quot;number&quot; | &quot;constString&quot; | constString;
         /// </summary>
         case_Vt,
         /// <summary>
@@ -81,10 +81,6 @@ namespace bitzhuwei.CGCompiler
         /// &quot;constString&quot;
         /// </summary>
         tail_constStringLeave,
-        /// <summary>
-        /// number
-        /// </summary>
-        numberLeave,
         /// <summary>
         /// constString
         /// </summary>

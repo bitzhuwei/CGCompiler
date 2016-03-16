@@ -35,12 +35,6 @@ namespace bitzhuwei.CGCompiler
         private static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
             FuncParsecase_VList___tail_lessThan_Leave;
         /// <summary>
-        /// 对 &lt;VList&gt; ::= identifier... 进行分析
-        /// <para>&lt;VList&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
-        /// </summary>
-        private static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            FuncParsecase_VList___identifierLeave;
-        /// <summary>
         /// 对 &lt;VList&gt; ::= &quot;null&quot;... 进行分析
         /// <para>&lt;VList&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
         /// </summary>
@@ -65,12 +59,6 @@ namespace bitzhuwei.CGCompiler
         private static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
             FuncParsecase_VList___tail_constStringLeave;
         /// <summary>
-        /// 对 &lt;VList&gt; ::= number... 进行分析
-        /// <para>&lt;VList&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
-        /// </summary>
-        private static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            FuncParsecase_VList___numberLeave;
-        /// <summary>
         /// 对 &lt;VList&gt; ::= constString... 进行分析
         /// <para>&lt;VList&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
         /// </summary>
@@ -82,12 +70,6 @@ namespace bitzhuwei.CGCompiler
         /// </summary>
         private static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
             FuncParsecase_V___tail_lessThan_Leave;
-        /// <summary>
-        /// 对 &lt;V&gt; ::= identifier... 进行分析
-        /// <para>&lt;V&gt; ::= &lt;Vt&gt;;</para>
-        /// </summary>
-        private static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            FuncParsecase_V___identifierLeave;
         /// <summary>
         /// 对 &lt;V&gt; ::= &quot;null&quot;... 进行分析
         /// <para>&lt;V&gt; ::= &lt;Vt&gt;;</para>
@@ -113,12 +95,6 @@ namespace bitzhuwei.CGCompiler
         private static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
             FuncParsecase_V___tail_constStringLeave;
         /// <summary>
-        /// 对 &lt;V&gt; ::= number... 进行分析
-        /// <para>&lt;V&gt; ::= &lt;Vt&gt;;</para>
-        /// </summary>
-        private static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            FuncParsecase_V___numberLeave;
-        /// <summary>
         /// 对 &lt;V&gt; ::= constString... 进行分析
         /// <para>&lt;V&gt; ::= &lt;Vt&gt;;</para>
         /// </summary>
@@ -142,12 +118,6 @@ namespace bitzhuwei.CGCompiler
         /// </summary>
         private static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
             FuncParsecase_VOpt___tail_lessThan_Leave;
-        /// <summary>
-        /// 对 &lt;VOpt&gt; ::= identifier... 进行分析
-        /// <para>&lt;VOpt&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
-        /// </summary>
-        private static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            FuncParsecase_VOpt___identifierLeave;
         /// <summary>
         /// 对 &lt;VOpt&gt; ::= &quot;null&quot;... 进行分析
         /// <para>&lt;VOpt&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
@@ -173,12 +143,6 @@ namespace bitzhuwei.CGCompiler
         private static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
             FuncParsecase_VOpt___tail_constStringLeave;
         /// <summary>
-        /// 对 &lt;VOpt&gt; ::= number... 进行分析
-        /// <para>&lt;VOpt&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
-        /// </summary>
-        private static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            FuncParsecase_VOpt___numberLeave;
-        /// <summary>
         /// 对 &lt;VOpt&gt; ::= constString... 进行分析
         /// <para>&lt;VOpt&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
         /// </summary>
@@ -190,12 +154,6 @@ namespace bitzhuwei.CGCompiler
         /// </summary>
         private static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
             FuncParsecase_Vn___tail_lessThan_Leave;
-        /// <summary>
-        /// 对 &lt;Vt&gt; ::= identifier... 进行分析
-        /// <para>&lt;Vt&gt; ::= identifier;</para>
-        /// </summary>
-        private static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            FuncParsecase_Vt___identifierLeave;
         /// <summary>
         /// 对 &lt;Vt&gt; ::= &quot;null&quot;... 进行分析
         /// <para>&lt;Vt&gt; ::= &quot;null&quot;;</para>
@@ -220,12 +178,6 @@ namespace bitzhuwei.CGCompiler
         /// </summary>
         private static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
             FuncParsecase_Vt___tail_constStringLeave;
-        /// <summary>
-        /// 对 &lt;Vt&gt; ::= number... 进行分析
-        /// <para>&lt;Vt&gt; ::= number;</para>
-        /// </summary>
-        private static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            FuncParsecase_Vt___numberLeave;
         /// <summary>
         /// 对 &lt;Vt&gt; ::= constString... 进行分析
         /// <para>&lt;Vt&gt; ::= constString;</para>
@@ -289,11 +241,6 @@ namespace bitzhuwei.CGCompiler
         private static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
             FuncParsetail_constStringLeave_;
         /// <summary>
-        /// 对 叶结点number 进行分析
-        /// </summary>
-        private static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            FuncParsenumberLeave_;
-        /// <summary>
         /// 对 叶结点constString 进行分析
         /// </summary>
         private static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
@@ -318,7 +265,6 @@ namespace bitzhuwei.CGCompiler
         private static readonly EnumVTypeCG m_tail_identifierLeave = EnumVTypeCG.tail_identifierLeave;
         private static readonly EnumVTypeCG m_tail_numberLeave = EnumVTypeCG.tail_numberLeave;
         private static readonly EnumVTypeCG m_tail_constStringLeave = EnumVTypeCG.tail_constStringLeave;
-        private static readonly EnumVTypeCG m_numberLeave = EnumVTypeCG.numberLeave;
         private static readonly EnumVTypeCG m_constStringLeave = EnumVTypeCG.constStringLeave;
         private static readonly EnumVTypeCG m_tail_startEndLeave = EnumVTypeCG.tail_startEndLeave;
         
@@ -373,15 +319,6 @@ namespace bitzhuwei.CGCompiler
             return FuncParsecase_VList___tail_lessThan_Leave;
         }
         /// <summary>
-        /// 对 &lt;VList&gt; ::= identifier... 进行分析
-        /// <para>&lt;VList&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
-        /// </summary>
-        public static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            GetFuncParsecase_VList___identifierLeave()
-        {
-            return FuncParsecase_VList___identifierLeave;
-        }
-        /// <summary>
         /// 对 &lt;VList&gt; ::= &quot;null&quot;... 进行分析
         /// <para>&lt;VList&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
         /// </summary>
@@ -418,15 +355,6 @@ namespace bitzhuwei.CGCompiler
             return FuncParsecase_VList___tail_constStringLeave;
         }
         /// <summary>
-        /// 对 &lt;VList&gt; ::= number... 进行分析
-        /// <para>&lt;VList&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
-        /// </summary>
-        public static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            GetFuncParsecase_VList___numberLeave()
-        {
-            return FuncParsecase_VList___numberLeave;
-        }
-        /// <summary>
         /// 对 &lt;VList&gt; ::= constString... 进行分析
         /// <para>&lt;VList&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
         /// </summary>
@@ -443,15 +371,6 @@ namespace bitzhuwei.CGCompiler
             GetFuncParsecase_V___tail_lessThan_Leave()
         {
             return FuncParsecase_V___tail_lessThan_Leave;
-        }
-        /// <summary>
-        /// 对 &lt;V&gt; ::= identifier... 进行分析
-        /// <para>&lt;V&gt; ::= &lt;Vt&gt;;</para>
-        /// </summary>
-        public static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            GetFuncParsecase_V___identifierLeave()
-        {
-            return FuncParsecase_V___identifierLeave;
         }
         /// <summary>
         /// 对 &lt;V&gt; ::= &quot;null&quot;... 进行分析
@@ -490,15 +409,6 @@ namespace bitzhuwei.CGCompiler
             return FuncParsecase_V___tail_constStringLeave;
         }
         /// <summary>
-        /// 对 &lt;V&gt; ::= number... 进行分析
-        /// <para>&lt;V&gt; ::= &lt;Vt&gt;;</para>
-        /// </summary>
-        public static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            GetFuncParsecase_V___numberLeave()
-        {
-            return FuncParsecase_V___numberLeave;
-        }
-        /// <summary>
         /// 对 &lt;V&gt; ::= constString... 进行分析
         /// <para>&lt;V&gt; ::= &lt;Vt&gt;;</para>
         /// </summary>
@@ -533,15 +443,6 @@ namespace bitzhuwei.CGCompiler
             GetFuncParsecase_VOpt___tail_lessThan_Leave()
         {
             return FuncParsecase_VOpt___tail_lessThan_Leave;
-        }
-        /// <summary>
-        /// 对 &lt;VOpt&gt; ::= identifier... 进行分析
-        /// <para>&lt;VOpt&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
-        /// </summary>
-        public static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            GetFuncParsecase_VOpt___identifierLeave()
-        {
-            return FuncParsecase_VOpt___identifierLeave;
         }
         /// <summary>
         /// 对 &lt;VOpt&gt; ::= &quot;null&quot;... 进行分析
@@ -580,15 +481,6 @@ namespace bitzhuwei.CGCompiler
             return FuncParsecase_VOpt___tail_constStringLeave;
         }
         /// <summary>
-        /// 对 &lt;VOpt&gt; ::= number... 进行分析
-        /// <para>&lt;VOpt&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
-        /// </summary>
-        public static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            GetFuncParsecase_VOpt___numberLeave()
-        {
-            return FuncParsecase_VOpt___numberLeave;
-        }
-        /// <summary>
         /// 对 &lt;VOpt&gt; ::= constString... 进行分析
         /// <para>&lt;VOpt&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
         /// </summary>
@@ -605,15 +497,6 @@ namespace bitzhuwei.CGCompiler
             GetFuncParsecase_Vn___tail_lessThan_Leave()
         {
             return FuncParsecase_Vn___tail_lessThan_Leave;
-        }
-        /// <summary>
-        /// 对 &lt;Vt&gt; ::= identifier... 进行分析
-        /// <para>&lt;Vt&gt; ::= identifier;</para>
-        /// </summary>
-        public static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            GetFuncParsecase_Vt___identifierLeave()
-        {
-            return FuncParsecase_Vt___identifierLeave;
         }
         /// <summary>
         /// 对 &lt;Vt&gt; ::= &quot;null&quot;... 进行分析
@@ -650,15 +533,6 @@ namespace bitzhuwei.CGCompiler
             GetFuncParsecase_Vt___tail_constStringLeave()
         {
             return FuncParsecase_Vt___tail_constStringLeave;
-        }
-        /// <summary>
-        /// 对 &lt;Vt&gt; ::= number... 进行分析
-        /// <para>&lt;Vt&gt; ::= number;</para>
-        /// </summary>
-        public static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            GetFuncParsecase_Vt___numberLeave()
-        {
-            return FuncParsecase_Vt___numberLeave;
         }
         /// <summary>
         /// 对 &lt;Vt&gt; ::= constString... 进行分析
@@ -759,14 +633,6 @@ namespace bitzhuwei.CGCompiler
             return FuncParsetail_constStringLeave_;
         }
         /// <summary>
-        /// 对 叶结点number 进行分析
-        /// </summary>
-        public static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            GetFuncParsenumberLeave_()
-        {
-            return FuncParsenumberLeave_;
-        }
-        /// <summary>
         /// 对 叶结点constString 进行分析
         /// </summary>
         public static CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
@@ -839,19 +705,6 @@ namespace bitzhuwei.CGCompiler
             return Derivationcase_VList___case_Vcase_VOpt(result, parser);
         }
         /// <summary>
-        /// 对 &lt;VList&gt; ::= identifier... 进行分析
-        /// <para>&lt;VList&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
-        /// <param name="result"></param>
-        /// <param name="parser"></param>
-        /// </summary>
-        /// <returns></returns>
-        private static SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            Parsecase_VList___identifierLeave(SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> result, ISyntaxParser<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> parser)
-        {
-            // <VList> ::= <V> <VOpt>;
-            return Derivationcase_VList___case_Vcase_VOpt(result, parser);
-        }
-        /// <summary>
         /// 对 &lt;VList&gt; ::= &quot;null&quot;... 进行分析
         /// <para>&lt;VList&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
         /// <param name="result"></param>
@@ -904,19 +757,6 @@ namespace bitzhuwei.CGCompiler
             return Derivationcase_VList___case_Vcase_VOpt(result, parser);
         }
         /// <summary>
-        /// 对 &lt;VList&gt; ::= number... 进行分析
-        /// <para>&lt;VList&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
-        /// <param name="result"></param>
-        /// <param name="parser"></param>
-        /// </summary>
-        /// <returns></returns>
-        private static SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            Parsecase_VList___numberLeave(SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> result, ISyntaxParser<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> parser)
-        {
-            // <VList> ::= <V> <VOpt>;
-            return Derivationcase_VList___case_Vcase_VOpt(result, parser);
-        }
-        /// <summary>
         /// 对 &lt;VList&gt; ::= constString... 进行分析
         /// <para>&lt;VList&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
         /// <param name="result"></param>
@@ -941,19 +781,6 @@ namespace bitzhuwei.CGCompiler
         {
             // <V> ::= <Vn>;
             return Derivationcase_V___case_Vn(result, parser);
-        }
-        /// <summary>
-        /// 对 &lt;V&gt; ::= identifier... 进行分析
-        /// <para>&lt;V&gt; ::= &lt;Vt&gt;;</para>
-        /// <param name="result"></param>
-        /// <param name="parser"></param>
-        /// </summary>
-        /// <returns></returns>
-        private static SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            Parsecase_V___identifierLeave(SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> result, ISyntaxParser<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> parser)
-        {
-            // <V> ::= <Vt>;
-            return Derivationcase_V___case_Vt(result, parser);
         }
         /// <summary>
         /// 对 &lt;V&gt; ::= &quot;null&quot;... 进行分析
@@ -1003,19 +830,6 @@ namespace bitzhuwei.CGCompiler
         /// <returns></returns>
         private static SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
             Parsecase_V___tail_constStringLeave(SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> result, ISyntaxParser<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> parser)
-        {
-            // <V> ::= <Vt>;
-            return Derivationcase_V___case_Vt(result, parser);
-        }
-        /// <summary>
-        /// 对 &lt;V&gt; ::= number... 进行分析
-        /// <para>&lt;V&gt; ::= &lt;Vt&gt;;</para>
-        /// <param name="result"></param>
-        /// <param name="parser"></param>
-        /// </summary>
-        /// <returns></returns>
-        private static SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            Parsecase_V___numberLeave(SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> result, ISyntaxParser<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> parser)
         {
             // <V> ::= <Vt>;
             return Derivationcase_V___case_Vt(result, parser);
@@ -1073,19 +887,6 @@ namespace bitzhuwei.CGCompiler
             return Derivationcase_VOpt___case_Vcase_VOpt(result, parser);
         }
         /// <summary>
-        /// 对 &lt;VOpt&gt; ::= identifier... 进行分析
-        /// <para>&lt;VOpt&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
-        /// <param name="result"></param>
-        /// <param name="parser"></param>
-        /// </summary>
-        /// <returns></returns>
-        private static SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            Parsecase_VOpt___identifierLeave(SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> result, ISyntaxParser<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> parser)
-        {
-            // <VOpt> ::= <V> <VOpt>;
-            return Derivationcase_VOpt___case_Vcase_VOpt(result, parser);
-        }
-        /// <summary>
         /// 对 &lt;VOpt&gt; ::= &quot;null&quot;... 进行分析
         /// <para>&lt;VOpt&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
         /// <param name="result"></param>
@@ -1138,19 +939,6 @@ namespace bitzhuwei.CGCompiler
             return Derivationcase_VOpt___case_Vcase_VOpt(result, parser);
         }
         /// <summary>
-        /// 对 &lt;VOpt&gt; ::= number... 进行分析
-        /// <para>&lt;VOpt&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
-        /// <param name="result"></param>
-        /// <param name="parser"></param>
-        /// </summary>
-        /// <returns></returns>
-        private static SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            Parsecase_VOpt___numberLeave(SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> result, ISyntaxParser<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> parser)
-        {
-            // <VOpt> ::= <V> <VOpt>;
-            return Derivationcase_VOpt___case_Vcase_VOpt(result, parser);
-        }
-        /// <summary>
         /// 对 &lt;VOpt&gt; ::= constString... 进行分析
         /// <para>&lt;VOpt&gt; ::= &lt;V&gt; &lt;VOpt&gt;;</para>
         /// <param name="result"></param>
@@ -1175,19 +963,6 @@ namespace bitzhuwei.CGCompiler
         {
             // <Vn> ::= "<" identifier ">";
             return Derivationcase_Vn___tail_lessThan_LeaveidentifierLeavetail_greaterThan_Leave(result, parser);
-        }
-        /// <summary>
-        /// 对 &lt;Vt&gt; ::= identifier... 进行分析
-        /// <para>&lt;Vt&gt; ::= identifier;</para>
-        /// <param name="result"></param>
-        /// <param name="parser"></param>
-        /// </summary>
-        /// <returns></returns>
-        private static SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            Parsecase_Vt___identifierLeave(SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> result, ISyntaxParser<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> parser)
-        {
-            // <Vt> ::= identifier;
-            return Derivationcase_Vt___identifierLeave(result, parser);
         }
         /// <summary>
         /// 对 &lt;Vt&gt; ::= &quot;null&quot;... 进行分析
@@ -1240,19 +1015,6 @@ namespace bitzhuwei.CGCompiler
         {
             // <Vt> ::= "constString";
             return Derivationcase_Vt___tail_constStringLeave(result, parser);
-        }
-        /// <summary>
-        /// 对 &lt;Vt&gt; ::= number... 进行分析
-        /// <para>&lt;Vt&gt; ::= number;</para>
-        /// <param name="result"></param>
-        /// <param name="parser"></param>
-        /// </summary>
-        /// <returns></returns>
-        private static SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            Parsecase_Vt___numberLeave(SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> result, ISyntaxParser<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> parser)
-        {
-            // <Vt> ::= number;
-            return Derivationcase_Vt___numberLeave(result, parser);
         }
         /// <summary>
         /// 对 &lt;Vt&gt; ::= constString... 进行分析
@@ -1468,25 +1230,6 @@ namespace bitzhuwei.CGCompiler
         {
             var parserCG = parser as LL1SyntaxParserCG;
             result.NodeValue.NodeType = EnumVTypeCG.tail_constStringLeave;
-            result.NodeValue.NodeName = parserCG.m_TokenListSource[parserCG.m_ptNextToken].Detail;
-            result.MappedTotalTokenList = parserCG.m_TokenListSource;
-            result.MappedTokenStartIndex = parserCG.m_ptNextToken;
-            parserCG.m_ptNextToken++;
-            result.MappedTokenLength = 1;
-            parserCG.m_ParserStack.Pop();
-            return Next(result, parserCG);
-        }
-        /// <summary>
-        /// 对 叶结点number 进行分析
-        /// <param name="result"></param>
-        /// <param name="parser"></param>
-        /// </summary>
-        /// <returns></returns>
-        private static SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            ParsenumberLeave_(SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> result, ISyntaxParser<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> parser)
-        {
-            var parserCG = parser as LL1SyntaxParserCG;
-            result.NodeValue.NodeType = EnumVTypeCG.numberLeave;
             result.NodeValue.NodeName = parserCG.m_TokenListSource[parserCG.m_ptNextToken].Detail;
             result.MappedTotalTokenList = parserCG.m_TokenListSource;
             result.MappedTokenStartIndex = parserCG.m_ptNextToken;
@@ -2045,64 +1788,6 @@ namespace bitzhuwei.CGCompiler
             return tail_constStringLeaveTree0;
         }//<Vt> ::= "constString";
         /// <summary>
-        /// &lt;Vt&gt; ::= identifier;
-        /// <summary>
-        /// <param name="result">需要扩展的结点</param>
-        /// <param name="parser">使用的分析器对象</param>
-        /// <returns>下一个要扩展的结点</returns>
-        private static SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            Derivationcase_Vt___identifierLeave(
-            SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> result,
-            ISyntaxParser<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> parser)
-        {//<Vt> ::= identifier;
-            var parserCG = parser as LL1SyntaxParserCG;
-            result.NodeValue.NodeType = EnumVTypeCG.case_Vt;
-            result.NodeValue.NodeName = EnumVTypeCG.case_Vt.ToString();
-            //result.NodeValue.Position = EnumProductionNodePosition.NonLeave;
-            result.MappedTotalTokenList = parserCG.m_TokenListSource;
-            result.MappedTokenStartIndex = parserCG.m_ptNextToken;
-            parserCG.m_ParserStack.Pop();
-            // right-to-left push
-            parserCG.m_ParserStack.Push(m_identifierLeave);
-            // generate syntax tree
-            var identifierLeaveTree0 = new SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>();
-            identifierLeaveTree0.MappedTotalTokenList = parserCG.m_TokenListSource;
-            identifierLeaveTree0.MappedTokenStartIndex = parserCG.m_ptNextToken;
-            identifierLeaveTree0.Parent = result;
-            //identifierLeaveTree0.Value = new ProductionNode(EnumVTypeCG.identifierLeave);
-            result.Children.Add(identifierLeaveTree0);
-            return identifierLeaveTree0;
-        }//<Vt> ::= identifier;
-        /// <summary>
-        /// &lt;Vt&gt; ::= number;
-        /// <summary>
-        /// <param name="result">需要扩展的结点</param>
-        /// <param name="parser">使用的分析器对象</param>
-        /// <returns>下一个要扩展的结点</returns>
-        private static SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>
-            Derivationcase_Vt___numberLeave(
-            SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> result,
-            ISyntaxParser<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG> parser)
-        {//<Vt> ::= number;
-            var parserCG = parser as LL1SyntaxParserCG;
-            result.NodeValue.NodeType = EnumVTypeCG.case_Vt;
-            result.NodeValue.NodeName = EnumVTypeCG.case_Vt.ToString();
-            //result.NodeValue.Position = EnumProductionNodePosition.NonLeave;
-            result.MappedTotalTokenList = parserCG.m_TokenListSource;
-            result.MappedTokenStartIndex = parserCG.m_ptNextToken;
-            parserCG.m_ParserStack.Pop();
-            // right-to-left push
-            parserCG.m_ParserStack.Push(m_numberLeave);
-            // generate syntax tree
-            var numberLeaveTree0 = new SyntaxTree<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>();
-            numberLeaveTree0.MappedTotalTokenList = parserCG.m_TokenListSource;
-            numberLeaveTree0.MappedTokenStartIndex = parserCG.m_ptNextToken;
-            numberLeaveTree0.Parent = result;
-            //numberLeaveTree0.Value = new ProductionNode(EnumVTypeCG.numberLeave);
-            result.Children.Add(numberLeaveTree0);
-            return numberLeaveTree0;
-        }//<Vt> ::= number;
-        /// <summary>
         /// &lt;Vt&gt; ::= constString;
         /// <summary>
         /// <param name="result">需要扩展的结点</param>
@@ -2141,38 +1826,30 @@ namespace bitzhuwei.CGCompiler
             m_Map.SetCell(EnumVTypeCG.case_PList, EnumTokenTypeCG.token_LessThan_, FuncParsecase_PList___tail_lessThan_Leave);
             m_Map.SetCell(EnumVTypeCG.case_PList, EnumTokenTypeCG.token_startEnd, FuncParsecase_PList___tail_startEndLeave);
             m_Map.SetCell(EnumVTypeCG.case_VList, EnumTokenTypeCG.token_LessThan_, FuncParsecase_VList___tail_lessThan_Leave);
-            m_Map.SetCell(EnumVTypeCG.case_VList, EnumTokenTypeCG.identifier, FuncParsecase_VList___identifierLeave);
             m_Map.SetCell(EnumVTypeCG.case_VList, EnumTokenTypeCG.token_null, FuncParsecase_VList___tail_nullLeave);
             m_Map.SetCell(EnumVTypeCG.case_VList, EnumTokenTypeCG.token_identifier, FuncParsecase_VList___tail_identifierLeave);
             m_Map.SetCell(EnumVTypeCG.case_VList, EnumTokenTypeCG.token_number, FuncParsecase_VList___tail_numberLeave);
             m_Map.SetCell(EnumVTypeCG.case_VList, EnumTokenTypeCG.token_constString, FuncParsecase_VList___tail_constStringLeave);
-            m_Map.SetCell(EnumVTypeCG.case_VList, EnumTokenTypeCG.number, FuncParsecase_VList___numberLeave);
             m_Map.SetCell(EnumVTypeCG.case_VList, EnumTokenTypeCG.constString, FuncParsecase_VList___constStringLeave);
             m_Map.SetCell(EnumVTypeCG.case_V, EnumTokenTypeCG.token_LessThan_, FuncParsecase_V___tail_lessThan_Leave);
-            m_Map.SetCell(EnumVTypeCG.case_V, EnumTokenTypeCG.identifier, FuncParsecase_V___identifierLeave);
             m_Map.SetCell(EnumVTypeCG.case_V, EnumTokenTypeCG.token_null, FuncParsecase_V___tail_nullLeave);
             m_Map.SetCell(EnumVTypeCG.case_V, EnumTokenTypeCG.token_identifier, FuncParsecase_V___tail_identifierLeave);
             m_Map.SetCell(EnumVTypeCG.case_V, EnumTokenTypeCG.token_number, FuncParsecase_V___tail_numberLeave);
             m_Map.SetCell(EnumVTypeCG.case_V, EnumTokenTypeCG.token_constString, FuncParsecase_V___tail_constStringLeave);
-            m_Map.SetCell(EnumVTypeCG.case_V, EnumTokenTypeCG.number, FuncParsecase_V___numberLeave);
             m_Map.SetCell(EnumVTypeCG.case_V, EnumTokenTypeCG.constString, FuncParsecase_V___constStringLeave);
             m_Map.SetCell(EnumVTypeCG.case_VOpt, EnumTokenTypeCG.token_Semicolon_, FuncParsecase_VOpt___tail_semicolon_Leave);
             m_Map.SetCell(EnumVTypeCG.case_VOpt, EnumTokenTypeCG.token_Or_, FuncParsecase_VOpt___tail_or_Leave);
             m_Map.SetCell(EnumVTypeCG.case_VOpt, EnumTokenTypeCG.token_LessThan_, FuncParsecase_VOpt___tail_lessThan_Leave);
-            m_Map.SetCell(EnumVTypeCG.case_VOpt, EnumTokenTypeCG.identifier, FuncParsecase_VOpt___identifierLeave);
             m_Map.SetCell(EnumVTypeCG.case_VOpt, EnumTokenTypeCG.token_null, FuncParsecase_VOpt___tail_nullLeave);
             m_Map.SetCell(EnumVTypeCG.case_VOpt, EnumTokenTypeCG.token_identifier, FuncParsecase_VOpt___tail_identifierLeave);
             m_Map.SetCell(EnumVTypeCG.case_VOpt, EnumTokenTypeCG.token_number, FuncParsecase_VOpt___tail_numberLeave);
             m_Map.SetCell(EnumVTypeCG.case_VOpt, EnumTokenTypeCG.token_constString, FuncParsecase_VOpt___tail_constStringLeave);
-            m_Map.SetCell(EnumVTypeCG.case_VOpt, EnumTokenTypeCG.number, FuncParsecase_VOpt___numberLeave);
             m_Map.SetCell(EnumVTypeCG.case_VOpt, EnumTokenTypeCG.constString, FuncParsecase_VOpt___constStringLeave);
             m_Map.SetCell(EnumVTypeCG.case_Vn, EnumTokenTypeCG.token_LessThan_, FuncParsecase_Vn___tail_lessThan_Leave);
-            m_Map.SetCell(EnumVTypeCG.case_Vt, EnumTokenTypeCG.identifier, FuncParsecase_Vt___identifierLeave);
             m_Map.SetCell(EnumVTypeCG.case_Vt, EnumTokenTypeCG.token_null, FuncParsecase_Vt___tail_nullLeave);
             m_Map.SetCell(EnumVTypeCG.case_Vt, EnumTokenTypeCG.token_identifier, FuncParsecase_Vt___tail_identifierLeave);
             m_Map.SetCell(EnumVTypeCG.case_Vt, EnumTokenTypeCG.token_number, FuncParsecase_Vt___tail_numberLeave);
             m_Map.SetCell(EnumVTypeCG.case_Vt, EnumTokenTypeCG.token_constString, FuncParsecase_Vt___tail_constStringLeave);
-            m_Map.SetCell(EnumVTypeCG.case_Vt, EnumTokenTypeCG.number, FuncParsecase_Vt___numberLeave);
             m_Map.SetCell(EnumVTypeCG.case_Vt, EnumTokenTypeCG.constString, FuncParsecase_Vt___constStringLeave);
             
             m_Map.SetCell(EnumVTypeCG.tail_colon_Colon_Equality_Leave, EnumTokenTypeCG.token_Colon_Colon_Equality_, FuncParsetail_colon_Colon_Equality_Leave_);
@@ -2186,7 +1863,6 @@ namespace bitzhuwei.CGCompiler
             m_Map.SetCell(EnumVTypeCG.tail_colon_Colon_Equality_Leave, EnumTokenTypeCG.token_identifier, FuncParsetail_colon_Colon_Equality_Leave_);
             m_Map.SetCell(EnumVTypeCG.tail_colon_Colon_Equality_Leave, EnumTokenTypeCG.token_number, FuncParsetail_colon_Colon_Equality_Leave_);
             m_Map.SetCell(EnumVTypeCG.tail_colon_Colon_Equality_Leave, EnumTokenTypeCG.token_constString, FuncParsetail_colon_Colon_Equality_Leave_);
-            m_Map.SetCell(EnumVTypeCG.tail_colon_Colon_Equality_Leave, EnumTokenTypeCG.number, FuncParsetail_colon_Colon_Equality_Leave_);
             m_Map.SetCell(EnumVTypeCG.tail_colon_Colon_Equality_Leave, EnumTokenTypeCG.constString, FuncParsetail_colon_Colon_Equality_Leave_);
             m_Map.SetCell(EnumVTypeCG.tail_colon_Colon_Equality_Leave, EnumTokenTypeCG.token_startEnd, FuncParsetail_colon_Colon_Equality_Leave_);
             
@@ -2201,7 +1877,6 @@ namespace bitzhuwei.CGCompiler
             m_Map.SetCell(EnumVTypeCG.tail_semicolon_Leave, EnumTokenTypeCG.token_identifier, FuncParsetail_semicolon_Leave_);
             m_Map.SetCell(EnumVTypeCG.tail_semicolon_Leave, EnumTokenTypeCG.token_number, FuncParsetail_semicolon_Leave_);
             m_Map.SetCell(EnumVTypeCG.tail_semicolon_Leave, EnumTokenTypeCG.token_constString, FuncParsetail_semicolon_Leave_);
-            m_Map.SetCell(EnumVTypeCG.tail_semicolon_Leave, EnumTokenTypeCG.number, FuncParsetail_semicolon_Leave_);
             m_Map.SetCell(EnumVTypeCG.tail_semicolon_Leave, EnumTokenTypeCG.constString, FuncParsetail_semicolon_Leave_);
             m_Map.SetCell(EnumVTypeCG.tail_semicolon_Leave, EnumTokenTypeCG.token_startEnd, FuncParsetail_semicolon_Leave_);
             
@@ -2216,7 +1891,6 @@ namespace bitzhuwei.CGCompiler
             m_Map.SetCell(EnumVTypeCG.epsilonLeave, EnumTokenTypeCG.token_identifier, FuncParseepsilonLeave_);
             m_Map.SetCell(EnumVTypeCG.epsilonLeave, EnumTokenTypeCG.token_number, FuncParseepsilonLeave_);
             m_Map.SetCell(EnumVTypeCG.epsilonLeave, EnumTokenTypeCG.token_constString, FuncParseepsilonLeave_);
-            m_Map.SetCell(EnumVTypeCG.epsilonLeave, EnumTokenTypeCG.number, FuncParseepsilonLeave_);
             m_Map.SetCell(EnumVTypeCG.epsilonLeave, EnumTokenTypeCG.constString, FuncParseepsilonLeave_);
             m_Map.SetCell(EnumVTypeCG.epsilonLeave, EnumTokenTypeCG.token_startEnd, FuncParseepsilonLeave_);
             
@@ -2231,7 +1905,6 @@ namespace bitzhuwei.CGCompiler
             m_Map.SetCell(EnumVTypeCG.tail_or_Leave, EnumTokenTypeCG.token_identifier, FuncParsetail_or_Leave_);
             m_Map.SetCell(EnumVTypeCG.tail_or_Leave, EnumTokenTypeCG.token_number, FuncParsetail_or_Leave_);
             m_Map.SetCell(EnumVTypeCG.tail_or_Leave, EnumTokenTypeCG.token_constString, FuncParsetail_or_Leave_);
-            m_Map.SetCell(EnumVTypeCG.tail_or_Leave, EnumTokenTypeCG.number, FuncParsetail_or_Leave_);
             m_Map.SetCell(EnumVTypeCG.tail_or_Leave, EnumTokenTypeCG.constString, FuncParsetail_or_Leave_);
             m_Map.SetCell(EnumVTypeCG.tail_or_Leave, EnumTokenTypeCG.token_startEnd, FuncParsetail_or_Leave_);
             
@@ -2246,7 +1919,6 @@ namespace bitzhuwei.CGCompiler
             m_Map.SetCell(EnumVTypeCG.tail_lessThan_Leave, EnumTokenTypeCG.token_identifier, FuncParsetail_lessThan_Leave_);
             m_Map.SetCell(EnumVTypeCG.tail_lessThan_Leave, EnumTokenTypeCG.token_number, FuncParsetail_lessThan_Leave_);
             m_Map.SetCell(EnumVTypeCG.tail_lessThan_Leave, EnumTokenTypeCG.token_constString, FuncParsetail_lessThan_Leave_);
-            m_Map.SetCell(EnumVTypeCG.tail_lessThan_Leave, EnumTokenTypeCG.number, FuncParsetail_lessThan_Leave_);
             m_Map.SetCell(EnumVTypeCG.tail_lessThan_Leave, EnumTokenTypeCG.constString, FuncParsetail_lessThan_Leave_);
             m_Map.SetCell(EnumVTypeCG.tail_lessThan_Leave, EnumTokenTypeCG.token_startEnd, FuncParsetail_lessThan_Leave_);
             
@@ -2261,7 +1933,6 @@ namespace bitzhuwei.CGCompiler
             m_Map.SetCell(EnumVTypeCG.identifierLeave, EnumTokenTypeCG.token_identifier, FuncParseidentifierLeave_);
             m_Map.SetCell(EnumVTypeCG.identifierLeave, EnumTokenTypeCG.token_number, FuncParseidentifierLeave_);
             m_Map.SetCell(EnumVTypeCG.identifierLeave, EnumTokenTypeCG.token_constString, FuncParseidentifierLeave_);
-            m_Map.SetCell(EnumVTypeCG.identifierLeave, EnumTokenTypeCG.number, FuncParseidentifierLeave_);
             m_Map.SetCell(EnumVTypeCG.identifierLeave, EnumTokenTypeCG.constString, FuncParseidentifierLeave_);
             m_Map.SetCell(EnumVTypeCG.identifierLeave, EnumTokenTypeCG.token_startEnd, FuncParseidentifierLeave_);
             
@@ -2276,7 +1947,6 @@ namespace bitzhuwei.CGCompiler
             m_Map.SetCell(EnumVTypeCG.tail_greaterThan_Leave, EnumTokenTypeCG.token_identifier, FuncParsetail_greaterThan_Leave_);
             m_Map.SetCell(EnumVTypeCG.tail_greaterThan_Leave, EnumTokenTypeCG.token_number, FuncParsetail_greaterThan_Leave_);
             m_Map.SetCell(EnumVTypeCG.tail_greaterThan_Leave, EnumTokenTypeCG.token_constString, FuncParsetail_greaterThan_Leave_);
-            m_Map.SetCell(EnumVTypeCG.tail_greaterThan_Leave, EnumTokenTypeCG.number, FuncParsetail_greaterThan_Leave_);
             m_Map.SetCell(EnumVTypeCG.tail_greaterThan_Leave, EnumTokenTypeCG.constString, FuncParsetail_greaterThan_Leave_);
             m_Map.SetCell(EnumVTypeCG.tail_greaterThan_Leave, EnumTokenTypeCG.token_startEnd, FuncParsetail_greaterThan_Leave_);
             
@@ -2291,7 +1961,6 @@ namespace bitzhuwei.CGCompiler
             m_Map.SetCell(EnumVTypeCG.tail_nullLeave, EnumTokenTypeCG.token_identifier, FuncParsetail_nullLeave_);
             m_Map.SetCell(EnumVTypeCG.tail_nullLeave, EnumTokenTypeCG.token_number, FuncParsetail_nullLeave_);
             m_Map.SetCell(EnumVTypeCG.tail_nullLeave, EnumTokenTypeCG.token_constString, FuncParsetail_nullLeave_);
-            m_Map.SetCell(EnumVTypeCG.tail_nullLeave, EnumTokenTypeCG.number, FuncParsetail_nullLeave_);
             m_Map.SetCell(EnumVTypeCG.tail_nullLeave, EnumTokenTypeCG.constString, FuncParsetail_nullLeave_);
             m_Map.SetCell(EnumVTypeCG.tail_nullLeave, EnumTokenTypeCG.token_startEnd, FuncParsetail_nullLeave_);
             
@@ -2306,7 +1975,6 @@ namespace bitzhuwei.CGCompiler
             m_Map.SetCell(EnumVTypeCG.tail_identifierLeave, EnumTokenTypeCG.token_identifier, FuncParsetail_identifierLeave_);
             m_Map.SetCell(EnumVTypeCG.tail_identifierLeave, EnumTokenTypeCG.token_number, FuncParsetail_identifierLeave_);
             m_Map.SetCell(EnumVTypeCG.tail_identifierLeave, EnumTokenTypeCG.token_constString, FuncParsetail_identifierLeave_);
-            m_Map.SetCell(EnumVTypeCG.tail_identifierLeave, EnumTokenTypeCG.number, FuncParsetail_identifierLeave_);
             m_Map.SetCell(EnumVTypeCG.tail_identifierLeave, EnumTokenTypeCG.constString, FuncParsetail_identifierLeave_);
             m_Map.SetCell(EnumVTypeCG.tail_identifierLeave, EnumTokenTypeCG.token_startEnd, FuncParsetail_identifierLeave_);
             
@@ -2321,7 +1989,6 @@ namespace bitzhuwei.CGCompiler
             m_Map.SetCell(EnumVTypeCG.tail_numberLeave, EnumTokenTypeCG.token_identifier, FuncParsetail_numberLeave_);
             m_Map.SetCell(EnumVTypeCG.tail_numberLeave, EnumTokenTypeCG.token_number, FuncParsetail_numberLeave_);
             m_Map.SetCell(EnumVTypeCG.tail_numberLeave, EnumTokenTypeCG.token_constString, FuncParsetail_numberLeave_);
-            m_Map.SetCell(EnumVTypeCG.tail_numberLeave, EnumTokenTypeCG.number, FuncParsetail_numberLeave_);
             m_Map.SetCell(EnumVTypeCG.tail_numberLeave, EnumTokenTypeCG.constString, FuncParsetail_numberLeave_);
             m_Map.SetCell(EnumVTypeCG.tail_numberLeave, EnumTokenTypeCG.token_startEnd, FuncParsetail_numberLeave_);
             
@@ -2336,24 +2003,8 @@ namespace bitzhuwei.CGCompiler
             m_Map.SetCell(EnumVTypeCG.tail_constStringLeave, EnumTokenTypeCG.token_identifier, FuncParsetail_constStringLeave_);
             m_Map.SetCell(EnumVTypeCG.tail_constStringLeave, EnumTokenTypeCG.token_number, FuncParsetail_constStringLeave_);
             m_Map.SetCell(EnumVTypeCG.tail_constStringLeave, EnumTokenTypeCG.token_constString, FuncParsetail_constStringLeave_);
-            m_Map.SetCell(EnumVTypeCG.tail_constStringLeave, EnumTokenTypeCG.number, FuncParsetail_constStringLeave_);
             m_Map.SetCell(EnumVTypeCG.tail_constStringLeave, EnumTokenTypeCG.constString, FuncParsetail_constStringLeave_);
             m_Map.SetCell(EnumVTypeCG.tail_constStringLeave, EnumTokenTypeCG.token_startEnd, FuncParsetail_constStringLeave_);
-            
-            m_Map.SetCell(EnumVTypeCG.numberLeave, EnumTokenTypeCG.token_Colon_Colon_Equality_, FuncParsenumberLeave_);
-            m_Map.SetCell(EnumVTypeCG.numberLeave, EnumTokenTypeCG.token_Semicolon_, FuncParsenumberLeave_);
-            m_Map.SetCell(EnumVTypeCG.numberLeave, EnumTokenTypeCG.epsilon, FuncParsenumberLeave_);
-            m_Map.SetCell(EnumVTypeCG.numberLeave, EnumTokenTypeCG.token_Or_, FuncParsenumberLeave_);
-            m_Map.SetCell(EnumVTypeCG.numberLeave, EnumTokenTypeCG.token_LessThan_, FuncParsenumberLeave_);
-            m_Map.SetCell(EnumVTypeCG.numberLeave, EnumTokenTypeCG.identifier, FuncParsenumberLeave_);
-            m_Map.SetCell(EnumVTypeCG.numberLeave, EnumTokenTypeCG.token_GreaterThan_, FuncParsenumberLeave_);
-            m_Map.SetCell(EnumVTypeCG.numberLeave, EnumTokenTypeCG.token_null, FuncParsenumberLeave_);
-            m_Map.SetCell(EnumVTypeCG.numberLeave, EnumTokenTypeCG.token_identifier, FuncParsenumberLeave_);
-            m_Map.SetCell(EnumVTypeCG.numberLeave, EnumTokenTypeCG.token_number, FuncParsenumberLeave_);
-            m_Map.SetCell(EnumVTypeCG.numberLeave, EnumTokenTypeCG.token_constString, FuncParsenumberLeave_);
-            m_Map.SetCell(EnumVTypeCG.numberLeave, EnumTokenTypeCG.number, FuncParsenumberLeave_);
-            m_Map.SetCell(EnumVTypeCG.numberLeave, EnumTokenTypeCG.constString, FuncParsenumberLeave_);
-            m_Map.SetCell(EnumVTypeCG.numberLeave, EnumTokenTypeCG.token_startEnd, FuncParsenumberLeave_);
             
             m_Map.SetCell(EnumVTypeCG.constStringLeave, EnumTokenTypeCG.token_Colon_Colon_Equality_, FuncParseconstStringLeave_);
             m_Map.SetCell(EnumVTypeCG.constStringLeave, EnumTokenTypeCG.token_Semicolon_, FuncParseconstStringLeave_);
@@ -2366,7 +2017,6 @@ namespace bitzhuwei.CGCompiler
             m_Map.SetCell(EnumVTypeCG.constStringLeave, EnumTokenTypeCG.token_identifier, FuncParseconstStringLeave_);
             m_Map.SetCell(EnumVTypeCG.constStringLeave, EnumTokenTypeCG.token_number, FuncParseconstStringLeave_);
             m_Map.SetCell(EnumVTypeCG.constStringLeave, EnumTokenTypeCG.token_constString, FuncParseconstStringLeave_);
-            m_Map.SetCell(EnumVTypeCG.constStringLeave, EnumTokenTypeCG.number, FuncParseconstStringLeave_);
             m_Map.SetCell(EnumVTypeCG.constStringLeave, EnumTokenTypeCG.constString, FuncParseconstStringLeave_);
             m_Map.SetCell(EnumVTypeCG.constStringLeave, EnumTokenTypeCG.token_startEnd, FuncParseconstStringLeave_);
             
@@ -2381,7 +2031,6 @@ namespace bitzhuwei.CGCompiler
             m_Map.SetCell(EnumVTypeCG.tail_startEndLeave, EnumTokenTypeCG.token_identifier, FuncParsetail_startEndLeave_);
             m_Map.SetCell(EnumVTypeCG.tail_startEndLeave, EnumTokenTypeCG.token_number, FuncParsetail_startEndLeave_);
             m_Map.SetCell(EnumVTypeCG.tail_startEndLeave, EnumTokenTypeCG.token_constString, FuncParsetail_startEndLeave_);
-            m_Map.SetCell(EnumVTypeCG.tail_startEndLeave, EnumTokenTypeCG.number, FuncParsetail_startEndLeave_);
             m_Map.SetCell(EnumVTypeCG.tail_startEndLeave, EnumTokenTypeCG.constString, FuncParsetail_startEndLeave_);
             m_Map.SetCell(EnumVTypeCG.tail_startEndLeave, EnumTokenTypeCG.token_startEnd, FuncParsetail_startEndLeave_);
         }
@@ -2399,8 +2048,6 @@ namespace bitzhuwei.CGCompiler
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_PList___tail_startEndLeave);
             FuncParsecase_VList___tail_lessThan_Leave = 
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_VList___tail_lessThan_Leave);
-            FuncParsecase_VList___identifierLeave = 
-                new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_VList___identifierLeave);
             FuncParsecase_VList___tail_nullLeave = 
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_VList___tail_nullLeave);
             FuncParsecase_VList___tail_identifierLeave = 
@@ -2409,14 +2056,10 @@ namespace bitzhuwei.CGCompiler
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_VList___tail_numberLeave);
             FuncParsecase_VList___tail_constStringLeave = 
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_VList___tail_constStringLeave);
-            FuncParsecase_VList___numberLeave = 
-                new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_VList___numberLeave);
             FuncParsecase_VList___constStringLeave = 
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_VList___constStringLeave);
             FuncParsecase_V___tail_lessThan_Leave = 
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_V___tail_lessThan_Leave);
-            FuncParsecase_V___identifierLeave = 
-                new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_V___identifierLeave);
             FuncParsecase_V___tail_nullLeave = 
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_V___tail_nullLeave);
             FuncParsecase_V___tail_identifierLeave = 
@@ -2425,8 +2068,6 @@ namespace bitzhuwei.CGCompiler
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_V___tail_numberLeave);
             FuncParsecase_V___tail_constStringLeave = 
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_V___tail_constStringLeave);
-            FuncParsecase_V___numberLeave = 
-                new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_V___numberLeave);
             FuncParsecase_V___constStringLeave = 
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_V___constStringLeave);
             FuncParsecase_VOpt___tail_semicolon_Leave = 
@@ -2435,8 +2076,6 @@ namespace bitzhuwei.CGCompiler
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_VOpt___tail_or_Leave);
             FuncParsecase_VOpt___tail_lessThan_Leave = 
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_VOpt___tail_lessThan_Leave);
-            FuncParsecase_VOpt___identifierLeave = 
-                new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_VOpt___identifierLeave);
             FuncParsecase_VOpt___tail_nullLeave = 
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_VOpt___tail_nullLeave);
             FuncParsecase_VOpt___tail_identifierLeave = 
@@ -2445,14 +2084,10 @@ namespace bitzhuwei.CGCompiler
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_VOpt___tail_numberLeave);
             FuncParsecase_VOpt___tail_constStringLeave = 
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_VOpt___tail_constStringLeave);
-            FuncParsecase_VOpt___numberLeave = 
-                new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_VOpt___numberLeave);
             FuncParsecase_VOpt___constStringLeave = 
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_VOpt___constStringLeave);
             FuncParsecase_Vn___tail_lessThan_Leave = 
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_Vn___tail_lessThan_Leave);
-            FuncParsecase_Vt___identifierLeave = 
-                new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_Vt___identifierLeave);
             FuncParsecase_Vt___tail_nullLeave = 
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_Vt___tail_nullLeave);
             FuncParsecase_Vt___tail_identifierLeave = 
@@ -2461,8 +2096,6 @@ namespace bitzhuwei.CGCompiler
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_Vt___tail_numberLeave);
             FuncParsecase_Vt___tail_constStringLeave = 
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_Vt___tail_constStringLeave);
-            FuncParsecase_Vt___numberLeave = 
-                new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_Vt___numberLeave);
             FuncParsecase_Vt___constStringLeave = 
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsecase_Vt___constStringLeave);
             
@@ -2488,8 +2121,6 @@ namespace bitzhuwei.CGCompiler
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsetail_numberLeave_);
             FuncParsetail_constStringLeave_ = 
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(Parsetail_constStringLeave_);
-            FuncParsenumberLeave_ = 
-                new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(ParsenumberLeave_);
             FuncParseconstStringLeave_ = 
                 new CandidateFunction<EnumTokenTypeCG, EnumVTypeCG, TreeNodeValueCG>(ParseconstStringLeave_);
             FuncParsetail_startEndLeave_ = 
@@ -2511,12 +2142,12 @@ namespace bitzhuwei.CGCompiler
         /// LL1SyntaxParserCG的语法分析器
         /// </summary>
         public LL1SyntaxParserCG()
-            : base(21, 14) { }
+            : base(20, 13) { }
         /// LL1SyntaxParserCG的语法分析器
         /// </summary>
         /// <param name="tokens">要分析的单词列表</param>
         public LL1SyntaxParserCG(TokenList<EnumTokenTypeCG> tokens)
-            : base(21, 14)
+            : base(20, 13)
         {
             m_TokenListSource = tokens;
         }
@@ -2588,9 +2219,8 @@ namespace bitzhuwei.CGCompiler
             m_Map.SetLine(15, EnumVTypeCG.tail_identifierLeave);
             m_Map.SetLine(16, EnumVTypeCG.tail_numberLeave);
             m_Map.SetLine(17, EnumVTypeCG.tail_constStringLeave);
-            m_Map.SetLine(18, EnumVTypeCG.numberLeave);
-            m_Map.SetLine(19, EnumVTypeCG.constStringLeave);
-            m_Map.SetLine(20, EnumVTypeCG.tail_startEndLeave);
+            m_Map.SetLine(18, EnumVTypeCG.constStringLeave);
+            m_Map.SetLine(19, EnumVTypeCG.tail_startEndLeave);
             
             
             m_Map.SetColumn(0, EnumTokenTypeCG.token_Colon_Colon_Equality_);
@@ -2604,9 +2234,8 @@ namespace bitzhuwei.CGCompiler
             m_Map.SetColumn(8, EnumTokenTypeCG.token_identifier);
             m_Map.SetColumn(9, EnumTokenTypeCG.token_number);
             m_Map.SetColumn(10, EnumTokenTypeCG.token_constString);
-            m_Map.SetColumn(11, EnumTokenTypeCG.number);
-            m_Map.SetColumn(12, EnumTokenTypeCG.constString);
-            m_Map.SetColumn(13, EnumTokenTypeCG.token_startEnd);
+            m_Map.SetColumn(11, EnumTokenTypeCG.constString);
+            m_Map.SetColumn(12, EnumTokenTypeCG.token_startEnd);
         }
         
         #endregion SetMapLinesAndColumns()

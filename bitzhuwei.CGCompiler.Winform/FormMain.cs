@@ -534,7 +534,7 @@ namespace bitzhuwei.CGCompiler.Winform
             + "<V>      ::= <Vn> | <Vt>;" + Environment.NewLine
             + "<VOpt>   ::= <V> <VOpt> | \"|\" <V> <VOpt> | null;" + Environment.NewLine
             + "<Vn>     ::= \"<\" identifier \">\";" + Environment.NewLine
-            + "<Vt>     ::= \"null\" | \"identifier\" | \"number\" | \"constString\" | identifier | number | constString;";
+            + "<Vt>     ::= \"null\" | \"identifier\" | \"number\" | \"constString\" | constString;";
 
         const string configFilename = "LL1GrammarCompilerWinform.config";
         private EventHandler textChangedEvent;

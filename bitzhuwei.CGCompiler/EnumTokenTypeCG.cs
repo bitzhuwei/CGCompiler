@@ -54,10 +54,6 @@ namespace bitzhuwei.CGCompiler
         /// </summary>
         token_constString,
         /// <summary>
-        /// number
-        /// </summary>
-        number,
-        /// <summary>
         /// constString
         /// </summary>
         constString,

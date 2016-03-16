@@ -142,6 +142,10 @@ namespace bitzhuwei.CGCompiler
         /// </summary>
         Equality,
         /// <summary>
+        /// @
+        /// </summary>
+        At,
+        /// <summary>
         /// space Tab \r\n
         /// </summary>
         Space,

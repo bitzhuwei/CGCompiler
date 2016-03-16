@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ContextfreeGrammar GrammarName="CG" Namespace="bitzhuwei.CGCompiler">
+  <source_code_of_CGCompiler>Name:CG
+&lt;Start&gt; ::= &lt;Vn&gt; "::=" &lt;VList&gt; ";" &lt;PList&gt;;
+&lt;PList&gt; ::= &lt;Vn&gt; "::=" &lt;VList&gt; ";" &lt;PList&gt; | null;
+&lt;VList&gt; ::= &lt;V&gt; &lt;VOpt&gt;;
+&lt;V&gt; ::= &lt;Vn&gt; | &lt;Vt&gt;;
+&lt;VOpt&gt; ::= &lt;V&gt; &lt;VOpt&gt; | "|" &lt;V&gt; &lt;VOpt&gt; | null;
+&lt;Vn&gt; ::= "&lt;" identifier "&gt;";
+&lt;Vt&gt; ::= "null" | "identifier" | "number" | "constString" | constString;
+</source_code_of_CGCompiler>
   <ContextfreeProductionList Count="7">
     <ContextfreeProduction>
       <ProductionNode NodeName="Start" NodeNote="Start" Position="NonLeave" />
@@ -77,7 +86,7 @@
     </ContextfreeProduction>
     <ContextfreeProduction>
       <ProductionNode NodeName="Vt" NodeNote="Vt" Position="NonLeave" />
-      <RightSection CandidateCount="7">
+      <RightSection CandidateCount="5">
         <ProductionNodeList NodeCount="1">
           <ProductionNode NodeName="&quot;null&quot;" NodeNote="&quot;null&quot;" Position="Leave" />
         </ProductionNodeList>
@@ -89,12 +98,6 @@
         </ProductionNodeList>
         <ProductionNodeList NodeCount="1">
           <ProductionNode NodeName="&quot;constString&quot;" NodeNote="&quot;constString&quot;" Position="Leave" />
-        </ProductionNodeList>
-        <ProductionNodeList NodeCount="1">
-          <ProductionNode NodeName="identifier" NodeNote="identifier" Position="Leave" />
-        </ProductionNodeList>
-        <ProductionNodeList NodeCount="1">
-          <ProductionNode NodeName="number" NodeNote="number" Position="Leave" />
         </ProductionNodeList>
         <ProductionNodeList NodeCount="1">
           <ProductionNode NodeName="constString" NodeNote="constString" Position="Leave" />
