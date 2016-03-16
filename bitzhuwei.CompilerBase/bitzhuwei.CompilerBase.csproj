@@ -102,7 +102,6 @@
   <ItemGroup>
     <Content Include="Core\设计说明Core.txt" />
     <Content Include="LexicalAnalyzerBase\设计说明LexicalAnalyzerBase.txt" />
-    <Content Include="LL1SyntaxParserBase\GrammarOfContextfreeGrammar.txt" />
     <Content Include="LL1SyntaxParserBase\设计说明LL1SyntaxParserBase.txt" />
     <Content Include="Visual\设计说明Visual.txt" />
   </ItemGroup>
@@ -122,6 +121,9 @@
     <EmbeddedResource Include="Visual\TokenListTextBoxGeneric.resx">
       <DependentUpon>TokenListTextBoxGeneric.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="LR1SyntaxParserBase\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

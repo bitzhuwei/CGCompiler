@@ -7,7 +7,7 @@ using System.Diagnostics;
 namespace bitzhuwei.CompilerBase
 {
     /// <summary>
-    /// 创建一个候选式函数的对象
+    /// 一个候选式
     /// </summary>
     /// <typeparam name="TEnumTokenType"></typeparam>
     /// <typeparam name="TEnumVType"></typeparam>
@@ -18,7 +18,7 @@ namespace bitzhuwei.CompilerBase
         where TTreeNodeValue : class,ICloneable, new()
     {
         /// <summary>
-        /// 创建一个候选式函数的对象
+        /// 一个候选式
         /// </summary>
         /// <param name="candidateFunc">此对象包含的委托</param>
         public CandidateFunction(
